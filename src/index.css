@@ -24,7 +24,7 @@ html {
 }
 
 html::-webkit-scrollbar {
-  width: 4px;
+  width: 2px;
 }
 
 html::-webkit-scrollbar-track {
