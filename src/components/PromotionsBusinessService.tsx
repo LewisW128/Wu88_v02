@@ -55,13 +55,13 @@ function Promotions() {
       </div>
       <div className="flex gap-[20px]">
         <div className="relative h-[210px] w-[331px] shrink-0 overflow-hidden rounded-bl-[50px] rounded-tr-[50px] bg-[#8d54d8]">
-          <img alt="" src={pirateBg} className="pointer-events-none absolute left-[-5px] top-[-82px] h-[492px] w-[336px] object-cover blur-[1px]" />
+          <img alt="" src={pirateBg} className="pointer-events-none absolute left-[-5px] top-[-82px] h-[492px] w-[336px] max-w-none object-cover blur-[1px]" />
           <img alt="" src={pirate} className="pointer-events-none absolute left-[128px] top-[-22px] h-[371px] w-[203px] object-cover" />
           <PromoTitle badge={badgeVectorA} text="新手冒險好禮" />
           <PromoButton text="立即領取" />
         </div>
         <div className="relative h-[210px] w-[331px] shrink-0 overflow-hidden rounded-bl-[50px] rounded-tr-[50px] bg-[#8d54d8]">
-          <img alt="" src={football} className="pointer-events-none absolute left-1/2 top-[calc(50%+53px)] h-[452px] w-[339px] -translate-x-1/2 -translate-y-1/2 object-cover" />
+          <img alt="" src={football} className="pointer-events-none absolute left-1/2 top-[calc(50%+53px)] h-[452px] w-[339px] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover" />
           <PromoTitle badge={badgeVectorB} text="看球賽領獎勵" />
           <PromoButton text="立即下注" />
         </div>
@@ -69,7 +69,7 @@ function Promotions() {
           className="relative h-[210px] w-[331px] shrink-0 overflow-hidden rounded-bl-[50px] rounded-tr-[50px]"
           style={{ backgroundImage: "linear-gradient(-52deg, rgb(72,186,206) 32%, rgb(154,113,241) 70%, rgb(100,78,179) 191%)" }}
         >
-          <img alt="" src={gclass} className="pointer-events-none absolute left-[36px] top-[29px] h-[212px] w-[377px] object-cover" />
+          <img alt="" src={gclass} className="pointer-events-none absolute left-[36px] top-[29px] h-[212px] w-[377px] max-w-none object-cover" />
           <PromoTitle badge={badgeVectorC} text="VIP 專屬優惠" />
           <PromoButton text="立即參加" />
         </div>

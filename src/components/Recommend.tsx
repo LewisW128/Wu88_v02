@@ -101,7 +101,7 @@ export default function Recommend() {
 
         <Card main="飛天財神" sub="SLOT" badge={null}>
           <div className="absolute inset-0 bg-white" />
-          <img alt="" src={feitiancaishen} className="absolute left-1/2 top-1/2 h-[396px] w-[396px] -translate-x-1/2 -translate-y-1/2 object-cover blur-[10px]" />
+          <img alt="" src={feitiancaishen} className="absolute left-1/2 top-1/2 h-[396px] w-[396px] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover blur-[10px]" />
           <img alt="" src={feitiancaishen} className="absolute left-1/2 top-[calc(50%-20px)] h-[200px] w-[200px] -translate-x-1/2 -translate-y-1/2 object-cover" />
         </Card>
 
@@ -112,7 +112,7 @@ export default function Recommend() {
 
         <Card main="火燒連環船" sub="SLOT" badge={null}>
           <div className="absolute inset-0 bg-[#76d7f7]" />
-          <img alt="" src={huoshaolianhuanchuan} className="absolute left-[-187px] top-1/2 h-[574px] w-[574px] -translate-y-1/2 object-cover blur-[10px]" />
+          <img alt="" src={huoshaolianhuanchuan} className="absolute left-[-187px] top-1/2 h-[574px] w-[574px] max-w-none -translate-y-1/2 object-cover blur-[10px]" />
           <img alt="" src={huoshaolianhuanchuan} className="absolute left-0 top-[calc(50%-20px)] h-[200px] w-[200px] -translate-y-1/2 object-cover" />
         </Card>
 

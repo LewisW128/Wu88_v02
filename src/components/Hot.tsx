@@ -138,7 +138,7 @@ export default function Hot() {
             <img alt="" src={numeral02} className="absolute left-0 top-0 h-[231px] w-[175px]" />
           </NumeralFrame>
           <Card main="戰神塞特 2" sub="SLOT" badge="NEW" specialShape>
-            <img alt="" src={zhanshensaite2} className="absolute left-1/2 top-1/2 h-[268px] w-[268px] -translate-x-1/2 -translate-y-1/2 object-cover" />
+            <img alt="" src={zhanshensaite2} className="absolute left-1/2 top-1/2 h-[268px] w-[268px] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover" />
           </Card>
         </div>
 
@@ -148,7 +148,7 @@ export default function Hot() {
             <img alt="" src={numeral03Fill} className="absolute left-[28px] top-[20px] h-[211.3px] w-[147.4px]" />
           </NumeralFrame>
           <Card main="雷神之鎚" sub="SLOT" badge="WU88" specialShape>
-            <img alt="" src={leishenzhichui} className="absolute left-1/2 top-1/2 h-[270px] w-[482px] -translate-x-1/2 -translate-y-1/2 object-cover" />
+            <img alt="" src={leishenzhichui} className="absolute left-1/2 top-1/2 h-[270px] w-[482px] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover" />
           </Card>
         </div>
 
@@ -169,7 +169,7 @@ export default function Hot() {
             <img alt="" src={numeral05Fill} className="absolute left-[22px] top-[18px] h-[212.8px] w-[153.4px]" />
           </NumeralFrame>
           <Card main="月兔" sub="SLOT" badge={null}>
-            <img alt="" src={yuetu} className="absolute left-[-168px] top-[-1.5px] h-[268px] w-[536px] object-cover" />
+            <img alt="" src={yuetu} className="absolute left-[-168px] top-[-1.5px] h-[268px] w-[536px] max-w-none object-cover" />
           </Card>
         </div>
 
@@ -179,7 +179,7 @@ export default function Hot() {
             <img alt="" src={numeral06Fill} className="absolute left-[29px] top-[18px] h-[212.8px] w-[145.6px]" />
           </NumeralFrame>
           <Card main="金虎爺" sub="SLOT" badge="NEW" specialShape>
-            <img alt="" src={jinhuye} className="absolute left-1/2 top-1/2 h-[268px] w-[268px] -translate-x-1/2 -translate-y-1/2 object-cover" />
+            <img alt="" src={jinhuye} className="absolute left-1/2 top-1/2 h-[268px] w-[268px] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover" />
           </Card>
         </div>
 
@@ -189,7 +189,7 @@ export default function Hot() {
             <img alt="" src={numeral07Fill} className="absolute left-[24px] top-[21px] h-[210.1px] w-[151.5px]" />
           </NumeralFrame>
           <Card main="輪盤" sub="ROULETTE" badge={null}>
-            <img alt="" src={rouletteRank7} className="absolute left-1/2 top-[-5px] h-[309px] w-[206px] -translate-x-1/2 object-cover" />
+            <img alt="" src={rouletteRank7} className="absolute left-1/2 top-[-5px] h-[309px] w-[206px] max-w-none -translate-x-1/2 object-cover" />
           </Card>
         </div>
 
@@ -199,7 +199,7 @@ export default function Hot() {
             <img alt="" src={numeral08Fill} className="absolute left-[27px] top-[21px] h-[210.1px] w-[148px]" />
           </NumeralFrame>
           <Card main="輪盤" sub="ROULETTE" badge={null}>
-            <img alt="" src={rouletteRank8} className="absolute left-1/2 top-[-35px] h-[309px] w-[206px] -translate-x-1/2 object-cover" />
+            <img alt="" src={rouletteRank8} className="absolute left-1/2 top-[-35px] h-[309px] w-[206px] max-w-none -translate-x-1/2 object-cover" />
           </Card>
         </div>
 
@@ -213,7 +213,7 @@ export default function Hot() {
             </div>
           </NumeralFrame>
           <Card main="輪盤" sub="ROULETTE" badge={null}>
-            <img alt="" src={rouletteRank9} className="absolute left-1/2 top-[calc(50%+30px)] h-[354px] w-[202px] -translate-x-1/2 -translate-y-1/2 object-cover" />
+            <img alt="" src={rouletteRank9} className="absolute left-1/2 top-[calc(50%+30px)] h-[354px] w-[202px] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover" />
           </Card>
         </div>
 
@@ -223,7 +223,7 @@ export default function Hot() {
             <img alt="" src={numeral10Fill} className="absolute left-[29px] top-[19px] h-[211.8px] w-[321.2px]" />
           </NumeralFrame>
           <Card main="輪盤" sub="ROULETTE" badge={null}>
-            <img alt="" src={rouletteRank10} className="absolute left-1/2 top-[-3px] h-[361px] w-[203px] -translate-x-1/2 object-cover" />
+            <img alt="" src={rouletteRank10} className="absolute left-1/2 top-[-3px] h-[361px] w-[203px] max-w-none -translate-x-1/2 object-cover" />
           </Card>
         </div>
       </div>
