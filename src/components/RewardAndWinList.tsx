@@ -7,7 +7,6 @@ import ellipse3 from "../assets/reward/ellipse3.svg";
 
 import iconCrown from "../assets/winlist/icon-crown.svg";
 import iconTitle from "../assets/winlist/icon-title.svg";
-import vector from "../assets/winlist/vector.svg";
 import iconMoney from "../assets/winlist/icon-money.svg";
 import gameThumb1 from "../assets/winlist/game-thumb1.png";
 import gameThumb2 from "../assets/winlist/game-thumb2.png";
