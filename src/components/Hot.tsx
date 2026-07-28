@@ -115,7 +115,7 @@ export default function Hot() {
           </div>
           <p className="text-[20px] font-bold tracking-[0.35px] text-[#444242]">熱門遊戲</p>
         </div>
-        <div className="flex items-center gap-[10px] py-[5px]">
+        <div className="flex items-center gap-[10px] py-[5px] pr-[40px]">
           <p className="whitespace-nowrap text-[20px] font-bold leading-[32px] tracking-[0.35px] text-[#3e4140]">所有遊戲</p>
           <img alt="" src={arrowChevronTeal} className="h-[13px] w-[8px]" />
         </div>
