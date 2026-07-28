@@ -1,0 +1,15 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="321.151" height="211.832" viewBox="0 0 321.151 211.832" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path id="Union" d="M288.771 0.0869141L321.064 32.3799H321.151V179.078H320.863L321.151 179.366L288.771 211.746V211.832H204.189V211.746L171.81 179.366L172.098 179.078H171.81V32.3799H171.896L204.189 0.0869141V0H288.771V0.0869141ZM98.46 168.218H151.984V211.831H0V168.218H54.8467V43.9873H0V0.374023H98.46V168.218ZM217.983 157.563L228.639 168.219H264.322L277.538 155.003V98.0088L217.983 157.563ZM215.423 56.8301V112.668L274.399 53.6914L264.322 43.6143H228.639L215.423 56.8301Z" fill="url(#paint0_linear_0_900)"/>
+<defs>
+<linearGradient id="paint0_linear_0_900" x1="338" y1="297" x2="-2.44816e-06" y2="-41" gradientUnits="userSpaceOnUse">
+<stop stop-color="#01FAB0"/>
+<stop offset="0.07" stop-color="#14E8B8"/>
+<stop offset="0.2" stop-color="#48BACE"/>
+<stop offset="0.39" stop-color="#9A71F1"/>
+<stop offset="0.45" stop-color="#B65AFD"/>
+<stop offset="0.68" stop-color="#8D54D8"/>
+<stop offset="0.88" stop-color="#6F4FBD"/>
+<stop offset="1" stop-color="#644EB3"/>
+</linearGradient>
+</defs>
+</svg>
