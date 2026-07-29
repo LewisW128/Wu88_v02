@@ -21,16 +21,15 @@ function Promotions() {
           <img alt="" src={withBasePath("/assets/shared/arrow-chevron-gray.svg")} className="h-[11px] w-[6px]" />
         </div>
       </div>
-      <div className="flex gap-[20px]">
+      <div className="scrollbar-hide flex gap-[20px] overflow-x-auto">
         <PromoCard image={withBasePath("/assets/promotions/card1.png")} alt="每日簽到禮 天天贈彩點" />
         <PromoCard image={withBasePath("/assets/promotions/card2.png")} alt="武財神風輪盤 天天轉 8,888" />
         <PromoCard image={withBasePath("/assets/promotions/card3.png")} alt="超商儲值禮 送 G-CLASS" />
+        <PromoCard image={withBasePath("/assets/promotions/card4.png")} alt="USDT返利 無上限，每筆USDT加碼贈2%" />
       </div>
     </div>
   );
 }
-
-const PARTNER_NAMES = ["CQ9", "歐博", "狼堡", "翼盾", "SUPERMAN", "META"];
 
 function Business() {
   return (
@@ -49,13 +48,8 @@ function Business() {
           </button>
         </div>
       </div>
-      <div className="relative flex h-[164px] w-full items-center gap-[50px] overflow-hidden rounded-br-[50px] rounded-tl-[50px] border border-[#dadada] px-[30px]">
-        <img alt="" src={withBasePath("/assets/business/ellipse.svg")} className="pointer-events-none absolute -right-[110px] -top-[30px] size-[366px]" />
-        {PARTNER_NAMES.map((name) => (
-          <div key={name} className="relative flex h-[85px] w-[85px] shrink-0 items-center justify-center text-center">
-            <p className="text-[14px] font-bold tracking-wide text-[#3e4140]">{name}</p>
-          </div>
-        ))}
+      <div className="h-[164px] w-full overflow-hidden rounded-br-[50px] rounded-tl-[50px] border border-[#dadada]">
+        <img alt="頂級合作廠商" src={withBasePath("/assets/business/panel.png")} className="pointer-events-none block size-full object-cover" />
       </div>
     </div>
   );
