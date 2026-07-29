@@ -106,6 +106,9 @@ const WINNERS = [
   { avatar: withBasePath("/assets/win-list/avatar1.png"), name: "JACK1234", amount: "+ 90,000", thumb: withBasePath("/assets/win-list/products-img.png") },
   { avatar: withBasePath("/assets/win-list/avatar2.png"), name: "LUCY2345", amount: "+ 10,000", thumb: withBasePath("/assets/win-list/download1.png") },
   { avatar: withBasePath("/assets/win-list/avatar3.png"), name: "LUCY2345", amount: "+ 1,000,000", thumb: withBasePath("/assets/win-list/sl2571-1.png") },
+  { avatar: withBasePath("/assets/win-list/avatar.png"), name: "LUCKY777", amount: "+ 500,000", thumb: withBasePath("/assets/win-list/chatgpt-image-1.png") },
+  { avatar: withBasePath("/assets/win-list/avatar1.png"), name: "JACK1234", amount: "+ 20,000", thumb: withBasePath("/assets/win-list/products-img.png") },
+  { avatar: withBasePath("/assets/win-list/avatar2.png"), name: "LUCY2345", amount: "+ 8,000,000", thumb: withBasePath("/assets/win-list/download1.png") },
 ];
 
 function MoneyIcon() {
@@ -120,17 +123,9 @@ function MoneyIcon() {
   );
 }
 
-function WinnerRow({ w, index }: { w: (typeof WINNERS)[number]; index: number }) {
+function WinnerRow({ w }: { w: (typeof WINNERS)[number] }) {
   return (
-    <div
-      className="relative h-[79px] w-full shrink-0 overflow-hidden rounded-[50px] bg-white/60 backdrop-blur-[20px]"
-      style={{
-        maskImage: `url("${withBasePath("/assets/win-list/rank-selections.svg")}")`,
-        maskSize: "758px 309px",
-        maskPosition: `0px ${-89 * index}px`,
-        maskRepeat: "no-repeat",
-      }}
-    >
+    <div className="relative h-[79px] w-full shrink-0 overflow-hidden rounded-[50px] bg-white/60 backdrop-blur-[20px]">
       <div className="absolute left-[10px] top-1/2 flex -translate-y-1/2 items-center gap-[10px]">
         <div className="relative size-[59px] shrink-0 rounded-full p-[2px]" style={{ backgroundImage: AVATAR_RING_GRADIENT }}>
           <img alt="" src={w.avatar} className="size-full rounded-full object-cover" />
@@ -170,8 +165,6 @@ function WinList() {
         <WinListTitleIcon />
         <p className="whitespace-nowrap text-[20px] font-bold tracking-[0.35px] text-white">得獎名單</p>
       </div>
-      <div className="absolute right-px top-[177px] h-[120px] w-px bg-[#23f3d5]" />
-
       <div className="absolute left-[20px] top-[85px] flex h-[34px] w-[758px] items-center rounded-[50px] bg-[#e2ff25] px-[20px] backdrop-blur-[10px]">
         <p className="w-[205px] text-[14px] font-bold tracking-[0.15px] text-[#3e4140]">玩家</p>
         <p className="w-[238px] text-center text-[14px] font-bold tracking-[0.15px] text-[#3e4140]">盈利</p>
@@ -179,9 +172,15 @@ function WinList() {
         <p className="text-[14px] font-bold tracking-[0.15px] text-[#3e4140]">遊戲</p>
       </div>
 
-      <div className="absolute left-[20px] right-[20px] top-[129px] flex flex-col gap-0">
+      <div
+        className="scrollbar-teal-thin absolute left-[20px] right-[20px] top-[129px] bottom-[18px] flex flex-col gap-[10px] overflow-y-auto pr-[10px]"
+        style={{
+          maskImage: "linear-gradient(to bottom, black calc(100% - 40px), transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black calc(100% - 40px), transparent 100%)",
+        }}
+      >
         {WINNERS.map((w, i) => (
-          <WinnerRow key={i} w={w} index={i} />
+          <WinnerRow key={i} w={w} />
         ))}
       </div>
     </div>
