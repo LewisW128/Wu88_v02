@@ -55,14 +55,14 @@ function TopUpButton() {
 
 const NotifyIcon = () => <img alt="" src={withBasePath("/assets/icons/notify.svg")} className="size-[25px] shrink-0" />;
 
-// The scrolled/compact nav bar (Figma 439:3383) pulls the avatar+name+button
-// into a shorter, tighter pill (h-59, no vertical padding) with the notify
-// bell sitting outside it, instead of the taller top-bar pill that wraps
-// everything including the bell.
+// The scrolled/compact nav bar (Figma 439:3383) sits directly on the sticky
+// header's own translucent background -- no separate pill/border/fill of its
+// own, just the bare elements spaced with gap-20/40, unlike the top-bar
+// version which wraps everything in its own bordered pill.
 export function ProfileCompact() {
   return (
     <div className="flex items-center gap-[40px]">
-      <div className="flex h-[59px] items-center gap-[20px] rounded-full border border-[#dadada] bg-white/60 px-[20px] backdrop-blur-[20px]">
+      <div className="flex h-[59px] items-center gap-[20px]">
         <AvatarBadge />
         <NameAndBalance />
         <TopUpButton />
