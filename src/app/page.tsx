@@ -18,14 +18,13 @@ export default function Home() {
         </div>
 
         <div className="min-w-0 flex-1">
-          <div className="relative">
+          <div className="sticky top-0 z-20 flex items-center justify-between px-[40px] pt-[20px]">
+            <Filter />
+            <Profile />
+          </div>
+
+          <div className="relative -mt-[125px]">
             <Cotainer />
-            <div className="absolute left-[40px] top-[47px]">
-              <Filter />
-            </div>
-            <div className="absolute right-[40px] top-[20px]">
-              <Profile />
-            </div>
           </div>
 
           <div className="relative -mt-[119px] flex flex-col gap-[40px] pb-[40px] pl-[40px]">
