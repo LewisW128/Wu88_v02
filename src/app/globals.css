@@ -18,10 +18,17 @@ body {
   display: none;
 }
 
-html,
-.scrollbar-teal-thin {
-  scrollbar-width: thin;
-  scrollbar-color: #23f3d5 transparent;
+/* Chrome/Safari/Edge ignore the ::-webkit-scrollbar width below if the
+   standard scrollbar-width/scrollbar-color properties are also set on the
+   same element (they fall back to the browser's built-in "thin" preset,
+   ~11px, instead of the exact width) — so only set the standard properties
+   for browsers that don't support ::-webkit-scrollbar (Firefox). */
+@supports not selector(::-webkit-scrollbar) {
+  html,
+  .scrollbar-teal-thin {
+    scrollbar-width: thin;
+    scrollbar-color: #23f3d5 transparent;
+  }
 }
 
 html::-webkit-scrollbar,
