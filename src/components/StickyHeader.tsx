@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { withBasePath } from "../lib/asset";
 import Filter from "./Filter";
 import Profile from "./Profile";
 
@@ -21,7 +22,7 @@ export default function StickyHeader() {
         scrolled ? "bg-white/80 py-[15px] backdrop-blur-[10px]" : "pt-[20px]"
       }`}
     >
-      <Filter />
+      {scrolled ? <img alt="" src={withBasePath("/assets/icons/search.svg")} className="size-[25px]" /> : <Filter />}
       <Profile />
     </div>
   );
