@@ -15,7 +15,7 @@ export default function Home() {
     <ScaleBelowBreakpoint>
       <div className="min-h-screen bg-white">
         <div className="flex w-full">
-          <div className="sticky top-0 z-10 h-screen">
+          <div className="sticky top-0 z-10" style={{ height: "calc(100vh / var(--page-zoom, 1))" }}>
             <Sidebar />
           </div>
 

@@ -27,5 +27,11 @@ export default function ScaleBelowBreakpoint({ children }: { children: React.Rea
     return () => window.removeEventListener("resize", updateZoom);
   }, []);
 
-  return <div style={{ zoom }}>{children}</div>;
+  // `vh` units don't scale with an ancestor's `zoom` the way px values do —
+  // 100vh always resolves to the real viewport height, so anything sized with
+  // it (e.g. `h-screen`) ends up visually shrunk to `zoom * realHeight`
+  // instead of matching the viewport. Expose the zoom factor as a CSS
+  // variable so viewport-height-dependent elements can counter-scale via
+  // `calc(100vh / var(--page-zoom))`.
+  return <div style={{ zoom, "--page-zoom": zoom } as React.CSSProperties}>{children}</div>;
 }
