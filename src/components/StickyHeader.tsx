@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { withBasePath } from "../lib/asset";
 import Filter from "./Filter";
-import Profile from "./Profile";
+import Profile, { ProfileCompact } from "./Profile";
 
 export default function StickyHeader() {
   const [scrolled, setScrolled] = useState(false);
@@ -23,7 +23,7 @@ export default function StickyHeader() {
       }`}
     >
       {scrolled ? <img alt="" src={withBasePath("/assets/icons/search.svg")} className="size-[25px]" /> : <Filter />}
-      <Profile />
+      {scrolled ? <ProfileCompact /> : <Profile />}
     </div>
   );
 }
