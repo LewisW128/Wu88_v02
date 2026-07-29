@@ -26,7 +26,7 @@ html,
 
 html::-webkit-scrollbar,
 .scrollbar-teal-thin::-webkit-scrollbar {
-  width: 2px;
+  width: 1px;
 }
 
 html::-webkit-scrollbar-track,

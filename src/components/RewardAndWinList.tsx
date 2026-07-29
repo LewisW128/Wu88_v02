@@ -7,7 +7,7 @@ const AVATAR_BADGE_GRADIENT =
   "linear-gradient(-48.0664842153752deg, rgb(72,186,206) 17.1%, rgb(154,113,241) 77.3%, rgb(182,90,253) 100%)";
 
 const WIN_LIST_BG_GRADIENT =
-  "linear-gradient(-51.07deg, rgba(20,232,184,0) 7.43%, rgb(72,186,206) 7.59%, rgba(1,250,176,0) 15.52%, rgb(154,113,241) 29.54%, rgb(182,90,253) 36.47%, rgb(141,84,216) 63.04%, rgb(111,79,189) 86.14%, rgb(100,78,179) 100%)";
+  "linear-gradient(-51.07deg, rgb(72,186,206) 7.59%, rgb(154,113,241) 29.54%, rgb(182,90,253) 36.47%, rgb(141,84,216) 63.04%, rgb(111,79,189) 86.14%, rgb(100,78,179) 100%)";
 
 function DotsGrid({ size, gap, rows, cols }: { size: number; gap: number; rows: number; cols: number }) {
   return (
@@ -173,10 +173,12 @@ function WinList() {
       </div>
 
       <div
-        className="scrollbar-teal-thin absolute left-[20px] right-[20px] top-[129px] bottom-[18px] flex flex-col gap-[10px] overflow-y-auto pr-[10px]"
+        className="absolute left-[20px] right-0 top-[129px] bottom-[18px] flex flex-col gap-[10px] overflow-y-auto pr-[20px]"
         style={{
           maskImage: "linear-gradient(to bottom, black calc(100% - 40px), transparent 100%)",
           WebkitMaskImage: "linear-gradient(to bottom, black calc(100% - 40px), transparent 100%)",
+          scrollbarColor: "auto",
+          scrollbarWidth: "auto",
         }}
       >
         {WINNERS.map((w, i) => (
