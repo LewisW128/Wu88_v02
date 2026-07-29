@@ -1,6 +1,3 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
 import { withBasePath } from "../lib/asset";
 
 const AVATAR_RING_GRADIENT =
@@ -11,9 +8,6 @@ const AVATAR_BADGE_GRADIENT =
 
 const WIN_LIST_BG_GRADIENT =
   "linear-gradient(-56deg, rgb(72,186,206) 22%, rgb(154,113,241) 69%, rgb(141,84,216) 142%, rgb(100,78,179) 222%)";
-
-const REWARD_ANNOUNCEMENT_WIDTH = 519;
-const WIN_LIST_MIN_WIDTH = 798;
 
 function DotsGrid({ size, gap, rows, cols }: { size: number; gap: number; rows: number; cols: number }) {
   return (
@@ -168,7 +162,7 @@ function WinnerRow({ w }: { w: (typeof WINNERS)[number] }) {
 
 function WinList() {
   return (
-    <div className="relative h-[438px] w-full overflow-hidden rounded-br-[70px]" style={{ backgroundImage: WIN_LIST_BG_GRADIENT }}>
+    <div className="relative h-[438px] min-w-0 flex-1 overflow-hidden rounded-br-[70px]" style={{ backgroundImage: WIN_LIST_BG_GRADIENT }}>
       <div className="absolute left-[20px] top-[20px] flex items-center gap-[10px]">
         <WinListTitleIcon />
         <p className="whitespace-nowrap text-[20px] font-bold tracking-[0.35px] text-white">得獎名單</p>
@@ -195,47 +189,11 @@ function WinList() {
   );
 }
 
-const ROW_GAP = 40;
-const ROW_DESIGN_WIDTH = REWARD_ANNOUNCEMENT_WIDTH + ROW_GAP + WIN_LIST_MIN_WIDTH;
-const CARD_HEIGHT = 438;
-
 export default function RewardAndWinList() {
-  const rowRef = useRef<HTMLDivElement>(null);
-  const [scale, setScale] = useState(1);
-
-  useEffect(() => {
-    const el = rowRef.current;
-    if (!el) return;
-    const observer = new ResizeObserver((entries) => {
-      const width = entries[0]?.contentRect.width;
-      if (width) setScale(Math.min(1, width / ROW_DESIGN_WIDTH));
-    });
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  if (scale >= 1) {
-    return (
-      <div ref={rowRef} className="flex w-full items-end gap-[40px] pr-[40px]">
-        <RewardAnnouncement />
-        <div className="min-w-0 flex-1">
-          <WinList />
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div ref={rowRef} className="w-full overflow-hidden pr-[40px]" style={{ height: CARD_HEIGHT * scale }}>
-      <div
-        className="flex items-end gap-[40px]"
-        style={{ width: ROW_DESIGN_WIDTH, transform: `scale(${scale})`, transformOrigin: "top left" }}
-      >
-        <RewardAnnouncement />
-        <div style={{ width: WIN_LIST_MIN_WIDTH, flexShrink: 0 }}>
-          <WinList />
-        </div>
-      </div>
+    <div className="flex w-full items-end gap-[40px] pr-[40px]">
+      <RewardAnnouncement />
+      <WinList />
     </div>
   );
 }

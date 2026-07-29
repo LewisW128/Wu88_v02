@@ -2,10 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 
-// Below this viewport width, stop reflowing the desktop layout and instead
-// shrink the whole page (rendered at DESIGN_WIDTH, where it's already known
-// to look right) down to fit — like viewing a desktop site zoomed out.
-const BREAKPOINT = 1024;
+// The page is designed to look right at DESIGN_WIDTH. The instant the
+// viewport gets narrower than that, stop reflowing individual sections and
+// instead shrink the whole page (rendered at DESIGN_WIDTH) down to fit as one
+// unit — like continuously zooming out on a desktop site. This scales
+// smoothly all the way down (through iPad-portrait's 1024 width and beyond)
+// rather than only kicking in below a separate breakpoint.
 const DESIGN_WIDTH = 1440;
 
 export default function ScaleBelowBreakpoint({ children }: { children: React.ReactNode }) {
@@ -16,7 +18,7 @@ export default function ScaleBelowBreakpoint({ children }: { children: React.Rea
   useEffect(() => {
     const updateScale = () => {
       const vw = window.innerWidth;
-      setScale(vw < BREAKPOINT ? vw / DESIGN_WIDTH : 1);
+      setScale(Math.min(1, vw / DESIGN_WIDTH));
     };
     updateScale();
     window.addEventListener("resize", updateScale);
