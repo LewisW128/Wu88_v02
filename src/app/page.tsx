@@ -1,7 +1,6 @@
 import ScaleBelowBreakpoint from "../components/ScaleBelowBreakpoint";
 import Sidebar from "../components/Sidebar";
-import Profile from "../components/Profile";
-import Filter from "../components/Filter";
+import StickyHeader from "../components/StickyHeader";
 import Cotainer from "../components/Cotainer";
 import FormBar from "../components/FormBar";
 import Recommend from "../components/Recommend";
@@ -20,10 +19,7 @@ export default function Home() {
           </div>
 
           <div className="min-w-0 flex-1">
-            <div className="sticky top-0 z-20 flex items-center justify-between px-[40px] pt-[20px]">
-              <Filter />
-              <Profile />
-            </div>
+            <StickyHeader />
 
             <div className="relative -mt-[125px]">
               <Cotainer />

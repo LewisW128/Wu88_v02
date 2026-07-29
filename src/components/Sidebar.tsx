@@ -47,29 +47,7 @@ export default function Sidebar() {
         </nav>
 
         <div className="absolute bottom-0 left-0 h-[462px] w-[291px] overflow-hidden">
-          <img alt="" src={withBasePath("/assets/sidebar/ad-vector1.svg")} className="pointer-events-none absolute left-[-152.28px] top-[40.66px] h-[248.04px] w-[248.07px] rotate-[8.36deg]" />
-          <div className="absolute bottom-0 left-[-9px] h-[462px] w-[316px] overflow-hidden">
-            <img alt="" src={withBasePath("/assets/sidebar/event-girl.png")} className="absolute left-0 top-[1.61%] h-[103.7%] w-full object-cover" />
-          </div>
-          <img alt="" src={withBasePath("/assets/sidebar/ad-vector2.svg")} className="pointer-events-none absolute left-[-219px] top-[-231.44px] h-[1140.92px] w-[1122.73px] rotate-[1.07deg]" />
-
-          <div className="absolute left-1/2 top-[211px] flex w-[234px] -translate-x-1/2 items-center justify-center">
-            <div className="flex -rotate-[2.01deg] flex-col items-center gap-[10px]">
-              <div className="rotate-[2.01deg]">
-                <img alt="新會員使首充送" src={withBasePath("/assets/sidebar/headline-text.svg")} className="h-[42.39px] w-[229.328px]" />
-              </div>
-              <div className="flex items-end justify-center gap-[13px]">
-                <div className="flex items-center">
-                  <img alt="" src={withBasePath("/assets/sidebar/numeral-1.svg")} className="mr-[-12px] h-[80px] w-[60px]" />
-                  <div className="flex gap-[6px]">
-                    <img alt="" src={withBasePath("/assets/sidebar/numeral-0.svg")} className="h-[80px] w-[60px]" />
-                    <img alt="" src={withBasePath("/assets/sidebar/numeral-0.svg")} className="h-[80px] w-[60px]" />
-                  </div>
-                </div>
-                <img alt="" src={withBasePath("/assets/sidebar/numeral-pct.svg")} className="h-[56px] w-[42px]" />
-              </div>
-            </div>
-          </div>
+          <img alt="新會員使首充送 100%" src={withBasePath("/assets/sidebar/ad-banner.svg")} className="pointer-events-none absolute inset-0 size-full" />
 
           <div className="absolute bottom-[23px] left-[20px] h-[60px] w-[227px] drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]">
             <img alt="" src={withBasePath("/assets/sidebar/promotions-button.svg")} className="pointer-events-none absolute inset-0 size-full" />
