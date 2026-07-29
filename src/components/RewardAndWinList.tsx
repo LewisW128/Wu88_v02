@@ -55,7 +55,7 @@ function RewardAnnouncement() {
 
       <div className="absolute left-[20px] top-[20px] flex items-center gap-[10px]">
         <TitleIcon />
-        <p className="whitespace-nowrap text-[20px] font-bold tracking-[0.35px] text-[#3e4140]">得獎名單</p>
+        <p className="whitespace-nowrap text-[20px] font-bold tracking-[0.35px] text-[#3e4140]">累積獎勵</p>
       </div>
 
       <div className="absolute left-[20px] top-[calc(50%-2.87px)] flex -translate-y-1/2 items-center gap-[6.25px]">
@@ -124,8 +124,9 @@ function WinnerRow({ w }: { w: (typeof WINNERS)[number] }) {
   return (
     <div className="flex h-[79px] w-full shrink-0 items-center overflow-hidden rounded-[50px] bg-white/60 px-[10px] backdrop-blur-[20px]">
       <div className="flex flex-[205] items-center gap-[10px]">
-        <div className="relative size-[59px] shrink-0 rounded-full border-2 border-[#01fab0]">
+        <div className="relative size-[59px] shrink-0 rounded-full">
           <img alt="" src={w.avatar} className="size-full rounded-full object-cover" />
+          <img alt="" src={withBasePath("/assets/win-list/avatar-ring.svg")} className="pointer-events-none absolute inset-0 size-full" />
           <div
             className="absolute bottom-0 right-0 size-[21px] overflow-hidden rounded-full"
             style={{ backgroundImage: AVATAR_BADGE_GRADIENT }}
@@ -164,11 +165,19 @@ function WinList() {
         <WinListTitleIcon />
         <p className="whitespace-nowrap text-[20px] font-bold tracking-[0.35px] text-white">得獎名單</p>
       </div>
-      <div className="absolute left-[20px] right-[20px] top-[85px] flex h-[34px] items-center rounded-[50px] bg-[#e2ff25] px-[20px] backdrop-blur-[10px]">
-        <p className="flex-[205] text-[14px] font-bold tracking-[0.15px] text-[#3e4140]">玩家</p>
-        <p className="flex-[238] text-center text-[14px] font-bold tracking-[0.15px] text-[#3e4140]">盈利</p>
-        <p className="flex-[227] text-[14px] font-bold tracking-[0.15px] text-[#3e4140]">賠率</p>
-        <p className="flex-[88] text-[14px] font-bold tracking-[0.15px] text-[#3e4140]">遊戲</p>
+      <div className="absolute left-[20px] right-[20px] top-[91px] flex h-[20px] items-center">
+        <p className="flex-[205] whitespace-nowrap text-[14px] font-bold tracking-[0.15px] text-white">
+          玩家 <span className="text-[#23f3d5]">/</span>
+        </p>
+        <p className="flex-[238] whitespace-nowrap text-[14px] font-bold tracking-[0.15px] text-white">
+          盈利 <span className="text-[#23f3d5]">/</span>
+        </p>
+        <p className="flex-[227] whitespace-nowrap text-[14px] font-bold tracking-[0.15px] text-white">
+          賠率 <span className="text-[#23f3d5]">/</span>
+        </p>
+        <p className="flex-[88] whitespace-nowrap text-[14px] font-bold tracking-[0.15px] text-white">
+          遊戲 <span className="text-[#23f3d5]">/</span>
+        </p>
       </div>
 
       <div
