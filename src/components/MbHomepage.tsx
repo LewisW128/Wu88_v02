@@ -1,15 +1,6 @@
 import type { ReactNode } from "react";
-import avatarPhoto from "../assets/profile/avatar.png";
-import iconCrown from "../assets/profile/icon-crown.svg";
-import iconMoney from "../assets/profile/icon-money.svg";
-import iconNotify from "../assets/profile/icon-notify.svg";
-import avatarDefault from "../assets/mb-homepage/avatar-default.png";
-import iconMessage from "../assets/mb-homepage/icon-message.svg";
-import pillDark from "../assets/mb-homepage/pill-dark.svg";
-import pillPurple from "../assets/mb-homepage/pill-purple.svg";
-import pillTeal from "../assets/mb-homepage/pill-teal.svg";
-import pillYellow from "../assets/mb-homepage/pill-yellow.svg";
 
+import { withBasePath } from "../lib/asset";
 function PillButton({ bg, label, textClass, shadowClass = "" }: { bg: string; label: string; textClass: string; shadowClass?: string }) {
   return (
     <div className={`relative h-[53px] w-[88px] shrink-0 ${shadowClass}`}>
@@ -24,8 +15,8 @@ function PillButton({ bg, label, textClass, shadowClass = "" }: { bg: string; la
 function RegisterLoginButtons() {
   return (
     <div className="flex items-center gap-[10px]">
-      <PillButton bg={pillPurple} label="註冊" textClass="text-white" shadowClass="drop-shadow-[0px_10px_5px_rgba(141,84,216,0.5)]" />
-      <PillButton bg={pillTeal} label="登入" textClass="text-[#444242]" />
+      <PillButton bg={withBasePath("/assets/mb-homepage/pill-purple.svg")} label="註冊" textClass="text-white" shadowClass="drop-shadow-[0px_10px_5px_rgba(141,84,216,0.5)]" />
+      <PillButton bg={withBasePath("/assets/mb-homepage/pill-teal.svg")} label="登入" textClass="text-[#444242]" />
     </div>
   );
 }
@@ -33,7 +24,7 @@ function RegisterLoginButtons() {
 function UnbindButton({ dense = false }: { dense?: boolean }) {
   return (
     <PillButton
-      bg={pillDark}
+      bg={withBasePath("/assets/mb-homepage/pill-dark.svg")}
       label="未綁定"
       textClass="text-white"
       shadowClass={dense ? "drop-shadow-[0px_10px_10px_rgba(62,65,64,0.25)]" : "drop-shadow-[0px_10px_5px_rgba(62,65,64,0.25)]"}
@@ -42,14 +33,14 @@ function UnbindButton({ dense = false }: { dense?: boolean }) {
 }
 
 function TopUpButton() {
-  return <PillButton bg={pillYellow} label="儲值" textClass="text-[#444242]" shadowClass="drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]" />;
+  return <PillButton bg={withBasePath("/assets/mb-homepage/pill-yellow.svg")} label="儲值" textClass="text-[#444242]" shadowClass="drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]" />;
 }
 
 function VipIdentity() {
   return (
     <>
       <div className="relative size-[59px] shrink-0 rounded-full border-2 border-[#01fab0]">
-        <img alt="" src={avatarPhoto} className="size-full rounded-full object-cover" />
+        <img alt="" src={withBasePath("/assets/profile/avatar.png")} className="size-full rounded-full object-cover" />
         <div
           className="absolute bottom-0 right-0 size-[21px] overflow-hidden rounded-full"
           style={{
@@ -57,7 +48,7 @@ function VipIdentity() {
               "linear-gradient(-48deg, rgb(1,250,176) 90%, rgb(72,186,206) 10%, rgb(182,90,253) 91%, rgb(100,78,179) 312%)",
           }}
         >
-          <img alt="" src={iconCrown} className="absolute left-[3px] top-[3px] size-[15px]" />
+          <img alt="" src={withBasePath("/assets/profile/icon-crown.svg")} className="absolute left-[3px] top-[3px] size-[15px]" />
         </div>
       </div>
       <div className="flex w-[128px] flex-col items-start gap-[5px]">
@@ -68,7 +59,7 @@ function VipIdentity() {
           </div>
         </div>
         <div className="flex items-center gap-[10px]">
-          <img alt="" src={iconMoney} className="size-[25px]" />
+          <img alt="" src={withBasePath("/assets/profile/icon-money.svg")} className="size-[25px]" />
           <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#3e4140]">10,000,000</p>
         </div>
       </div>
@@ -92,7 +83,7 @@ export default function MbHomepage({ style = "Homepage", state = "Unloggin" }: M
     left = (
       <>
         <div className="flex items-center gap-[10px]">
-          <img alt="" src={avatarDefault} className="size-[59px] shrink-0 rounded-full" />
+          <img alt="" src={withBasePath("/assets/mb-homepage/avatar-default.png")} className="size-[59px] shrink-0 rounded-full" />
           <p className="whitespace-nowrap text-[12px] font-bold tracking-[0.15px] text-[#3e4140]">PLAYER 12345</p>
         </div>
         <RegisterLoginButtons />
@@ -103,7 +94,7 @@ export default function MbHomepage({ style = "Homepage", state = "Unloggin" }: M
       <>
         <div className="flex items-center gap-[10px]">
           <div className="relative size-[59px] shrink-0 overflow-hidden rounded-full border-2 border-[#01fab0]">
-            <img alt="" src={avatarPhoto} className="size-full object-cover" />
+            <img alt="" src={withBasePath("/assets/profile/avatar.png")} className="size-full object-cover" />
           </div>
           <p className="whitespace-nowrap text-[12px] font-bold tracking-[0.15px] text-[#3e4140]">LUCKY777</p>
         </div>
@@ -127,7 +118,7 @@ export default function MbHomepage({ style = "Homepage", state = "Unloggin" }: M
     left = (
       <>
         <div className="flex items-center gap-[10px]">
-          <img alt="" src={iconMoney} className="size-[25px] shrink-0" />
+          <img alt="" src={withBasePath("/assets/profile/icon-money.svg")} className="size-[25px] shrink-0" />
           <p className="whitespace-nowrap text-[20px] font-bold tracking-[0.35px] text-[#3e4140]">10,000,000</p>
         </div>
         <TopUpButton />
@@ -144,11 +135,11 @@ export default function MbHomepage({ style = "Homepage", state = "Unloggin" }: M
       <div className="flex items-center gap-[20px]">{left}</div>
       {!isHomepage && (
         <div className="flex items-center gap-[40px]">
-          <img alt="" src={iconMessage} className="size-[25px] shrink-0" />
-          <img alt="" src={iconNotify} className="size-[25px] shrink-0" />
+          <img alt="" src={withBasePath("/assets/mb-homepage/icon-message.svg")} className="size-[25px] shrink-0" />
+          <img alt="" src={withBasePath("/assets/profile/icon-notify.svg")} className="size-[25px] shrink-0" />
         </div>
       )}
-      {isHomepage && <img alt="" src={iconNotify} className="size-[25px] shrink-0" />}
+      {isHomepage && <img alt="" src={withBasePath("/assets/profile/icon-notify.svg")} className="size-[25px] shrink-0" />}
     </div>
   );
 }

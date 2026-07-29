@@ -1,11 +1,5 @@
-import iconWhatsapp from "../assets/footer/icon-whatsapp.svg";
-import iconTelegram from "../assets/footer/icon-telegram.svg";
-import iconInstagram from "../assets/footer/icon-instagram.svg";
-import iconMore from "../assets/footer/icon-more.svg";
-import flagArrow from "../assets/footer/flag-arrow.svg";
-import qrFrame from "../assets/footer/qr-frame.png";
-import qrCode from "../assets/footer/qr-code.png";
 
+import { withBasePath } from "../lib/asset";
 const ABOUT_LINKS = ["平台介紹", "代理加盟", "隱私政策", "服務條款"];
 const GAMES_LINKS_1 = ["熱門遊戲", "捕魚遊戲", "真人視訊", "彩票投注"];
 const GAMES_LINKS_2 = ["電競娛樂", "體育競賽"];
@@ -48,8 +42,8 @@ export default function Footer() {
 
       <div className="relative flex flex-wrap justify-between gap-[40px] px-[60px] pt-[100px]">
         <div className="flex flex-col gap-[20px] sm:flex-row sm:items-center sm:gap-[40px]">
-          <AppDownload platform="ANDROID" icon={qrCode} />
-          <AppDownload platform="iOS 26.5" icon={qrCode} />
+          <AppDownload platform="ANDROID" icon={withBasePath("/assets/footer/qr-code.png")} />
+          <AppDownload platform="iOS 26.5" icon={withBasePath("/assets/footer/qr-code.png")} />
         </div>
         <div className="flex flex-wrap">
           <LinkColumn title="關於我們" columns={[ABOUT_LINKS]} />
@@ -60,20 +54,20 @@ export default function Footer() {
 
       <div className="relative mt-[80px] flex items-center gap-[10px] px-[60px]">
         <div className="flex size-[33px] items-center justify-center rounded-[10px] bg-[#061f45]">
-          <img alt="" src={iconWhatsapp} className="size-[20px]" />
+          <img alt="" src={withBasePath("/assets/footer/icon-whatsapp.svg")} className="size-[20px]" />
         </div>
         <div className="flex size-[33px] items-center justify-center rounded-[10px] bg-[#061f45]">
-          <img alt="" src={iconTelegram} className="size-[20px]" />
+          <img alt="" src={withBasePath("/assets/footer/icon-telegram.svg")} className="size-[20px]" />
         </div>
         <div className="flex size-[33px] items-center justify-center rounded-[10px] bg-[#061f45]">
-          <img alt="" src={iconInstagram} className="size-[20px]" />
+          <img alt="" src={withBasePath("/assets/footer/icon-instagram.svg")} className="size-[20px]" />
         </div>
         <div className="flex size-[33px] items-center justify-center rounded-[10px] bg-[#061f45]">
-          <img alt="" src={iconMore} className="size-[17px]" />
+          <img alt="" src={withBasePath("/assets/footer/icon-more.svg")} className="size-[17px]" />
         </div>
         <div className="flex h-[33px] w-[69px] items-center justify-between rounded-[10px] border border-white px-[8px]">
-          <img alt="" src={qrFrame} className="size-[21px] rounded-full" />
-          <img alt="" src={flagArrow} className="size-[16px]" />
+          <img alt="" src={withBasePath("/assets/footer/qr-frame.png")} className="size-[21px] rounded-full" />
+          <img alt="" src={withBasePath("/assets/footer/flag-arrow.svg")} className="size-[16px]" />
         </div>
       </div>
 

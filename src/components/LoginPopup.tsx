@@ -1,37 +1,22 @@
-import { useRef, useState } from "react";
-import logo from "../assets/login-popup/logo.svg";
-import iconClose from "../assets/login-popup/icon-close.svg";
-import blobTeal from "../assets/login-popup/blob-teal.svg";
-import photoFrameShadow from "../assets/login-popup/photo-frame-shadow.svg";
-import shardTopRight from "../assets/login-popup/shard-top-right.svg";
-import shardMid from "../assets/login-popup/shard-mid.svg";
-import shardBottomRight from "../assets/login-popup/shard-bottom-right.svg";
-import heroPhoto from "../assets/login-popup/hero-photo.png";
-import dot from "../assets/login-popup/dot.svg";
-import cornerSquiggle from "../assets/login-popup/corner-squiggle.svg";
-import iconAccountRing from "../assets/login-popup/icon-account-ring.svg";
-import iconAccountNeck from "../assets/login-popup/icon-account-neck.svg";
-import iconHead from "../assets/login-popup/icon-head.svg";
-import iconAccountBody from "../assets/login-popup/icon-account-body.svg";
-import iconLockTab from "../assets/login-popup/icon-lock-tab.svg";
-import iconLockBody from "../assets/login-popup/icon-lock-body.svg";
-import btnRegisterBg from "../assets/login-popup/btn-register-bg.svg";
-import btnLoginBg from "../assets/login-popup/btn-login-bg.svg";
+"use client";
 
+import { useRef, useState } from "react";
+
+import { withBasePath } from "../lib/asset";
 function AccountIcon() {
   return (
     <div className="relative size-[25px] shrink-0 overflow-hidden">
       <div className="absolute left-[8.19px] top-[3px] size-[9px]">
-        <img alt="" src={iconAccountRing} className="absolute -inset-[11.11%] block size-full max-w-none" />
+        <img alt="" src={withBasePath("/assets/login-popup/icon-account-ring.svg")} className="absolute -inset-[11.11%] block size-full max-w-none" />
       </div>
       <div className="absolute left-[11.69px] top-[7.98px] h-px w-[2px]">
-        <img alt="" src={iconAccountNeck} className="absolute inset-[0_-50%_-100%_-50%] block size-full max-w-none" />
+        <img alt="" src={withBasePath("/assets/login-popup/icon-account-neck.svg")} className="absolute inset-[0_-50%_-100%_-50%] block size-full max-w-none" />
       </div>
       <div className="absolute left-[13px] top-[13px] size-[10px]">
-        <img alt="" src={iconHead} className="absolute inset-0 block size-full max-w-none" />
+        <img alt="" src={withBasePath("/assets/login-popup/icon-head.svg")} className="absolute inset-0 block size-full max-w-none" />
       </div>
       <div className="absolute left-[calc(50%+0.5px)] top-[15px] h-[8px] w-[18px] -translate-x-1/2">
-        <img alt="" src={iconAccountBody} className="absolute inset-[-12.5%_-5.56%] block size-full max-w-none" />
+        <img alt="" src={withBasePath("/assets/login-popup/icon-account-body.svg")} className="absolute inset-[-12.5%_-5.56%] block size-full max-w-none" />
       </div>
     </div>
   );
@@ -41,14 +26,14 @@ function LockIcon() {
   return (
     <div className="relative size-[25px] shrink-0 overflow-hidden">
       <div className="absolute inset-[52%_8%_8%_52%]">
-        <img alt="" src={iconHead} className="absolute inset-0 block size-full max-w-none" />
+        <img alt="" src={withBasePath("/assets/login-popup/icon-head.svg")} className="absolute inset-0 block size-full max-w-none" />
       </div>
       <div className="absolute inset-[40%_16%_12%_16%] rounded-[3px] border-2 border-solid border-[#3e4140]" />
       <div className="absolute bottom-[62%] left-1/2 top-[12%] w-[7px] -translate-x-1/2">
-        <img alt="" src={iconLockTab} className="absolute -inset-[15.38%_14.29%] block size-full max-w-none" />
+        <img alt="" src={withBasePath("/assets/login-popup/icon-lock-tab.svg")} className="absolute -inset-[15.38%_14.29%] block size-full max-w-none" />
       </div>
       <div className="absolute left-[10.5px] top-[13px] h-[6px] w-[4px]">
-        <img alt="" src={iconLockBody} className="absolute inset-0 block size-full max-w-none" />
+        <img alt="" src={withBasePath("/assets/login-popup/icon-lock-body.svg")} className="absolute inset-0 block size-full max-w-none" />
       </div>
     </div>
   );
@@ -108,7 +93,7 @@ export default function LoginPopup({ onClose }: { onClose?: () => void }) {
     >
       {/* background blob */}
       <div className="pointer-events-none absolute left-[-78.56px] top-[180.38px] h-[370px] w-[458px]">
-        <img alt="" src={blobTeal} className="absolute -inset-[13.51%_10.92%] block size-full max-w-none" />
+        <img alt="" src={withBasePath("/assets/login-popup/blob-teal.svg")} className="absolute -inset-[13.51%_10.92%] block size-full max-w-none" />
       </div>
 
       {/* right-side photo panel — tilts and shifts layers to follow the cursor, like a camera dolly */}
@@ -130,32 +115,32 @@ export default function LoginPopup({ onClose }: { onClose?: () => void }) {
             className="pointer-events-none absolute left-[163.69px] top-[-348.89px] h-[743.296px] w-[785.657px] transition-transform duration-300 ease-out"
             style={parallax(6)}
           >
-            <img alt="" src={photoFrameShadow} className="absolute inset-0 block size-full max-w-none" />
+            <img alt="" src={withBasePath("/assets/login-popup/photo-frame-shadow.svg")} className="absolute inset-0 block size-full max-w-none" />
           </div>
           <div
             className="pointer-events-none absolute right-[-116px] top-[42.95px] h-[171px] w-[181px] transition-transform duration-300 ease-out"
             style={parallax(14)}
           >
-            <img alt="" src={shardTopRight} className="absolute inset-0 block size-full max-w-none" />
+            <img alt="" src={withBasePath("/assets/login-popup/shard-top-right.svg")} className="absolute inset-0 block size-full max-w-none" />
           </div>
           <div
             className="pointer-events-none absolute right-[255.3px] top-[155.32px] h-[262.639px] w-[276.759px] transition-transform duration-300 ease-out"
             style={parallax(10)}
           >
-            <img alt="" src={shardMid} className="absolute inset-0 block size-full max-w-none" />
+            <img alt="" src={withBasePath("/assets/login-popup/shard-mid.svg")} className="absolute inset-0 block size-full max-w-none" />
           </div>
           <div
             className="pointer-events-none absolute right-[-21px] top-[229.95px] h-[234px] w-[246px] transition-transform duration-300 ease-out"
             style={parallax(12)}
           >
-            <img alt="" src={shardBottomRight} className="absolute inset-0 block size-full max-w-none" />
+            <img alt="" src={withBasePath("/assets/login-popup/shard-bottom-right.svg")} className="absolute inset-0 block size-full max-w-none" />
           </div>
 
           <div
             className="pointer-events-none absolute left-[61.56px] top-[15.81px] h-[581.194px] w-[387.463px] shadow-[0px_127.083px_28.241px_0px_rgba(255,255,255,0.25)] transition-transform duration-300 ease-out"
             style={parallax(22)}
           >
-            <img alt="" src={heroPhoto} className="absolute inset-0 size-full max-w-none object-cover" />
+            <img alt="" src={withBasePath("/assets/login-popup/hero-photo.png")} className="absolute inset-0 size-full max-w-none object-cover" />
           </div>
 
           <div className="pointer-events-none absolute left-[-292.96px] top-[202.39px] flex size-[673.581px] items-center justify-center">
@@ -182,7 +167,7 @@ export default function LoginPopup({ onClose }: { onClose?: () => void }) {
             {Array.from({ length: DOT_GRID_ROWS }).map((_, row) => (
               <div key={row} className="flex items-center gap-[4.377px]">
                 {Array.from({ length: DOT_GRID_COLS }).map((_, col) => (
-                  <img key={col} alt="" src={dot} className="size-[2.189px]" />
+                  <img key={col} alt="" src={withBasePath("/assets/login-popup/dot.svg")} className="size-[2.189px]" />
                 ))}
               </div>
             ))}
@@ -195,7 +180,7 @@ export default function LoginPopup({ onClose }: { onClose?: () => void }) {
         <div className="flex flex-col items-start gap-[40px]">
           <div className="flex flex-col items-start gap-[10px]">
             <div className="w-[240px]">
-              <img alt="WU88 武財神 ONE" src={logo} className="h-auto w-full" />
+              <img alt="WU88 武財神 ONE" src={withBasePath("/assets/login-popup/logo.svg")} className="h-auto w-full" />
             </div>
             <p className="text-[16px] font-medium tracking-[0.15px] text-[#a2a2a2]">請輸入您的帳號和密碼</p>
           </div>
@@ -205,8 +190,8 @@ export default function LoginPopup({ onClose }: { onClose?: () => void }) {
           </div>
         </div>
         <div className="flex items-center gap-[10px]">
-          <ActionButton label="註冊" bg={btnRegisterBg} textColor="#ffffff" />
-          <ActionButton label="登入" bg={btnLoginBg} textColor="#444242" />
+          <ActionButton label="註冊" bg={withBasePath("/assets/login-popup/btn-register-bg.svg")} textColor="#ffffff" />
+          <ActionButton label="登入" bg={withBasePath("/assets/login-popup/btn-login-bg.svg")} textColor="#444242" />
         </div>
       </div>
 
@@ -220,11 +205,11 @@ export default function LoginPopup({ onClose }: { onClose?: () => void }) {
         onClick={onClose}
         className="absolute left-[39.44px] top-[39.38px] size-[25px] cursor-pointer overflow-hidden"
       >
-        <img alt="" src={iconClose} className="absolute left-1/2 top-1/2 h-[9.209px] w-[9.192px] -translate-x-1/2 -translate-y-1/2 max-w-none" />
+        <img alt="" src={withBasePath("/assets/login-popup/icon-close.svg")} className="absolute left-1/2 top-1/2 h-[9.209px] w-[9.192px] -translate-x-1/2 -translate-y-1/2 max-w-none" />
       </button>
 
       <div className="pointer-events-none absolute left-[487.44px] top-[471.38px] h-[128px] w-[134px]">
-        <img alt="" src={cornerSquiggle} className="absolute inset-0 block size-full max-w-none" />
+        <img alt="" src={withBasePath("/assets/login-popup/corner-squiggle.svg")} className="absolute inset-0 block size-full max-w-none" />
       </div>
     </div>
   );

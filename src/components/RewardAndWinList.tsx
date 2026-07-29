@@ -1,25 +1,10 @@
-import iconChart from "../assets/reward/icon-chart.svg";
-import bgLayer from "../assets/reward/bg-layer.png";
-import rectangle2 from "../assets/reward/rectangle2.svg";
-import btnBg from "../assets/reward/btn-bg.svg";
-import vector1 from "../assets/reward/vector1.svg";
-import ellipse3 from "../assets/reward/ellipse3.svg";
+import { withBasePath } from "../lib/asset";
 
-import iconCrown from "../assets/winlist/icon-crown.svg";
-import iconTitle from "../assets/winlist/icon-title.svg";
-import iconMoney from "../assets/winlist/icon-money.svg";
-import gameThumb1 from "../assets/winlist/game-thumb1.png";
-import gameThumb2 from "../assets/winlist/game-thumb2.png";
-import gameThumb3a from "../assets/winlist/game-thumb3a.png";
-import gameThumb3b from "../assets/winlist/game-thumb3b.png";
-import gameThumb4 from "../assets/winlist/game-thumb4.png";
-import avatar1 from "../assets/winlist/avatar1.png";
-import avatar2 from "../assets/winlist/avatar2.png";
-import avatar3 from "../assets/winlist/avatar3.png";
-import avatar4 from "../assets/winlist/avatar4.png";
-import girlTrophy from "../assets/winlist/girl-trophy.png";
+const AVATAR_RING_GRADIENT =
+  "linear-gradient(-48.0664842153752deg, rgb(72,186,206) 3.06%, rgb(20,232,184) 19.81%, rgb(154,113,241) 21.41%, rgb(1,250,176) 28.83%, rgb(182,90,253) 29.14%, rgb(141,84,216) 58.78%, rgb(111,79,189) 84.54%, rgb(100,78,179) 100%)";
 
-const DIGITS = ["0", "9", "9", "9", "0", "0", "0", "0", "0", "0", "0", "0"];
+const WIN_LIST_BG_GRADIENT =
+  "linear-gradient(-51.07deg, rgba(20,232,184,0) 7.43%, rgb(72,186,206) 7.59%, rgba(1,250,176,0) 15.52%, rgb(154,113,241) 29.54%, rgb(182,90,253) 36.47%, rgb(141,84,216) 63.04%, rgb(111,79,189) 86.14%, rgb(100,78,179) 100%)";
 
 function DotsGrid({ size, gap, rows, cols }: { size: number; gap: number; rows: number; cols: number }) {
   return (
@@ -27,7 +12,7 @@ function DotsGrid({ size, gap, rows, cols }: { size: number; gap: number; rows: 
       {Array.from({ length: rows }).map((_, r) => (
         <div key={r} className="flex items-center" style={{ gap }}>
           {Array.from({ length: cols }).map((_, c) => (
-            <img alt="" key={c} src={ellipse3} style={{ width: size, height: size }} />
+            <img alt="" key={c} src={withBasePath("/assets/reward-announcement/ellipse2.svg")} style={{ width: size, height: size }} />
           ))}
         </div>
       ))}
@@ -35,50 +20,28 @@ function DotsGrid({ size, gap, rows, cols }: { size: number; gap: number; rows: 
   );
 }
 
-const WINNERS = [
-  { avatar: avatar1, name: "LUCKY777", amount: "+ 10,000,000", thumb: gameThumb1, thumb2: undefined },
-  { avatar: avatar2, name: "JACK1234", amount: "+ 90,000", thumb: gameThumb2, thumb2: undefined },
-  { avatar: avatar3, name: "LUCY2345", amount: "+ 10,000", thumb: gameThumb3a, thumb2: gameThumb3b },
-  { avatar: avatar4, name: "LUCY2345", amount: "+ 1,000,000", thumb: gameThumb4, thumb2: undefined },
-];
+const REWARD_DIGIT_PAIRS = ["09", "99", "99", "00", "00", "00"];
 
-function WinnerRow({ w }: { w: (typeof WINNERS)[number] }) {
+function PointCard({ pair }: { pair: string }) {
   return (
-    <div className="relative flex h-[79px] w-full shrink-0 items-center justify-between rounded-full bg-white/60 px-[10px] backdrop-blur-[20px]">
-      <div className="flex items-center gap-[10px]">
-        <div
-          className="relative size-[59px] shrink-0 rounded-full p-[2px]"
-          style={{
-            backgroundImage:
-              "linear-gradient(-48.0664842153752deg, rgb(72,186,206) 0%, rgb(72,186,206) 20%, rgb(154,113,241) 45%, rgb(182,90,253) 55%, rgb(141,84,216) 70%, rgb(111,79,189) 85%, rgb(100,78,179) 100%)",
-          }}
-        >
-          <img alt="" src={w.avatar} className="size-full rounded-full object-cover" />
-          <div
-            className="absolute bottom-0 right-0 size-[21px] overflow-hidden rounded-full"
-            style={{
-              backgroundImage:
-                "linear-gradient(-48.0664842153752deg, rgb(72,186,206) 17.1%, rgb(154,113,241) 77.3%, rgb(182,90,253) 100%)",
-            }}
-          >
-            <img alt="" src={iconCrown} className="absolute left-[3px] top-[3px] size-[15px]" />
-          </div>
-        </div>
-        <div className="flex flex-col gap-[5px]">
-          <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#3e4140]">{w.name}</p>
-          <div className="w-fit rounded-full bg-[#8d54d8] px-[5px] py-px">
-            <p className="whitespace-nowrap text-[12px] font-medium tracking-[0.15px] text-white">LV.12</p>
-          </div>
-        </div>
+    <div className="relative size-[56.254px] shrink-0 overflow-hidden">
+      <div className="absolute left-1/2 top-[0.31px] h-[26.252px] w-[56.254px] -translate-x-1/2 rounded-t-[10.417px] bg-[#1e1d20]" />
+      <div className="absolute bottom-0 left-1/2 h-[26.044px] w-[56.254px] -translate-x-1/2 rounded-b-[10.417px] bg-[#1e1d20]" />
+      <p className="absolute left-[15.63px] top-[-1.56px] whitespace-nowrap text-center font-['Advent_Pro'] text-[50px] font-bold text-white">{pair[0]}</p>
+      <p className="absolute left-[40.63px] top-[-1.56px] whitespace-nowrap text-center font-['Advent_Pro'] text-[50px] font-bold text-white">{pair[1]}</p>
+    </div>
+  );
+}
+
+function TitleIcon() {
+  return (
+    <div className="relative size-[45px] shrink-0 overflow-hidden">
+      <img alt="" src={withBasePath("/assets/reward-announcement/ellipse28.svg")} className="absolute right-0 top-[calc(50%+11.7px)] size-[18px] -translate-y-1/2" />
+      <div className="absolute left-[calc(50%+5.35px)] top-[calc(50%-5.4px)] h-[27px] w-[34.097px] -translate-x-1/2 -translate-y-1/2">
+        <img alt="" src={withBasePath("/assets/reward-announcement/group1084.svg")} className="block size-full max-w-none" />
       </div>
-      <div className="flex items-center gap-[10px]">
-        <img alt="" src={iconMoney} className="size-[25px]" />
-        <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#3e4140]">{w.amount}</p>
-      </div>
-      <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#3e4140]">0.00x</p>
-      <div className="relative size-[59px] shrink-0 overflow-hidden rounded-full bg-white">
-        <img alt="" src={w.thumb} className="absolute inset-0 size-full object-cover" />
-        {w.thumb2 && <img alt="" src={w.thumb2} className="absolute inset-0 size-full object-cover" />}
+      <div className="absolute left-[calc(50%-0.9px)] top-[calc(50%+0.9px)] h-[28.8px] w-[36px] -translate-x-1/2 -translate-y-1/2">
+        <img alt="" src={withBasePath("/assets/reward-announcement/rectangle45.svg")} className="block size-full max-w-none" />
       </div>
     </div>
   );
@@ -87,35 +50,111 @@ function WinnerRow({ w }: { w: (typeof WINNERS)[number] }) {
 function RewardAnnouncement() {
   return (
     <div className="relative h-[438px] w-[519px] shrink-0 overflow-hidden rounded-tl-[50px] border-2 border-[#23f3d5] bg-white/50">
-      <img alt="" src={bgLayer} className="pointer-events-none absolute bottom-[-2px] left-[185px] h-[424px] w-[435px] object-cover opacity-50 blur-[2.5px]" />
-      <img alt="" src={rectangle2} className="pointer-events-none absolute left-[22px] top-[190px] h-[333px] w-[212px]" />
+      <img alt="" src={withBasePath("/assets/reward-announcement/photo-hero.png")} className="pointer-events-none absolute left-[114px] top-[23px] h-[580px] w-[485px] max-w-none object-cover" />
+      <img alt="" src={withBasePath("/assets/reward-announcement/rectangle2.svg")} className="pointer-events-none absolute left-[22px] top-[calc(50%+76px)] h-[412px] w-[262px] max-w-none -translate-y-1/2" />
 
       <div className="absolute left-[18px] top-[18px] flex items-center gap-[10px]">
-        <img alt="" src={iconChart} className="size-[45px]" />
-        <p className="whitespace-nowrap text-[20px] font-bold tracking-[0.35px] text-[#3e4140]">累積獎勵</p>
+        <TitleIcon />
+        <p className="whitespace-nowrap text-[20px] font-bold tracking-[0.35px] text-[#3e4140]">得獎名單</p>
       </div>
 
-      <div className="absolute left-1/2 top-[141px] flex -translate-x-1/2 gap-[8px]">
-        {DIGITS.map((d, i) => (
-          <div key={i} className="relative flex size-[72px] items-center justify-center rounded-[13px] bg-[#1e1d20]">
-            <p className="font-['Advent_Pro'] text-[52px] font-bold text-white">{d}</p>
-            {i % 2 === 1 && i !== DIGITS.length - 1 && <div className="w-[8px]" />}
-          </div>
+      <div className="absolute left-[18px] top-[calc(50%-2.87px)] flex -translate-y-1/2 items-center gap-[6.25px]">
+        {REWARD_DIGIT_PAIRS.map((pair, i) => (
+          <PointCard key={i} pair={pair} />
         ))}
       </div>
 
       <div className="absolute bottom-[18px] left-[18px]">
-        <DotsGrid size={4} gap={8} rows={6} cols={7} />
+        <DotsGrid size={3.875} gap={7.75} rows={6} cols={6} />
       </div>
 
-      <div className="absolute bottom-[38px] right-[18px] h-[53px] w-[128px]">
-        <div className="pointer-events-none absolute inset-[-18.41%_-7.81%_-55.27%_-23.44%]">
-          <img alt="" src={btnBg} className="block size-full max-w-none" />
+      <div className="absolute bottom-[38px] right-[18px] h-[53px] w-[128px] drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]">
+        <div className="pointer-events-none absolute inset-0 -scale-x-100">
+          <img alt="" src={withBasePath("/assets/reward-announcement/rectangle3.svg")} className="block size-full max-w-none" />
         </div>
         <div className="absolute inset-[24.53%_11.72%_30.19%_11.72%] flex items-center justify-between">
           <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">快速下注</p>
-          <img alt="" src={vector1} className="h-[10px] w-[26px]" />
+          <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[5.556px]">
+            <img alt="" src={withBasePath("/assets/reward-announcement/rectangle1.svg")} className="h-[6.111px] w-[3.333px]" />
+          </div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function WinListTitleIcon() {
+  return (
+    <div className="relative size-[45px] shrink-0 overflow-hidden">
+      <img alt="" src={withBasePath("/assets/win-list/ellipse29.svg")} className="absolute left-[21.6px] top-[23.4px] size-[18px]" />
+      <div className="absolute left-[9.79px] top-[3.64px] h-[37.714px] w-[23.912px]">
+        <img alt="" src={withBasePath("/assets/win-list/union1.svg")} className="block size-full max-w-none" />
+      </div>
+      <img alt="" src={withBasePath("/assets/win-list/star2.svg")} className="absolute left-[15.74px] top-[8.79px] size-[12px]" />
+      <div className="absolute left-[1.8px] top-[10.66px] h-[15.884px] w-[39.6px]">
+        <img alt="" src={withBasePath("/assets/win-list/group1075.svg")} className="block size-full max-w-none" />
+      </div>
+    </div>
+  );
+}
+
+const WINNERS = [
+  { avatar: withBasePath("/assets/win-list/avatar.png"), name: "LUCKY777", amount: "+ 10,000,000", thumb: withBasePath("/assets/win-list/chatgpt-image-1.png") },
+  { avatar: withBasePath("/assets/win-list/avatar1.png"), name: "JACK1234", amount: "+ 90,000", thumb: withBasePath("/assets/win-list/products-img.png") },
+  { avatar: withBasePath("/assets/win-list/avatar2.png"), name: "LUCY2345", amount: "+ 10,000", thumb: withBasePath("/assets/win-list/download1.png") },
+  { avatar: withBasePath("/assets/win-list/avatar3.png"), name: "LUCY2345", amount: "+ 1,000,000", thumb: withBasePath("/assets/win-list/sl2571-1.png") },
+];
+
+function MoneyIcon() {
+  return (
+    <div className="relative size-[25px] shrink-0 overflow-hidden">
+      <img alt="" src={withBasePath("/assets/win-list/ellipse27.svg")} className="absolute bottom-px right-px size-[10px]" />
+      <div className="absolute inset-[8%]">
+        <img alt="" src={withBasePath("/assets/win-list/vector.svg")} className="block size-full max-w-none" />
+      </div>
+      <img alt="" src={withBasePath("/assets/win-list/subtract.svg")} className="absolute left-[11.84px] top-[6px] h-[13px] w-[1.212px]" />
+    </div>
+  );
+}
+
+function WinnerRow({ w, index }: { w: (typeof WINNERS)[number]; index: number }) {
+  return (
+    <div
+      className="relative h-[79px] w-full shrink-0 overflow-hidden rounded-[50px] bg-white/60 backdrop-blur-[20px]"
+      style={{
+        maskImage: `url("${withBasePath("/assets/win-list/rank-selections.svg")}")`,
+        maskSize: "758px 309px",
+        maskPosition: `0px ${-89 * index}px`,
+        maskRepeat: "no-repeat",
+      }}
+    >
+      <div className="absolute left-[10px] top-1/2 flex -translate-y-1/2 items-center gap-[10px]">
+        <div className="relative size-[59px] shrink-0 rounded-full border-2 border-[#01fab0]">
+          <img alt="" src={w.avatar} className="size-full rounded-full object-cover" />
+          <div
+            className="absolute bottom-0 right-0 size-[20.917px] overflow-hidden rounded-full"
+            style={{ backgroundImage: AVATAR_RING_GRADIENT }}
+          >
+            <img alt="" src={withBasePath("/assets/win-list/group1079.svg")} className="absolute left-[3px] top-[3px] size-[15px]" />
+          </div>
+        </div>
+        <div className="flex flex-col items-start gap-[5px]">
+          <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#3e4140]">{w.name}</p>
+          <div className="w-fit rounded-full bg-[#8d54d8] px-[5px] py-px">
+            <p className="whitespace-nowrap text-[12px] font-medium tracking-[0.15px] text-white">LV.12</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="absolute left-[225px] top-1/2 flex -translate-y-1/2 items-center gap-[10px]">
+        <MoneyIcon />
+        <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#3e4140]">{w.amount}</p>
+      </div>
+
+      <p className="absolute left-[463px] top-[calc(50%-12.5px)] whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#3e4140]">0.00x</p>
+
+      <div className="absolute right-[10px] top-1/2 h-[59px] w-[76px] -translate-y-1/2 overflow-hidden rounded-[37.342px] bg-white">
+        <img alt="" src={w.thumb} className="absolute inset-0 size-full object-cover" />
       </div>
     </div>
   );
@@ -123,36 +162,25 @@ function RewardAnnouncement() {
 
 function WinList() {
   return (
-    <div className="relative h-[526px] w-[870px] shrink-0 overflow-hidden">
-      <div
-        className="absolute right-[126px] top-[88px] h-[438px] w-[744px] overflow-hidden rounded-br-[70px]"
-        style={{
-          backgroundImage:
-            "linear-gradient(-53deg, rgb(72,186,206) 18%, rgb(154,113,241) 71%, rgb(141,84,216) 152%, rgb(100,78,179) 241%)",
-        }}
-      >
-        <div className="absolute left-[20px] top-[20px] flex items-center gap-[10px]">
-          <img alt="" src={iconTitle} className="size-[45px]" />
-          <p className="whitespace-nowrap text-[20px] font-bold tracking-[0.35px] text-white">得獎名單</p>
-        </div>
-        <div className="absolute right-[20px] top-[20px]">
-          <DotsGrid size={2.5} gap={5} rows={6} cols={6} />
-        </div>
-
-        <div className="absolute left-[20px] top-[85px] flex h-[34px] w-[628px] items-center rounded-full bg-[#e2ff25] px-[20px] text-[14px] font-bold tracking-[0.15px] text-[#3e4140]">
-          <p className="w-[205px]">玩家</p>
-          <p className="w-[145px] text-center">盈利</p>
-          <p className="w-[145px]">賠率</p>
-          <p>遊戲</p>
-        </div>
-
-        <div className="absolute left-[20px] top-[129px] flex h-[308px] w-[628px] flex-col gap-[10px] overflow-y-auto">
-          {WINNERS.map((w, i) => (
-            <WinnerRow key={i} w={w} />
-          ))}
-        </div>
+    <div className="relative h-[438px] w-[798px] shrink-0 overflow-hidden rounded-br-[70px]" style={{ backgroundImage: WIN_LIST_BG_GRADIENT }}>
+      <div className="absolute left-[20px] top-[20px] flex items-center gap-[10px]">
+        <WinListTitleIcon />
+        <p className="whitespace-nowrap text-[20px] font-bold tracking-[0.35px] text-white">得獎名單</p>
       </div>
-      <img alt="" src={girlTrophy} className="absolute right-0 top-0 h-[526px] w-[284px] object-cover" />
+      <div className="absolute right-px top-[177px] h-[120px] w-px bg-[#23f3d5]" />
+
+      <div className="absolute left-[20px] top-[85px] flex h-[34px] w-[758px] items-center rounded-[50px] bg-[#e2ff25] px-[20px] backdrop-blur-[10px]">
+        <p className="w-[205px] text-[14px] font-bold tracking-[0.15px] text-[#3e4140]">玩家</p>
+        <p className="w-[238px] text-center text-[14px] font-bold tracking-[0.15px] text-[#3e4140]">盈利</p>
+        <p className="w-[227px] text-[14px] font-bold tracking-[0.15px] text-[#3e4140]">賠率</p>
+        <p className="text-[14px] font-bold tracking-[0.15px] text-[#3e4140]">遊戲</p>
+      </div>
+
+      <div className="absolute left-[20px] right-[20px] top-[129px] flex flex-col gap-0">
+        {WINNERS.map((w, i) => (
+          <WinnerRow key={i} w={w} index={i} />
+        ))}
+      </div>
     </div>
   );
 }

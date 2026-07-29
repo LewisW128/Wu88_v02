@@ -1,23 +1,18 @@
+"use client";
+
 import { useHorizontalSlider } from "../hooks/useHorizontalSlider";
 import SlideArrows from "./SlideArrows";
-import slot from "../assets/formbar/slot.png";
-import football from "../assets/formbar/football.png";
-import basketball from "../assets/formbar/basketball.png";
-import baseball from "../assets/formbar/baseball.png";
-import live from "../assets/formbar/live.png";
-import lottery from "../assets/formbar/lottery.png";
-import boardCard from "../assets/formbar/board-card.png";
-import sicbo from "../assets/formbar/sicbo.png";
 
+import { withBasePath } from "../lib/asset";
 const FORMS = [
-  { img: slot, main: "電子", sub: "SLOT" },
-  { img: football, main: "足球", sub: "FOOTBALL" },
-  { img: basketball, main: "籃球", sub: "BASKETBALL" },
-  { img: baseball, main: "棒球", sub: "BASEBALL" },
-  { img: live, main: "真人娛樂", sub: "LIVE" },
-  { img: lottery, main: "彩票", sub: "LOTTORY" },
-  { img: boardCard, main: "棋牌", sub: "BOARD & CARD" },
-  { img: sicbo, main: "骰寶", sub: "ROULETTE" },
+  { img: withBasePath("/assets/formbar/slot.png"), main: "電子", sub: "SLOT" },
+  { img: withBasePath("/assets/formbar/football.png"), main: "足球", sub: "FOOTBALL" },
+  { img: withBasePath("/assets/formbar/basketball.png"), main: "籃球", sub: "BASKETBALL" },
+  { img: withBasePath("/assets/formbar/baseball.png"), main: "棒球", sub: "BASEBALL" },
+  { img: withBasePath("/assets/formbar/live.png"), main: "真人娛樂", sub: "LIVE" },
+  { img: withBasePath("/assets/formbar/lottery.png"), main: "彩票", sub: "LOTTORY" },
+  { img: withBasePath("/assets/formbar/board-card.png"), main: "棋牌", sub: "BOARD & CARD" },
+  { img: withBasePath("/assets/formbar/sicbo.png"), main: "骰寶", sub: "ROULETTE" },
 ];
 
 export default function FormBar() {

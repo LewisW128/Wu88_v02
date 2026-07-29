@@ -1,6 +1,5 @@
-import arrowGray from "../assets/shared/arrow-chevron-gray.svg";
-import arrowTeal from "../assets/shared/arrow-chevron-teal.svg";
 
+import { withBasePath } from "../lib/asset";
 export default function SlideArrows({
   canScrollLeft,
   canScrollRight,
@@ -23,7 +22,7 @@ export default function SlideArrows({
         disabled={!canScrollLeft}
         className="flex size-[45px] items-center justify-center rounded-full bg-[#3e4140]"
       >
-        <img alt="" src={canScrollLeft ? arrowTeal : arrowGray} className="h-[13px] w-[8px] rotate-180" />
+        <img alt="" src={canScrollLeft ? withBasePath("/assets/shared/arrow-chevron-teal.svg") : withBasePath("/assets/shared/arrow-chevron-gray.svg")} className="h-[13px] w-[8px] rotate-180" />
       </button>
       <button
         type="button"
@@ -32,7 +31,7 @@ export default function SlideArrows({
         disabled={!canScrollRight}
         className="flex size-[45px] items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[10px]"
       >
-        <img alt="" src={canScrollRight ? arrowTeal : arrowGray} className="h-[13px] w-[8px]" />
+        <img alt="" src={canScrollRight ? withBasePath("/assets/shared/arrow-chevron-teal.svg") : withBasePath("/assets/shared/arrow-chevron-gray.svg")} className="h-[13px] w-[8px]" />
       </button>
     </div>
   );

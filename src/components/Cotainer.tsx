@@ -1,19 +1,16 @@
-import { useEffect, useState } from "react";
-import slide1Background from "../assets/cotainer/carousel/slide1-background.svg";
-import headlineSlide1 from "../assets/cotainer/carousel/headline-slide1.svg";
-import slide2Bg from "../assets/cotainer/carousel/slide2-bg.png";
-import headlineSlide2 from "../assets/cotainer/carousel/headline-slide2.svg";
-import ctaPillBg from "../assets/cotainer/carousel/cta-pill-bg.svg";
-import arrowChevron from "../assets/cotainer/carousel/arrow-chevron.svg";
+"use client";
 
+import { useEffect, useState } from "react";
+
+import { withBasePath } from "../lib/asset";
 const AUTOPLAY_MS = 6000;
 
 function Slide1() {
   return (
     <>
-      <img alt="" src={slide1Background} className="pointer-events-none absolute inset-0 size-full object-cover" />
+      <img alt="" src={withBasePath("/assets/cotainer/carousel/slide1-background.svg")} className="pointer-events-none absolute inset-0 size-full object-cover" />
       <div className="absolute left-[80px] top-1/2 flex w-[382px] -translate-y-1/2 flex-col items-start gap-[20px]">
-        <img alt="精彩不設限 贏得更過癮！" src={headlineSlide1} className="w-[336px]" />
+        <img alt="精彩不設限 贏得更過癮！" src={withBasePath("/assets/cotainer/carousel/headline-slide1.svg")} className="w-[336px]" />
         <p className="text-[36px] font-bold leading-none tracking-[0.36px] text-[#3e4140]">高額獎金 24h 精彩不斷</p>
       </div>
     </>
@@ -23,14 +20,14 @@ function Slide1() {
 function Slide2() {
   return (
     <>
-      <img alt="" src={slide2Bg} className="pointer-events-none absolute inset-0 size-full object-cover" />
-      <img alt="$300,000 來自WU88舉辦的競賽" src={headlineSlide2} className="absolute left-[72px] top-[130px] w-[348px]" />
+      <img alt="" src={withBasePath("/assets/cotainer/carousel/slide2-bg.png")} className="pointer-events-none absolute inset-0 size-full object-cover" />
+      <img alt="$300,000 來自WU88舉辦的競賽" src={withBasePath("/assets/cotainer/carousel/headline-slide2.svg")} className="absolute left-[72px] top-[130px] w-[348px]" />
       <div className="absolute left-[73px] top-[360px] h-[53px] w-[128px] drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]">
-        <img alt="" src={ctaPillBg} className="pointer-events-none absolute inset-0 size-full" />
+        <img alt="" src={withBasePath("/assets/cotainer/carousel/cta-pill-bg.svg")} className="pointer-events-none absolute inset-0 size-full" />
         <div className="absolute inset-[24.53%_11.72%_30.19%_11.72%] flex items-center justify-between">
           <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">立即參加</p>
           <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[5.5px]">
-            <img alt="" src={arrowChevron} className="h-[7px] w-[5px]" />
+            <img alt="" src={withBasePath("/assets/cotainer/carousel/arrow-chevron.svg")} className="h-[7px] w-[5px]" />
           </div>
         </div>
       </div>
