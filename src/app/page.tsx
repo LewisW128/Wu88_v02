@@ -14,7 +14,11 @@ export default function Home() {
     <ScaleBelowBreakpoint>
       <div className="min-h-screen bg-white">
         <div className="flex w-full">
-          <div className="sticky top-0 z-10" style={{ height: "calc(100vh / var(--page-zoom, 1))" }}>
+          {/* Capped at the sidebar's own content height (1117px, the ad banner's
+              bottom edge) so it never balloons past that at extreme zoom levels
+              and ends up covering the footer, which bleeds full-width underneath
+              this column. */}
+          <div className="sticky top-0 z-10" style={{ height: "min(calc(100vh / var(--page-zoom, 1)), 1117px)" }}>
             <Sidebar />
           </div>
 
