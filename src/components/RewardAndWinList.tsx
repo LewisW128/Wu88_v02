@@ -1,7 +1,10 @@
 import { withBasePath } from "../lib/asset";
 
 const AVATAR_RING_GRADIENT =
-  "linear-gradient(-48.0664842153752deg, rgb(72,186,206) 3.06%, rgb(20,232,184) 19.81%, rgb(154,113,241) 21.41%, rgb(1,250,176) 28.83%, rgb(182,90,253) 29.14%, rgb(141,84,216) 58.78%, rgb(111,79,189) 84.54%, rgb(100,78,179) 100%)";
+  "linear-gradient(-48.0664842153752deg, rgb(72,186,206) 0%, rgb(72,186,206) 20%, rgb(154,113,241) 45%, rgb(182,90,253) 55%, rgb(141,84,216) 70%, rgb(111,79,189) 85%, rgb(100,78,179) 100%)";
+
+const AVATAR_BADGE_GRADIENT =
+  "linear-gradient(-48.0664842153752deg, rgb(72,186,206) 17.1%, rgb(154,113,241) 77.3%, rgb(182,90,253) 100%)";
 
 const WIN_LIST_BG_GRADIENT =
   "linear-gradient(-51.07deg, rgba(20,232,184,0) 7.43%, rgb(72,186,206) 7.59%, rgba(1,250,176,0) 15.52%, rgb(154,113,241) 29.54%, rgb(182,90,253) 36.47%, rgb(141,84,216) 63.04%, rgb(111,79,189) 86.14%, rgb(100,78,179) 100%)";
@@ -24,11 +27,11 @@ const REWARD_DIGIT_PAIRS = ["09", "99", "99", "00", "00", "00"];
 
 function PointCard({ pair }: { pair: string }) {
   return (
-    <div className="relative size-[56.254px] shrink-0 overflow-hidden">
+    <div className="relative flex size-[56.254px] shrink-0 items-center overflow-hidden">
       <div className="absolute left-1/2 top-[0.31px] h-[26.252px] w-[56.254px] -translate-x-1/2 rounded-t-[10.417px] bg-[#1e1d20]" />
       <div className="absolute bottom-0 left-1/2 h-[26.044px] w-[56.254px] -translate-x-1/2 rounded-b-[10.417px] bg-[#1e1d20]" />
-      <p className="absolute left-[15.63px] top-[-1.56px] whitespace-nowrap text-center font-['Advent_Pro'] text-[50px] font-bold text-white">{pair[0]}</p>
-      <p className="absolute left-[40.63px] top-[-1.56px] whitespace-nowrap text-center font-['Advent_Pro'] text-[50px] font-bold text-white">{pair[1]}</p>
+      <p className="relative z-10 flex-1 text-center font-['Advent_Pro'] text-[50px] font-bold leading-none text-white">{pair[0]}</p>
+      <p className="relative z-10 flex-1 text-center font-['Advent_Pro'] text-[50px] font-bold leading-none text-white">{pair[1]}</p>
     </div>
   );
 }
@@ -129,13 +132,13 @@ function WinnerRow({ w, index }: { w: (typeof WINNERS)[number]; index: number })
       }}
     >
       <div className="absolute left-[10px] top-1/2 flex -translate-y-1/2 items-center gap-[10px]">
-        <div className="relative size-[59px] shrink-0 rounded-full border-2 border-[#01fab0]">
+        <div className="relative size-[59px] shrink-0 rounded-full p-[2px]" style={{ backgroundImage: AVATAR_RING_GRADIENT }}>
           <img alt="" src={w.avatar} className="size-full rounded-full object-cover" />
           <div
-            className="absolute bottom-0 right-0 size-[20.917px] overflow-hidden rounded-full"
-            style={{ backgroundImage: AVATAR_RING_GRADIENT }}
+            className="absolute bottom-0 right-0 size-[21px] overflow-hidden rounded-full"
+            style={{ backgroundImage: AVATAR_BADGE_GRADIENT }}
           >
-            <img alt="" src={withBasePath("/assets/win-list/group1079.svg")} className="absolute left-[3px] top-[3px] size-[15px]" />
+            <img alt="" src={withBasePath("/assets/profile/icon-crown.svg")} className="absolute left-[3px] top-[3px] size-[15px]" />
           </div>
         </div>
         <div className="flex flex-col items-start gap-[5px]">
@@ -187,7 +190,7 @@ function WinList() {
 
 export default function RewardAndWinList() {
   return (
-    <div className="flex w-full items-end gap-[40px] overflow-x-auto">
+    <div className="scrollbar-hide flex w-full items-end gap-[40px] overflow-x-auto">
       <RewardAnnouncement />
       <WinList />
     </div>
