@@ -12,7 +12,13 @@ import { useEffect, useState } from "react";
 // scales rendering the same way a browser's own page zoom does, so sticky/
 // fixed elements keep resolving against the real viewport correctly, and the
 // browser computes scrollable height natively — no manual measuring needed.
-const DESIGN_WIDTH = 1440;
+// 1440 is the Figma frame width, but the sidebar (291px) plus the fixed-width
+// RewardAnnouncement card (519px) plus gaps/padding leave WinList less room
+// than that — at 1440 it would render narrower than RewardAnnouncement, which
+// it must never be. 1530 gives WinList's own min-width (600px) just enough
+// room at 1:1, and since everything below this threshold scales down together
+// via `zoom`, the ratio between the two cards stays constant at any size.
+const DESIGN_WIDTH = 1530;
 
 export default function ScaleBelowBreakpoint({ children }: { children: React.ReactNode }) {
   const [zoom, setZoom] = useState(1);

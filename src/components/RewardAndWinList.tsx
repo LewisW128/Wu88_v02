@@ -94,7 +94,7 @@ function MoneyIcon() {
 function WinnerRow({ w }: { w: (typeof WINNERS)[number] }) {
   return (
     <div className="flex h-[79px] w-full shrink-0 items-center overflow-hidden rounded-[50px] bg-white/60 px-[10px] backdrop-blur-[20px]">
-      <div className="flex flex-[205] items-center gap-[10px]">
+      <div className="flex min-w-0 flex-[1_1_150px] items-center gap-[10px]">
         <div className="relative size-[59px] shrink-0 rounded-full">
           <img alt="" src={w.avatar} className="size-full rounded-full object-cover" />
           <img alt="" src={withBasePath("/assets/win-list/avatar-ring.svg")} className="pointer-events-none absolute inset-0 size-full" />
@@ -105,22 +105,22 @@ function WinnerRow({ w }: { w: (typeof WINNERS)[number] }) {
             <img alt="" src={withBasePath("/assets/profile/icon-crown.svg")} className="absolute left-[3px] top-[3px] size-[15px]" />
           </div>
         </div>
-        <div className="flex flex-col items-start gap-[5px]">
-          <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#3e4140]">{w.name}</p>
+        <div className="flex min-w-0 flex-col items-start gap-[5px]">
+          <p className="w-full truncate text-[16px] font-bold tracking-[0.15px] text-[#3e4140]">{w.name}</p>
           <div className="w-fit rounded-full bg-[#8d54d8] px-[5px] py-px">
             <p className="whitespace-nowrap text-[12px] font-medium tracking-[0.15px] text-white">LV.12</p>
           </div>
         </div>
       </div>
 
-      <div className="flex flex-[238] items-center gap-[10px]">
+      <div className="flex min-w-0 flex-[1_1_150px] items-center gap-[10px]">
         <MoneyIcon />
-        <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#3e4140]">{w.amount}</p>
+        <p className="truncate text-[16px] font-bold tracking-[0.15px] text-[#3e4140]">{w.amount}</p>
       </div>
 
-      <p className="flex-[227] whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#3e4140]">0.00x</p>
+      <p className="min-w-0 flex-[1_1_60px] truncate text-[16px] font-bold tracking-[0.15px] text-[#3e4140]">0.00x</p>
 
-      <div className="flex flex-[88] shrink-0 justify-end">
+      <div className="flex flex-[0_0_76px] justify-end">
         <div className="relative h-[59px] w-[76px] shrink-0 overflow-hidden rounded-[37.342px] bg-white">
           <img alt="" src={w.thumb} className="absolute inset-0 size-full object-cover" />
         </div>
@@ -131,22 +131,22 @@ function WinnerRow({ w }: { w: (typeof WINNERS)[number] }) {
 
 function WinList() {
   return (
-    <div className="relative h-[438px] min-w-0 flex-1 overflow-hidden rounded-tl-[50px] rounded-br-[70px]" style={{ backgroundImage: WIN_LIST_BG_GRADIENT }}>
+    <div className="relative h-[438px] min-w-[600px] flex-1 overflow-hidden rounded-tl-[50px] rounded-br-[70px]" style={{ backgroundImage: WIN_LIST_BG_GRADIENT }}>
       <div className="absolute left-[20px] top-[20px] flex items-center gap-[10px]">
         <WinListTitleIcon />
         <p className="whitespace-nowrap text-[20px] font-bold tracking-[0.35px] text-white">得獎名單</p>
       </div>
-      <div className="absolute left-[20px] right-[20px] top-[91px] flex h-[20px] items-center">
-        <p className="flex-[205] whitespace-nowrap text-[14px] font-bold tracking-[0.15px] text-white">
+      <div className="absolute left-[20px] right-[20px] top-[91px] flex h-[20px] items-center px-[10px]">
+        <p className="min-w-0 flex-[1_1_150px] truncate text-[14px] font-bold tracking-[0.15px] text-white">
           玩家 <span className="text-[#23f3d5]">/</span>
         </p>
-        <p className="flex-[238] whitespace-nowrap text-[14px] font-bold tracking-[0.15px] text-white">
+        <p className="min-w-0 flex-[1_1_150px] truncate text-[14px] font-bold tracking-[0.15px] text-white">
           盈利 <span className="text-[#23f3d5]">/</span>
         </p>
-        <p className="flex-[227] whitespace-nowrap text-[14px] font-bold tracking-[0.15px] text-white">
+        <p className="min-w-0 flex-[1_1_60px] truncate text-[14px] font-bold tracking-[0.15px] text-white">
           賠率 <span className="text-[#23f3d5]">/</span>
         </p>
-        <p className="flex-[88] whitespace-nowrap text-[14px] font-bold tracking-[0.15px] text-white">
+        <p className="flex-[0_0_76px] whitespace-nowrap text-[14px] font-bold tracking-[0.15px] text-white">
           遊戲 <span className="text-[#23f3d5]">/</span>
         </p>
       </div>
