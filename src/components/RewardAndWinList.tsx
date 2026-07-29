@@ -34,17 +34,7 @@ function PointCard({ pair }: { pair: string }) {
 }
 
 function TitleIcon() {
-  return (
-    <div className="relative size-[45px] shrink-0 overflow-hidden">
-      <img alt="" src={withBasePath("/assets/reward-announcement/ellipse28.svg")} className="absolute right-0 top-[calc(50%+11.7px)] size-[18px] -translate-y-1/2" />
-      <div className="absolute left-[calc(50%+5.35px)] top-[calc(50%-5.4px)] h-[27px] w-[34.097px] -translate-x-1/2 -translate-y-1/2">
-        <img alt="" src={withBasePath("/assets/reward-announcement/group1084.svg")} className="block size-full max-w-none" />
-      </div>
-      <div className="absolute left-[calc(50%-0.9px)] top-[calc(50%+0.9px)] h-[28.8px] w-[36px] -translate-x-1/2 -translate-y-1/2">
-        <img alt="" src={withBasePath("/assets/reward-announcement/rectangle45.svg")} className="block size-full max-w-none" />
-      </div>
-    </div>
-  );
+  return <img alt="" src={withBasePath("/assets/icons/accrue.svg")} className="size-[45px] shrink-0" />;
 }
 
 function RewardAnnouncement() {
@@ -84,18 +74,7 @@ function RewardAnnouncement() {
 }
 
 function WinListTitleIcon() {
-  return (
-    <div className="relative size-[45px] shrink-0 overflow-hidden">
-      <img alt="" src={withBasePath("/assets/win-list/ellipse29.svg")} className="absolute left-[21.6px] top-[23.4px] size-[18px]" />
-      <div className="absolute left-[9.79px] top-[3.64px] h-[37.714px] w-[23.912px]">
-        <img alt="" src={withBasePath("/assets/win-list/union1.svg")} className="block size-full max-w-none" />
-      </div>
-      <img alt="" src={withBasePath("/assets/win-list/star2.svg")} className="absolute left-[15.74px] top-[8.79px] size-[12px]" />
-      <div className="absolute left-[1.8px] top-[10.66px] h-[15.884px] w-[39.6px]">
-        <img alt="" src={withBasePath("/assets/win-list/group1075.svg")} className="block size-full max-w-none" />
-      </div>
-    </div>
-  );
+  return <img alt="" src={withBasePath("/assets/icons/trophy.svg")} className="size-[45px] shrink-0" />;
 }
 
 const WINNERS = [
@@ -109,15 +88,7 @@ const WINNERS = [
 ];
 
 function MoneyIcon() {
-  return (
-    <div className="relative size-[25px] shrink-0 overflow-hidden">
-      <img alt="" src={withBasePath("/assets/win-list/ellipse27.svg")} className="absolute bottom-px right-px size-[10px]" />
-      <div className="absolute inset-[8%]">
-        <img alt="" src={withBasePath("/assets/win-list/vector.svg")} className="block size-full max-w-none" />
-      </div>
-      <img alt="" src={withBasePath("/assets/win-list/subtract.svg")} className="absolute left-[11.84px] top-[6px] h-[13px] w-[1.212px]" />
-    </div>
-  );
+  return <img alt="" src={withBasePath("/assets/icons/money.svg")} className="size-[25px] shrink-0" />;
 }
 
 function WinnerRow({ w }: { w: (typeof WINNERS)[number] }) {

@@ -4,10 +4,10 @@ import { useState } from "react";
 
 import { withBasePath } from "../lib/asset";
 const NAV_ITEMS = [
-  { icon: withBasePath("/assets/sidebar/icon-home.svg"), title: "首頁", sub: "CASINO" },
-  { icon: withBasePath("/assets/sidebar/icon-casino.svg"), title: "賭場", sub: "LIVE" },
-  { icon: withBasePath("/assets/sidebar/icon-sport.svg"), title: "運動", sub: "SPORT" },
-  { icon: withBasePath("/assets/sidebar/icon-promotions.svg"), title: "優惠活動", sub: "PROMO" },
+  { icon: withBasePath("/assets/icons/home.svg"), title: "首頁", sub: "CASINO" },
+  { icon: withBasePath("/assets/icons/casino.svg"), title: "賭場", sub: "LIVE" },
+  { icon: withBasePath("/assets/icons/sport.svg"), title: "運動", sub: "SPORT" },
+  { icon: withBasePath("/assets/icons/gift.svg"), title: "優惠活動", sub: "PROMO" },
 ];
 
 export default function Sidebar() {

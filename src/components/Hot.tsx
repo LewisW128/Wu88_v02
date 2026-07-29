@@ -70,19 +70,7 @@ export default function Hot() {
     <div className="relative flex w-full flex-col gap-[20px]">
       <div className="flex items-center justify-between pl-[20px]">
         <div className="flex items-center gap-[10px]">
-          <div className="relative size-[45px] overflow-hidden">
-            <div className="absolute inset-[48%_16%_12%_44%]">
-              <img alt="" src={withBasePath("/assets/hot/title-icon-ellipse.svg")} className="block size-full max-w-none" />
-            </div>
-            <div className="absolute inset-[11.78%_20.14%_12.22%_23.86%]">
-              <div className="absolute inset-[-5.26%_-7.14%]">
-                <img alt="" src={withBasePath("/assets/hot/title-icon-vector1.svg")} className="block size-full max-w-none" />
-              </div>
-            </div>
-            <div className="absolute inset-[35.78%_32.14%_20.22%_31.86%]">
-              <img alt="" src={withBasePath("/assets/hot/title-icon-vector2.svg")} className="block size-full max-w-none" />
-            </div>
-          </div>
+          <img alt="" src={withBasePath("/assets/icons/hot.svg")} className="size-[45px]" />
           <p className="text-[20px] font-bold tracking-[0.35px] text-[#444242]">熱門遊戲</p>
         </div>
         <div className="flex items-center gap-[10px] py-[5px] pr-[40px]">

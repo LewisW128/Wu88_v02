@@ -31,7 +31,7 @@ export default function Profile() {
               </div>
             </div>
             <div className="flex items-center gap-[10px]">
-              <img alt="" src={withBasePath("/assets/profile/icon-money.svg")} className="size-[25px]" />
+              <img alt="" src={withBasePath("/assets/icons/money.svg")} className="size-[25px]" />
               <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#3e4140]">10,000,000</p>
             </div>
           </div>
@@ -46,7 +46,7 @@ export default function Profile() {
           </div>
         </div>
       </div>
-      <img alt="" src={withBasePath("/assets/profile/icon-notify.svg")} className="size-[25px] shrink-0" />
+      <img alt="" src={withBasePath("/assets/icons/notify.svg")} className="size-[25px] shrink-0" />
     </div>
   );
 }

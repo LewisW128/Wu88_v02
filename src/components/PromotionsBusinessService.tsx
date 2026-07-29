@@ -45,7 +45,7 @@ function Promotions() {
     <div className="relative flex w-full flex-col gap-[20px]">
       <div className="flex items-center justify-between pl-[20px]">
         <div className="flex items-center gap-[10px]">
-          <img alt="" src={withBasePath("/assets/promotions/icon-title.svg")} className="size-[45px]" />
+          <img alt="" src={withBasePath("/assets/icons/gift.svg")} className="size-[45px]" />
           <p className="text-[20px] font-bold tracking-[0.35px] text-[#444242]">優惠活動</p>
         </div>
         <div className="flex items-center gap-[10px]">
@@ -88,7 +88,7 @@ function Business() {
   return (
     <div className="relative flex w-full flex-col gap-[20px]">
       <div className="flex items-center gap-[10px] pl-[20px]">
-        <img alt="" src={withBasePath("/assets/business/icon-title.svg")} className="size-[45px]" />
+        <img alt="" src={withBasePath("/assets/icons/partner.svg")} className="size-[45px]" />
         <p className="text-[20px] font-bold tracking-[0.35px] text-[#444242]">頂級合作廠商</p>
       </div>
       <div ref={scrollRef} className="scrollbar-hide h-[164px] w-full overflow-x-auto rounded-br-[50px] rounded-tl-[50px] border border-[#dadada]">
