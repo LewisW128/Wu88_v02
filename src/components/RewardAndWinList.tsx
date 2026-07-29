@@ -173,12 +173,10 @@ function WinList() {
       </div>
 
       <div
-        className="absolute left-[20px] right-0 top-[129px] bottom-[18px] flex flex-col gap-[10px] overflow-y-auto pr-[20px]"
+        className="scrollbar-gray-thin absolute left-[20px] right-0 top-[129px] bottom-[18px] flex flex-col gap-[10px] overflow-y-auto pr-[20px]"
         style={{
           maskImage: "linear-gradient(to bottom, black calc(100% - 40px), transparent 100%)",
           WebkitMaskImage: "linear-gradient(to bottom, black calc(100% - 40px), transparent 100%)",
-          scrollbarColor: "auto",
-          scrollbarWidth: "auto",
         }}
       >
         {WINNERS.map((w, i) => (
