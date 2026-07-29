@@ -116,7 +116,7 @@ function Service() {
 export default function PromotionsBusinessService() {
   return (
     <div className="flex w-full items-center gap-[40px]">
-      <div className="flex flex-1 flex-col gap-[40px]">
+      <div className="flex min-w-0 flex-1 flex-col gap-[40px]">
         <Promotions />
         <Business />
       </div>
