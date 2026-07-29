@@ -191,7 +191,7 @@ function WinList() {
 
 export default function RewardAndWinList() {
   return (
-    <div className="flex w-full items-end gap-[40px]">
+    <div className="flex w-full items-end gap-[40px] pr-[40px]">
       <RewardAnnouncement />
       <WinList />
     </div>
