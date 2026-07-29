@@ -2,25 +2,17 @@
 
 
 import { withBasePath } from "../lib/asset";
+
 function PromoButton({ text }: { text: string }) {
   return (
     <div className="absolute bottom-[20px] left-[20px] h-[53px] w-[128px]">
-      <div className="pointer-events-none absolute inset-[-18.41%_-7.81%_-55.27%_-23.44%]">
-        <img alt="" src={withBasePath("/assets/promotions/btn-bg.svg")} className="block size-full max-w-none" />
-      </div>
+      <img alt="" src={withBasePath("/assets/promotions/btn-bg2.svg")} className="pointer-events-none absolute inset-0 block size-full max-w-none" />
       <div className="absolute inset-[24.53%_11.72%_30.19%_11.72%] flex items-center justify-between">
         <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">{text}</p>
-        <img alt="" src={withBasePath("/assets/promotions/vector1.svg")} className="h-[10px] w-[26px]" />
+        <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[5.556px]">
+          <img alt="" src={withBasePath("/assets/reward-announcement/rectangle1.svg")} className="h-[6.111px] w-[3.333px]" />
+        </div>
       </div>
-    </div>
-  );
-}
-
-function PromoTitle({ badge, text }: { badge: string; text: string }) {
-  return (
-    <div className="absolute left-[20px] top-[20px] flex flex-col">
-      <img alt="" src={badge} className="h-[21px] w-[21px] rotate-[8deg]" />
-      <p className="whitespace-nowrap text-[20px] font-bold tracking-[0.35px] text-white">{text}</p>
     </div>
   );
 }
@@ -39,24 +31,27 @@ function Promotions() {
         </div>
       </div>
       <div className="flex gap-[20px]">
-        <div className="relative h-[210px] w-[331px] shrink-0 overflow-hidden rounded-bl-[50px] rounded-tr-[50px] bg-[#8d54d8]">
-          <img alt="" src={withBasePath("/assets/promotions/pirate-bg.png")} className="pointer-events-none absolute left-[-5px] top-[-82px] h-[492px] w-[336px] max-w-none object-cover blur-[1px]" />
-          <img alt="" src={withBasePath("/assets/promotions/pirate.png")} className="pointer-events-none absolute left-[128px] top-[-22px] h-[371px] w-[203px] object-cover" />
-          <PromoTitle badge={withBasePath("/assets/promotions/vector2.svg")} text="新手冒險好禮" />
+        <div className="relative h-[210px] w-[331px] shrink-0 overflow-hidden rounded-bl-[50px] rounded-tr-[50px] border border-[#dadada]">
+          <img alt="" src={withBasePath("/assets/promotions/signin-art.png")} className="pointer-events-none absolute inset-0 size-full object-cover" />
+          <p className="absolute left-[20px] top-[20px] whitespace-nowrap text-[20px] tracking-[0.35px] text-[#3e4140]">每日簽到禮</p>
+          <p className="absolute left-[20px] top-[44px] whitespace-nowrap text-[20px] tracking-[0.35px] text-[#3e4140]">
+            天天贈<span className="text-[#23f3d5]">彩點</span>
+          </p>
           <PromoButton text="立即領取" />
         </div>
         <div className="relative h-[210px] w-[331px] shrink-0 overflow-hidden rounded-bl-[50px] rounded-tr-[50px] bg-[#8d54d8]">
-          <img alt="" src={withBasePath("/assets/promotions/football.png")} className="pointer-events-none absolute left-1/2 top-[calc(50%+53px)] h-[452px] w-[339px] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover" />
-          <PromoTitle badge={withBasePath("/assets/promotions/vector3.svg")} text="看球賽領獎勵" />
+          <p className="absolute left-[20px] top-[20px] whitespace-nowrap text-[20px] tracking-[0.35px] text-white">武財神風輪盤</p>
+          <p className="absolute left-[20px] top-[44px] whitespace-nowrap text-[20px] tracking-[0.35px] text-white">
+            天天轉 <span className="text-[25px] font-bold text-[#23f3d5]">8,888</span>
+          </p>
           <PromoButton text="立即下注" />
         </div>
-        <div
-          className="relative h-[210px] w-[331px] shrink-0 overflow-hidden rounded-bl-[50px] rounded-tr-[50px]"
-          style={{ backgroundImage: "linear-gradient(-52deg, rgb(72,186,206) 32%, rgb(154,113,241) 70%, rgb(100,78,179) 191%)" }}
-        >
-          <img alt="" src={withBasePath("/assets/promotions/gclass.png")} className="pointer-events-none absolute left-[36px] top-[29px] h-[212px] w-[377px] max-w-none object-cover" />
-          <PromoTitle badge={withBasePath("/assets/promotions/vector4.svg")} text="VIP 專屬優惠" />
-          <PromoButton text="立即參加" />
+        <div className="relative h-[210px] w-[331px] shrink-0 overflow-hidden rounded-bl-[50px] rounded-tr-[50px] bg-[#8d54d8]">
+          <p className="absolute left-[20px] top-[20px] whitespace-nowrap text-[20px] tracking-[0.35px] text-white">超商儲值禮</p>
+          <p className="absolute left-[20px] top-[44px] whitespace-nowrap text-[20px] tracking-[0.35px] text-white">
+            送 <span className="text-[25px] font-bold text-[#23f3d5]">G-CLASS</span>
+          </p>
+          <PromoButton text="立即儲值" />
         </div>
       </div>
     </div>
@@ -96,16 +91,20 @@ function Business() {
 
 function Service() {
   return (
-    <div
-      className="relative h-[544px] w-[284px] shrink-0 overflow-hidden rounded-bl-[50px] rounded-tr-[50px]"
-      style={{ backgroundImage: "linear-gradient(160deg, #8d54d8 0%, #6f4fbd 60%, #48bace 100%)" }}
-    >
+    <div className="relative h-[544px] w-[284px] shrink-0 overflow-hidden rounded-bl-[50px] rounded-tr-[50px] bg-[#8d54d8]">
+      <img
+        alt=""
+        src={withBasePath("/assets/service/mascot.png")}
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[570px] w-[416px] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover"
+      />
       <div className="absolute bottom-0 left-0 h-[151px] w-full bg-gradient-to-t from-black/50 to-transparent" />
-      <div className="absolute bottom-[40px] left-[20px] h-[53px] w-[244px]">
-        <img alt="" src={withBasePath("/assets/service/btn-bg.svg")} className="pointer-events-none absolute inset-[-18.63%_-4.1%_-55.91%_-12.3%] block max-w-none size-full" />
-        <div className="absolute inset-0 flex items-center justify-center gap-[10px]">
-          <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">聯繫客服</p>
-          <img alt="" src={withBasePath("/assets/service/vector.svg")} className="h-[8px] w-[21px]" />
+      <div className="absolute bottom-[38px] left-[25px] h-[63px] w-[234px]">
+        <img alt="" src={withBasePath("/assets/service/btn-bg2.svg")} className="pointer-events-none absolute inset-0 block size-full max-w-none" />
+        <div className="absolute inset-[24.53%_11.72%_30.19%_11.72%] flex items-center justify-between">
+          <p className="whitespace-nowrap text-[20px] font-bold tracking-[0.35px] text-[#444242]">聯繫客服</p>
+          <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[5.556px]">
+            <img alt="" src={withBasePath("/assets/reward-announcement/rectangle1.svg")} className="h-[6.111px] w-[3.333px]" />
+          </div>
         </div>
       </div>
     </div>
