@@ -68,7 +68,7 @@ export default function Hot() {
 
   return (
     <div className="relative flex w-full flex-col gap-[20px]">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between pl-[20px]">
         <div className="flex items-center gap-[10px]">
           <div className="relative size-[45px] overflow-hidden">
             <div className="absolute inset-[48%_16%_12%_44%]">
