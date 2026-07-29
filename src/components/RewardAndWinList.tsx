@@ -125,8 +125,8 @@ function MoneyIcon() {
 
 function WinnerRow({ w }: { w: (typeof WINNERS)[number] }) {
   return (
-    <div className="relative h-[79px] w-full shrink-0 overflow-hidden rounded-[50px] bg-white/60 backdrop-blur-[20px]">
-      <div className="absolute left-[10px] top-1/2 flex -translate-y-1/2 items-center gap-[10px]">
+    <div className="flex h-[79px] w-full shrink-0 items-center overflow-hidden rounded-[50px] bg-white/60 px-[10px] backdrop-blur-[20px]">
+      <div className="flex flex-[205] items-center gap-[10px]">
         <div className="relative size-[59px] shrink-0 rounded-full p-[2px]" style={{ backgroundImage: AVATAR_RING_GRADIENT }}>
           <img alt="" src={w.avatar} className="size-full rounded-full object-cover" />
           <div
@@ -144,15 +144,17 @@ function WinnerRow({ w }: { w: (typeof WINNERS)[number] }) {
         </div>
       </div>
 
-      <div className="absolute left-[225px] top-1/2 flex -translate-y-1/2 items-center gap-[10px]">
+      <div className="flex flex-[238] items-center gap-[10px]">
         <MoneyIcon />
         <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#3e4140]">{w.amount}</p>
       </div>
 
-      <p className="absolute left-[463px] top-[calc(50%-12.5px)] whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#3e4140]">0.00x</p>
+      <p className="flex-[227] whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#3e4140]">0.00x</p>
 
-      <div className="absolute right-[10px] top-1/2 h-[59px] w-[76px] -translate-y-1/2 overflow-hidden rounded-[37.342px] bg-white">
-        <img alt="" src={w.thumb} className="absolute inset-0 size-full object-cover" />
+      <div className="flex flex-[88] shrink-0 justify-end">
+        <div className="relative h-[59px] w-[76px] shrink-0 overflow-hidden rounded-[37.342px] bg-white">
+          <img alt="" src={w.thumb} className="absolute inset-0 size-full object-cover" />
+        </div>
       </div>
     </div>
   );
@@ -160,16 +162,16 @@ function WinnerRow({ w }: { w: (typeof WINNERS)[number] }) {
 
 function WinList() {
   return (
-    <div className="relative h-[438px] w-[798px] shrink-0 overflow-hidden rounded-br-[70px]" style={{ backgroundImage: WIN_LIST_BG_GRADIENT }}>
+    <div className="relative h-[438px] min-w-0 flex-1 overflow-hidden rounded-br-[70px]" style={{ backgroundImage: WIN_LIST_BG_GRADIENT }}>
       <div className="absolute left-[20px] top-[20px] flex items-center gap-[10px]">
         <WinListTitleIcon />
         <p className="whitespace-nowrap text-[20px] font-bold tracking-[0.35px] text-white">得獎名單</p>
       </div>
-      <div className="absolute left-[20px] top-[85px] flex h-[34px] w-[758px] items-center rounded-[50px] bg-[#e2ff25] px-[20px] backdrop-blur-[10px]">
-        <p className="w-[205px] text-[14px] font-bold tracking-[0.15px] text-[#3e4140]">玩家</p>
-        <p className="w-[238px] text-center text-[14px] font-bold tracking-[0.15px] text-[#3e4140]">盈利</p>
-        <p className="w-[227px] text-[14px] font-bold tracking-[0.15px] text-[#3e4140]">賠率</p>
-        <p className="text-[14px] font-bold tracking-[0.15px] text-[#3e4140]">遊戲</p>
+      <div className="absolute left-[20px] right-[20px] top-[85px] flex h-[34px] items-center rounded-[50px] bg-[#e2ff25] px-[20px] backdrop-blur-[10px]">
+        <p className="flex-[205] text-[14px] font-bold tracking-[0.15px] text-[#3e4140]">玩家</p>
+        <p className="flex-[238] text-center text-[14px] font-bold tracking-[0.15px] text-[#3e4140]">盈利</p>
+        <p className="flex-[227] text-[14px] font-bold tracking-[0.15px] text-[#3e4140]">賠率</p>
+        <p className="flex-[88] text-[14px] font-bold tracking-[0.15px] text-[#3e4140]">遊戲</p>
       </div>
 
       <div
@@ -189,7 +191,7 @@ function WinList() {
 
 export default function RewardAndWinList() {
   return (
-    <div className="scrollbar-hide flex w-full items-end gap-[40px] overflow-x-auto">
+    <div className="flex w-full items-end gap-[40px]">
       <RewardAnnouncement />
       <WinList />
     </div>

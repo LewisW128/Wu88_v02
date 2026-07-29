@@ -27,7 +27,7 @@ export default function Home() {
             <Cotainer />
           </div>
 
-          <div className="relative -mt-[119px] flex flex-col gap-[40px] pb-[40px] pl-[40px]">
+          <div className="relative -mt-[119px] flex flex-col gap-[40px] pb-[40px] pl-[40px] pr-[40px]">
             <FormBar />
             <Recommend />
             <Hot />
