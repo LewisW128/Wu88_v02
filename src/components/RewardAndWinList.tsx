@@ -1,10 +1,7 @@
 import { withBasePath } from "../lib/asset";
 
-const AVATAR_RING_GRADIENT =
-  "linear-gradient(-48.0664842153752deg, rgb(72,186,206) 0%, rgb(72,186,206) 20%, rgb(154,113,241) 45%, rgb(182,90,253) 55%, rgb(141,84,216) 70%, rgb(111,79,189) 85%, rgb(100,78,179) 100%)";
-
 const AVATAR_BADGE_GRADIENT =
-  "linear-gradient(-48.0664842153752deg, rgb(72,186,206) 17.1%, rgb(154,113,241) 77.3%, rgb(182,90,253) 100%)";
+  "linear-gradient(-48.0664842153752deg, rgb(1,250,176) 90.123%, rgb(20,232,184) 61.931%, rgb(72,186,206) 9.575%, rgb(154,113,241) 66.946%, rgb(182,90,253) 91.111%, rgb(141,84,216) 183.74%, rgb(111,79,189) 264.29%, rgb(100,78,179) 312.62%)";
 
 const WIN_LIST_BG_GRADIENT =
   "linear-gradient(-56deg, rgb(72,186,206) 22%, rgb(154,113,241) 69%, rgb(141,84,216) 142%, rgb(100,78,179) 222%)";
@@ -52,26 +49,26 @@ function TitleIcon() {
 
 function RewardAnnouncement() {
   return (
-    <div className="relative h-[438px] w-[519px] shrink-0 overflow-hidden rounded-tl-[50px] border-2 border-[#23f3d5] bg-white/50">
-      <img alt="" src={withBasePath("/assets/reward-announcement/photo-hero.png")} className="pointer-events-none absolute left-[114px] top-[23px] h-[580px] w-[485px] max-w-none object-cover" />
-      <img alt="" src={withBasePath("/assets/reward-announcement/rectangle2.svg")} className="pointer-events-none absolute left-[22px] top-[calc(50%+76px)] h-[412px] w-[262px] max-w-none -translate-y-1/2" />
+    <div className="relative h-[438px] w-[519px] shrink-0 overflow-hidden rounded-tl-[50px] bg-white/50">
+      <img alt="" src={withBasePath("/assets/reward-announcement/photo-hero.png")} className="pointer-events-none absolute left-[116px] top-[25px] h-[580px] w-[485px] max-w-none object-cover" />
+      <img alt="" src={withBasePath("/assets/reward-announcement/rectangle2.svg")} className="pointer-events-none absolute left-[24px] top-[calc(50%+76px)] h-[412px] w-[262px] max-w-none -translate-y-1/2" />
 
-      <div className="absolute left-[18px] top-[18px] flex items-center gap-[10px]">
+      <div className="absolute left-[20px] top-[20px] flex items-center gap-[10px]">
         <TitleIcon />
         <p className="whitespace-nowrap text-[20px] font-bold tracking-[0.35px] text-[#3e4140]">得獎名單</p>
       </div>
 
-      <div className="absolute left-[18px] top-[calc(50%-2.87px)] flex -translate-y-1/2 items-center gap-[6.25px]">
+      <div className="absolute left-[20px] top-[calc(50%-2.87px)] flex -translate-y-1/2 items-center gap-[6.25px]">
         {REWARD_DIGIT_PAIRS.map((pair, i) => (
           <PointCard key={i} pair={pair} />
         ))}
       </div>
 
-      <div className="absolute bottom-[18px] left-[18px]">
+      <div className="absolute bottom-[20px] left-[20px]">
         <DotsGrid size={3.875} gap={7.75} rows={6} cols={6} />
       </div>
 
-      <div className="absolute bottom-[38px] right-[18px] h-[53px] w-[128px] drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]">
+      <div className="absolute bottom-[40px] right-[20px] h-[53px] w-[128px] drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]">
         <div className="pointer-events-none absolute inset-0 -scale-x-100">
           <img alt="" src={withBasePath("/assets/reward-announcement/rectangle3.svg")} className="block size-full max-w-none" />
         </div>
@@ -127,7 +124,7 @@ function WinnerRow({ w }: { w: (typeof WINNERS)[number] }) {
   return (
     <div className="flex h-[79px] w-full shrink-0 items-center overflow-hidden rounded-[50px] bg-white/60 px-[10px] backdrop-blur-[20px]">
       <div className="flex flex-[205] items-center gap-[10px]">
-        <div className="relative size-[59px] shrink-0 rounded-full p-[2px]" style={{ backgroundImage: AVATAR_RING_GRADIENT }}>
+        <div className="relative size-[59px] shrink-0 rounded-full border-2 border-[#01fab0]">
           <img alt="" src={w.avatar} className="size-full rounded-full object-cover" />
           <div
             className="absolute bottom-0 right-0 size-[21px] overflow-hidden rounded-full"
@@ -162,7 +159,7 @@ function WinnerRow({ w }: { w: (typeof WINNERS)[number] }) {
 
 function WinList() {
   return (
-    <div className="relative h-[438px] min-w-0 flex-1 overflow-hidden rounded-br-[70px]" style={{ backgroundImage: WIN_LIST_BG_GRADIENT }}>
+    <div className="relative h-[438px] min-w-0 flex-1 overflow-hidden rounded-tl-[50px] rounded-br-[70px]" style={{ backgroundImage: WIN_LIST_BG_GRADIENT }}>
       <div className="absolute left-[20px] top-[20px] flex items-center gap-[10px]">
         <WinListTitleIcon />
         <p className="whitespace-nowrap text-[20px] font-bold tracking-[0.35px] text-white">得獎名單</p>
