@@ -22,7 +22,7 @@ export default function Sidebar() {
           <img alt="WU88.ONE" src={withBasePath("/assets/sidebar/logo.svg")} className="w-full" />
         </div>
 
-        <nav className="absolute inset-x-0 top-[150px] z-10 flex flex-col items-end pl-[20px]">
+        <nav className="absolute inset-x-0 top-[130px] z-10 flex flex-col items-end pl-[20px]">
           {NAV_ITEMS.map((item, index) => (
             <div
               key={item.title}
