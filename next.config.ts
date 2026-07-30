@@ -5,6 +5,7 @@ const basePath = isProd ? "/Wu88_v02" : "";
 
 const nextConfig: NextConfig = {
   output: "export",
+  trailingSlash: true,
   basePath,
   assetPrefix: isProd ? "/Wu88_v02/" : undefined,
   images: {

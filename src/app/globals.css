@@ -4,9 +4,14 @@
   box-sizing: border-box;
 }
 
+/* overflow-x: clip (not hidden) -- hidden/scroll/auto force the other axis
+   to auto per spec, which turns body into its own scroll container and
+   breaks position: sticky (Sidebar/StickyHeader) for every descendant.
+   clip is exempt from that pairing rule, so it clips horizontal overflow
+   without touching how vertical scrolling/sticky resolves. */
 html,
 body {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
