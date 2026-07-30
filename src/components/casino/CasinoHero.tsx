@@ -11,6 +11,7 @@ export default function CasinoHero() {
         playsInline
         className="pointer-events-none absolute inset-0 h-full w-full object-cover object-top"
       />
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[200px] bg-gradient-to-b from-transparent to-white" />
     </div>
   );
 }
