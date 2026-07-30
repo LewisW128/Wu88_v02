@@ -73,7 +73,18 @@ function RewardAnnouncement() {
 }
 
 function WinListTitleIcon() {
-  return <img alt="" src={withBasePath("/assets/icons/trophy.svg")} className="size-[45px] shrink-0" />;
+  return (
+    <div className="relative size-[45px] shrink-0 overflow-hidden">
+      <div className="absolute left-[9.79px] top-[3.64px] h-[37.714px] w-[23.912px]">
+        <img alt="" src={withBasePath("/assets/win-list/title-union.svg")} className="block size-full max-w-none" />
+      </div>
+      <img alt="" src={withBasePath("/assets/win-list/title-star.svg")} className="absolute left-[15.74px] top-[8.79px] block size-[12px] max-w-none" />
+      <div className="absolute left-[1.8px] top-[10.66px] h-[15.884px] w-[39.6px]">
+        <img alt="" src={withBasePath("/assets/win-list/title-group1075.svg")} className="block size-full max-w-none" />
+      </div>
+      <img alt="" src={withBasePath("/assets/win-list/title-line13.svg")} className="absolute left-[23.4px] top-[32.8px] block w-[1.8px] max-w-none" />
+    </div>
+  );
 }
 
 const WINNERS = [
