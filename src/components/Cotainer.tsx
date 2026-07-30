@@ -21,7 +21,14 @@ function Slide1() {
 function Slide2() {
   return (
     <>
-      <img alt="" src={withBasePath("/assets/cotainer/carousel/slide2-bg.png")} className="pointer-events-none absolute inset-0 size-full object-cover" />
+      <video
+        src={withBasePath("/assets/cotainer/carousel/slide2-bg.mp4")}
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="pointer-events-none absolute inset-0 size-full object-cover"
+      />
       <img alt="$300,000 來自WU88舉辦的競賽" src={withBasePath("/assets/cotainer/carousel/headline-slide2.svg")} className="absolute left-[72px] top-[130px] w-[348px]" />
       <div className="absolute left-[73px] top-[360px] h-[53px] w-[128px] drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]">
         <img alt="" src={withBasePath("/assets/cotainer/carousel/cta-pill-bg.svg")} className="pointer-events-none absolute inset-0 size-full" />
