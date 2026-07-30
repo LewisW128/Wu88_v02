@@ -86,8 +86,7 @@ export default function Hot() {
             <img alt="" src={withBasePath("/assets/hot/numeral01-fill.svg")} className="absolute left-[20px] top-[20px] h-[211.5px] w-[152px]" />
           </NumeralFrame>
           <Card main="SUPER 體育" sub="SPORT" badge={null} specialShape>
-            <div className="absolute inset-0 bg-[#2d302f]" />
-            <img alt="" src={withBasePath("/assets/hot/super-sport.png")} className="absolute left-1/2 top-[40px] h-[163px] w-[200px] -translate-x-1/2 object-cover" />
+            <img alt="" src={withBasePath("/assets/products/super-sport.png")} className="absolute inset-0 size-full object-cover" />
           </Card>
         </div>
 
@@ -96,7 +95,7 @@ export default function Hot() {
             <img alt="" src={withBasePath("/assets/hot/numeral02.svg")} className="absolute left-0 top-0 h-[231px] w-[175px]" />
           </NumeralFrame>
           <Card main="戰神塞特 2" sub="SLOT" badge="NEW" specialShape>
-            <img alt="" src={withBasePath("/assets/hot/zhanshensaite2.jpg")} className="absolute left-1/2 top-1/2 h-[268px] w-[268px] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover" />
+            <img alt="" src={withBasePath("/assets/products/zhanshensaite2.png")} className="absolute inset-0 size-full object-cover" />
           </Card>
         </div>
 
@@ -106,7 +105,7 @@ export default function Hot() {
             <img alt="" src={withBasePath("/assets/hot/numeral03-fill.svg")} className="absolute left-[28px] top-[20px] h-[211.3px] w-[147.4px]" />
           </NumeralFrame>
           <Card main="雷神之鎚" sub="SLOT" badge="WU88" specialShape>
-            <img alt="" src={withBasePath("/assets/hot/leishenzhichui.png")} className="absolute left-1/2 top-1/2 h-[270px] w-[482px] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover" />
+            <img alt="" src={withBasePath("/assets/products/leishenzhichui.png")} className="absolute inset-0 size-full object-cover" />
           </Card>
         </div>
 
@@ -116,8 +115,7 @@ export default function Hot() {
             <img alt="" src={withBasePath("/assets/hot/numeral04-fill.svg")} className="absolute left-[28px] top-[20px] h-[211.3px] w-[146.7px]" />
           </NumeralFrame>
           <Card main="麻將發了" sub="BOARD & CARD" badge={null}>
-            <div className="absolute inset-0 border border-[#dadada] bg-white" />
-            <img alt="" src={withBasePath("/assets/hot/majiangfale.png")} className="absolute left-[1px] top-[35px] h-[193px] w-[196px] object-cover" />
+            <img alt="" src={withBasePath("/assets/products/majiangfale.png")} className="absolute inset-0 size-full object-cover" />
           </Card>
         </div>
 
@@ -127,7 +125,7 @@ export default function Hot() {
             <img alt="" src={withBasePath("/assets/hot/numeral05-fill.svg")} className="absolute left-[22px] top-[18px] h-[212.8px] w-[153.4px]" />
           </NumeralFrame>
           <Card main="月兔" sub="SLOT" badge={null}>
-            <img alt="" src={withBasePath("/assets/hot/yuetu.png")} className="absolute left-[-168px] top-[-1.5px] h-[268px] w-[536px] max-w-none object-cover" />
+            <img alt="" src={withBasePath("/assets/products/yuetu.png")} className="absolute inset-0 size-full object-cover" />
           </Card>
         </div>
 
@@ -137,7 +135,7 @@ export default function Hot() {
             <img alt="" src={withBasePath("/assets/hot/numeral06-fill.svg")} className="absolute left-[29px] top-[18px] h-[212.8px] w-[145.6px]" />
           </NumeralFrame>
           <Card main="金虎爺" sub="SLOT" badge="NEW" specialShape>
-            <img alt="" src={withBasePath("/assets/hot/jinhuye.png")} className="absolute left-1/2 top-1/2 h-[268px] w-[268px] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover" />
+            <img alt="" src={withBasePath("/assets/products/jinhuye.png")} className="absolute inset-0 size-full object-cover" />
           </Card>
         </div>
 

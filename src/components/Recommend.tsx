@@ -74,43 +74,35 @@ export default function Recommend() {
 
       <div ref={scrollRef} className="scrollbar-hide mt-[24px] flex gap-[20px] overflow-x-auto pl-[60px] pr-[40px] pb-[10px] drop-shadow-[0px_40px_20px_rgba(0,0,0,0.25)]">
         <Card main="鼠來寶" sub="SLOT" badge="HOT" specialShape>
-          <img alt="" src={withBasePath("/assets/recommend/shulaibao.png")} className="absolute inset-0 size-full object-cover" />
+          <img alt="" src={withBasePath("/assets/products/shulaibao.png")} className="absolute inset-0 size-full object-cover" />
         </Card>
 
         <Card main="魔龍傳奇" sub="SLOT" badge={null}>
-          <img alt="" src={withBasePath("/assets/recommend/products.png")} className="absolute inset-0 size-full object-cover" />
+          <img alt="" src={withBasePath("/assets/products/moronglianqi.png")} className="absolute inset-0 size-full object-cover" />
         </Card>
 
         <Card main="跳起來" sub="SLOT" badge="NEW" specialShape>
-          <img alt="" src={withBasePath("/assets/recommend/products.png")} className="absolute inset-0 size-full object-cover blur-[18px]" />
-          <img alt="" src={withBasePath("/assets/recommend/tiaoqilai-overlay.png")} className="absolute left-1/2 top-0 h-full w-full -translate-x-1/2 object-cover" />
+          <img alt="" src={withBasePath("/assets/products/tiaoqilai.png")} className="absolute inset-0 size-full object-cover" />
         </Card>
 
         <Card main="胡到了" sub="SLOT" badge="HOT" specialShape>
-          <div className="absolute inset-0 bg-[#f269ff]" />
-          <img alt="" src={withBasePath("/assets/recommend/hudaole.png")} className="absolute left-0 top-[20px] h-[200px] w-[200px] object-cover" />
+          <img alt="" src={withBasePath("/assets/products/hudaole.png")} className="absolute inset-0 size-full object-cover" />
         </Card>
 
         <Card main="飛天財神" sub="SLOT" badge={null}>
-          <div className="absolute inset-0 bg-white" />
-          <img alt="" src={withBasePath("/assets/recommend/feitiancaishen.png")} className="absolute left-1/2 top-1/2 h-[396px] w-[396px] max-w-none -translate-x-1/2 -translate-y-1/2 object-cover blur-[10px]" />
-          <img alt="" src={withBasePath("/assets/recommend/feitiancaishen.png")} className="absolute left-1/2 top-[calc(50%-20px)] h-[200px] w-[200px] -translate-x-1/2 -translate-y-1/2 object-cover" />
+          <img alt="" src={withBasePath("/assets/products/feitiancaishen.png")} className="absolute inset-0 size-full object-cover" />
         </Card>
 
         <Card main="啤酒派對" sub="SLOT" badge={null}>
-          <div className="absolute inset-0 bg-[#76d7f7]" />
-          <img alt="" src={withBasePath("/assets/recommend/pijiupaidui.png")} className="absolute left-1/2 top-[calc(50%-20px)] h-[200px] w-[200px] -translate-x-1/2 -translate-y-1/2 object-cover" />
+          <img alt="" src={withBasePath("/assets/products/pijiupaidui.png")} className="absolute inset-0 size-full object-cover" />
         </Card>
 
         <Card main="火燒連環船" sub="SLOT" badge={null}>
-          <div className="absolute inset-0 bg-[#76d7f7]" />
-          <img alt="" src={withBasePath("/assets/recommend/huoshaolianhuanchuan.png")} className="absolute left-[-187px] top-1/2 h-[574px] w-[574px] max-w-none -translate-y-1/2 object-cover blur-[10px]" />
-          <img alt="" src={withBasePath("/assets/recommend/huoshaolianhuanchuan.png")} className="absolute left-0 top-[calc(50%-20px)] h-[200px] w-[200px] -translate-y-1/2 object-cover" />
+          <img alt="" src={withBasePath("/assets/products/huoshaolianhuanchuan.png")} className="absolute inset-0 size-full object-cover" />
         </Card>
 
         <Card main="發福神" sub="SLOT" badge={null}>
-          <div className="absolute inset-0 bg-[#68ffe6]" />
-          <img alt="" src={withBasePath("/assets/recommend/faifushen.png")} className="absolute left-0 top-[calc(50%-20px)] h-[200px] w-[200px] -translate-y-1/2 object-cover" />
+          <img alt="" src={withBasePath("/assets/products/faifushen.png")} className="absolute inset-0 size-full object-cover" />
         </Card>
       </div>
 
