@@ -20,7 +20,7 @@ export default function FormBar() {
 
   return (
     <div className="relative">
-      <div ref={scrollRef} className="scrollbar-hide flex items-end gap-[20px] overflow-x-auto">
+      <div ref={scrollRef} className="scrollbar-hide -mt-[30px] flex items-end gap-[20px] overflow-x-auto pt-[30px]">
         {FORMS.map((form) => (
           <div
             key={form.main}
@@ -41,7 +41,7 @@ export default function FormBar() {
         canScrollRight={canScrollRight}
         onLeft={() => scrollByPage("left")}
         onRight={() => scrollByPage("right")}
-        className="absolute bottom-[40px] right-[40px]"
+        className="absolute bottom-[40px] right-[40px] z-20"
       />
     </div>
   );
