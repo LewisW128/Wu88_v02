@@ -1,6 +1,10 @@
+"use client";
+
+import { useState } from "react";
+
 import ScaleBelowBreakpoint from "../../components/ScaleBelowBreakpoint";
 import Sidebar from "../../components/Sidebar";
-import StickyHeader from "../../components/StickyHeader";
+import CasinoStickyHeader from "../../components/casino/CasinoStickyHeader";
 import CasinoHero from "../../components/casino/CasinoHero";
 import CasinoFilterBar from "../../components/casino/CasinoFilterBar";
 import CasinoHotGames from "../../components/casino/CasinoHotGames";
@@ -9,6 +13,8 @@ import CasinoGeneralGames from "../../components/casino/CasinoGeneralGames";
 import Footer from "../../components/Footer";
 
 export default function CasinoPage() {
+  const [activeFilter, setActiveFilter] = useState(0);
+
   return (
     <ScaleBelowBreakpoint>
       <div className="min-h-screen bg-white">
@@ -18,13 +24,13 @@ export default function CasinoPage() {
           </div>
 
           <div className="min-w-0 flex-1">
-            <StickyHeader />
+            <CasinoStickyHeader active={activeFilter} onSelect={setActiveFilter} />
 
             <CasinoHero />
 
             <div className="relative flex flex-col gap-[40px] pb-[40px] pl-[40px] pt-[20px]">
               <div className="pl-[20px] pr-[40px]">
-                <CasinoFilterBar />
+                <CasinoFilterBar active={activeFilter} onSelect={setActiveFilter} />
               </div>
               <CasinoHotGames />
               <CasinoRecommend />
