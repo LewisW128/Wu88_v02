@@ -11,8 +11,15 @@ const NAV_ITEMS = [
   { icon: withBasePath("/assets/icons/gift.svg"), title: "優惠活動", sub: "PROMO", href: null },
 ];
 
+// Normalize away a trailing slash (except the root "/") since next.config's
+// trailingSlash: true makes usePathname() return "/casino/" while href values
+// here are written without one.
+function normalizePathname(pathname: string) {
+  return pathname.length > 1 && pathname.endsWith("/") ? pathname.slice(0, -1) : pathname;
+}
+
 export default function Sidebar() {
-  const pathname = usePathname();
+  const pathname = normalizePathname(usePathname());
 
   return (
     <div className="h-full w-[291px] shrink-0 overflow-y-auto bg-white scrollbar-teal-thin">
