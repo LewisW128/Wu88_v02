@@ -18,8 +18,8 @@ export default function Sidebar() {
       <div className="relative min-h-[1117px] w-[291px]">
         <img alt="" src={withBasePath("/assets/sidebar/sidebar-bg.svg")} className="pointer-events-none absolute left-0 top-0 h-[1117px] w-[291px]" />
 
-        <div className="absolute left-1/2 top-[40px] w-[251px] -translate-x-1/2">
-          <img alt="WU88 武財神 ONE" src={withBasePath("/assets/sidebar/logo.svg")} className="w-full" />
+        <div className="absolute left-1/2 top-[40px] w-[150px] -translate-x-1/2">
+          <img alt="WU88.ONE" src={withBasePath("/assets/sidebar/logo.svg")} className="w-full" />
         </div>
 
         <nav className="absolute inset-x-0 top-[150px] z-10 flex flex-col items-end pl-[20px]">
