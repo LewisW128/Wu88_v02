@@ -9,7 +9,7 @@ export default function CasinoHero() {
         loop
         muted
         playsInline
-        className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+        className="pointer-events-none absolute inset-0 h-full w-full object-cover object-top"
       />
     </div>
   );
