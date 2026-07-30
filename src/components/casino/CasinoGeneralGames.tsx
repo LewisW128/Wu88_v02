@@ -77,7 +77,7 @@ export function CasinoGeneralGamesRow({
   const { scrollRef, canScrollLeft, canScrollRight, scrollByPage } = useHorizontalSlider();
 
   return (
-    <div id={`casino-section-${id}`} className="relative flex w-full flex-col gap-[20px]">
+    <div id={`casino-section-${id}`} className="relative flex w-full scroll-mt-[110px] flex-col gap-[20px]">
       <div className="flex items-center justify-between pl-[20px]">
         <div className="flex items-center gap-[10px]">
           <img alt="" src={icon} className="size-[45px]" />

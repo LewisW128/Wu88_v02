@@ -1,5 +1,5 @@
 export const CASINO_FILTERS = [
-  { label: "熱門", target: null },
+  { label: "熱門", target: "hot" },
   { label: "WU88 推薦", target: "recommend" },
   { label: "電子遊戲", target: "slot" },
   { label: "真人娛樂", target: "real" },

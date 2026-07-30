@@ -67,7 +67,7 @@ export default function CasinoHotGames() {
   const { scrollRef, canScrollLeft, canScrollRight, scrollByPage } = useHorizontalSlider();
 
   return (
-    <div id="casino-section-hot" className="relative flex w-full flex-col gap-[20px]">
+    <div id="casino-section-hot" className="relative flex w-full scroll-mt-[110px] flex-col gap-[20px]">
       <div className="flex items-center justify-between pl-[20px]">
         <div className="flex items-center gap-[10px]">
           <img alt="" src={withBasePath("/assets/icons/hot.svg")} className="size-[45px]" />

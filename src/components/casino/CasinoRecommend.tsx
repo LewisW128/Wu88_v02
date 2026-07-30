@@ -59,7 +59,7 @@ export default function CasinoRecommend() {
   return (
     <div
       id="casino-section-recommend"
-      className="relative w-full overflow-hidden rounded-tl-[50px] pb-[40px] pt-[20px]"
+      className="relative w-full scroll-mt-[110px] overflow-hidden rounded-tl-[50px] pb-[40px] pt-[20px]"
       style={{
         backgroundImage:
           "linear-gradient(-56deg, rgb(72,186,206) 22%, rgb(154,113,241) 69%, rgb(141,84,216) 142%, rgb(100,78,179) 222%)",
