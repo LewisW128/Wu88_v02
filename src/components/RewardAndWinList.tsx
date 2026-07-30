@@ -5,20 +5,6 @@ const AVATAR_BADGE_GRADIENT = "linear-gradient(-48.1deg, #14E8B8 0%, #48BACE 35.
 const WIN_LIST_BG_GRADIENT =
   "linear-gradient(-56deg, rgb(72,186,206) 22%, rgb(154,113,241) 69%, rgb(141,84,216) 142%, rgb(100,78,179) 222%)";
 
-function DotsGrid({ size, gap, rows, cols }: { size: number; gap: number; rows: number; cols: number }) {
-  return (
-    <div className="flex flex-col gap-[7.75px]">
-      {Array.from({ length: rows }).map((_, r) => (
-        <div key={r} className="flex items-center" style={{ gap }}>
-          {Array.from({ length: cols }).map((_, c) => (
-            <img alt="" key={c} src={withBasePath("/assets/reward-announcement/ellipse2.svg")} style={{ width: size, height: size }} />
-          ))}
-        </div>
-      ))}
-    </div>
-  );
-}
-
 const REWARD_DIGIT_PAIRS = ["09", "99", "99", "00", "00", "00"];
 
 function PointCard({ pair }: { pair: string }) {
@@ -39,8 +25,7 @@ function TitleIcon() {
 function RewardAnnouncement() {
   return (
     <div className="relative h-[438px] w-[519px] shrink-0 overflow-hidden rounded-tl-[50px] bg-white/50">
-      <img alt="" src={withBasePath("/assets/reward-announcement/photo-hero.png")} className="pointer-events-none absolute left-[116px] top-[25px] h-[580px] w-[485px] max-w-none object-cover" />
-      <img alt="" src={withBasePath("/assets/reward-announcement/rectangle2.svg")} className="pointer-events-none absolute left-[24px] top-[calc(50%+76px)] h-[412px] w-[262px] max-w-none -translate-y-1/2" />
+      <img alt="" src={withBasePath("/assets/reward-announcement/bg.png")} className="pointer-events-none absolute inset-0 size-full object-cover" />
 
       <div className="absolute left-[20px] top-[20px] flex items-center gap-[10px]">
         <TitleIcon />
@@ -51,10 +36,6 @@ function RewardAnnouncement() {
         {REWARD_DIGIT_PAIRS.map((pair, i) => (
           <PointCard key={i} pair={pair} />
         ))}
-      </div>
-
-      <div className="absolute bottom-[20px] left-[20px]">
-        <DotsGrid size={3.875} gap={7.75} rows={6} cols={6} />
       </div>
 
       <div className="absolute bottom-[40px] right-[20px] h-[53px] w-[128px] drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]">
