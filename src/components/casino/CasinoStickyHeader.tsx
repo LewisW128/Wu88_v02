@@ -86,7 +86,9 @@ export default function CasinoStickyHeader({ active, onSelect }: { active: numbe
     <div
       ref={headerRef}
       className={`sticky top-0 z-20 flex items-center px-[40px] transition-[background-color,padding,backdrop-filter] duration-200 ${
-        scrolled ? "bg-white/80 py-[15px] backdrop-blur-[10px]" : "pt-[20px]"
+        scrolled
+          ? "bg-gradient-to-r from-white from-[6.657%] via-[rgba(255,255,255,0.8)] via-[42.545%] to-white to-[69.398%] py-[15px] backdrop-blur-[10px]"
+          : "pt-[20px]"
       } ${stage === "chips" ? "" : "justify-between"}`}
     >
       {stage === "chips" ? (
