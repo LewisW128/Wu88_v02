@@ -6,10 +6,13 @@ import SlideArrows from "./SlideArrows";
 
 function PromoButton({ text }: { text: string }) {
   return (
-    <div className="absolute bottom-[20px] left-[20px] flex h-[53px] w-[128px] items-center justify-between rounded-full bg-[#e2ff25] px-[20px] drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]">
-      <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">{text}</p>
-      <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[5.556px]">
-        <img alt="" src={withBasePath("/assets/reward-announcement/rectangle1.svg")} className="h-[6.111px] w-[3.333px]" />
+    <div className="absolute bottom-[20px] left-[20px] h-[53px] w-[128px] drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]">
+      <img alt="" src={withBasePath("/assets/reward-announcement/rectangle3.svg")} className="pointer-events-none absolute inset-0 block size-full max-w-none" />
+      <div className="absolute inset-[24.53%_11.72%_30.19%_11.72%] flex items-center justify-between">
+        <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">{text}</p>
+        <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[5.556px]">
+          <img alt="" src={withBasePath("/assets/reward-announcement/rectangle1.svg")} className="h-[6.111px] w-[3.333px]" />
+        </div>
       </div>
     </div>
   );
@@ -21,20 +24,6 @@ function PromoCard({ image, alt, children }: { image: string; alt: string; child
       <img alt={alt} src={image} className="pointer-events-none absolute inset-0 block size-full object-cover" />
       {children}
     </div>
-  );
-}
-
-function UsdtCardText() {
-  return (
-    <>
-      <div className="pointer-events-none absolute left-px top-1/2 h-[210px] w-[161px] -translate-y-1/2 bg-gradient-to-l from-transparent to-black/50" />
-      <div className="absolute left-[21px] top-[20px] text-[20px] leading-[24px] tracking-[0.35px] text-white">
-        <p>ＵＳＤＴ返利</p>
-        <p>無上限，每筆</p>
-        <p>加碼贈</p>
-      </div>
-      <p className="absolute left-[90px] top-[62px] text-[25px] font-bold leading-[32px] tracking-[0.35px] text-[#23f3d5]">2%</p>
-    </>
   );
 }
 
@@ -55,19 +44,13 @@ function Promotions() {
       </div>
       <div ref={scrollRef} className="scrollbar-hide flex gap-[20px] overflow-x-auto">
         <PromoCard image={withBasePath("/assets/promotions/card1.png")} alt="每日簽到禮 天天贈彩點" />
-        <PromoCard image={withBasePath("/assets/promotions/card2.jpg")} alt="武財神風輪盤 天天轉 8,888">
-          <p className="absolute left-[20px] top-[20px] whitespace-nowrap text-[20px] tracking-[0.35px] text-white">武財神風輪盤</p>
-          <p className="absolute left-[20px] top-[44px] whitespace-nowrap text-[20px] tracking-[0.35px] text-white">
-            天天轉 <span className="text-[25px] font-bold text-[#23f3d5]">8,888</span>
-          </p>
+        <PromoCard image={withBasePath("/assets/promotions/card2-wheel.svg")} alt="武財神風輪盤 天天轉 8,888">
           <PromoButton text="立即中獎" />
         </PromoCard>
-        <PromoCard image={withBasePath("/assets/promotions/card3.jpg")} alt="USDT返利 無上限，每筆USDT加碼贈2%">
-          <UsdtCardText />
+        <PromoCard image={withBasePath("/assets/promotions/card3-usdt-vault.svg")} alt="USDT返利 無上限，每筆USDT加碼贈2%">
           <PromoButton text="立即參加" />
         </PromoCard>
-        <PromoCard image={withBasePath("/assets/promotions/card4.jpg")} alt="USDT返利 無上限，每筆USDT加碼贈2%">
-          <UsdtCardText />
+        <PromoCard image={withBasePath("/assets/promotions/card4-gclass.svg")} alt="超商儲值禮 送 G-CLASS">
           <PromoButton text="立即參加" />
         </PromoCard>
       </div>
