@@ -27,7 +27,7 @@ export default function Sidebar() {
             <div
               key={item.title}
               onClick={() => setActiveIndex(index)}
-              className="relative flex h-[122px] w-full shrink-0 cursor-pointer items-center overflow-hidden"
+              className="relative flex h-[122px] w-full shrink-0 cursor-pointer items-center"
             >
               {index === activeIndex && (
                 <>
