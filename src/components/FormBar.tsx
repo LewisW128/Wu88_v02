@@ -20,9 +20,12 @@ export default function FormBar() {
 
   return (
     <div className="relative">
-      <div ref={scrollRef} className="scrollbar-hide flex items-center gap-[20px] overflow-x-auto">
+      <div ref={scrollRef} className="scrollbar-hide flex items-end gap-[20px] overflow-x-auto">
         {FORMS.map((form) => (
-          <div key={form.main} className="relative h-[224px] w-[200px] shrink-0 overflow-hidden rounded-[50px] bg-white">
+          <div
+            key={form.main}
+            className="relative h-[224px] w-[200px] shrink-0 origin-bottom overflow-hidden rounded-[50px] bg-white transition-transform duration-300 ease-out hover:z-10 hover:scale-[1.134]"
+          >
             <img alt="" src={form.img} className="absolute left-1/2 top-0 h-[224px] w-[258px] max-w-none -translate-x-1/2 object-cover" />
             <div className="absolute bottom-0 left-0 h-[81px] w-[200px] bg-gradient-to-b from-[rgba(141,84,216,0)] to-[#6f4fbd]">
               <div className="absolute left-[40px] top-[15px] flex flex-col whitespace-nowrap">
