@@ -67,6 +67,20 @@ function Promotions() {
   );
 }
 
+const PARTNERS = [
+  { src: "cq9.png", alt: "CQ9" },
+  { src: "oubo.png", alt: "歐博" },
+  { src: "qilin.png", alt: "麒麟" },
+  { src: "feilong.png", alt: "飛龍" },
+  { src: "super.png", alt: "SUPER" },
+  { src: "sa.png", alt: "SA" },
+  { src: "meta.png", alt: "META" },
+  { src: "horse.png", alt: "Horse" },
+  { src: "bc.png", alt: "BC" },
+  { src: "ag.png", alt: "AG" },
+  { src: "9k.png", alt: "9K" },
+];
+
 function Business() {
   const { scrollRef, canScrollLeft, canScrollRight, scrollByPage } = useHorizontalSlider();
 
@@ -76,8 +90,13 @@ function Business() {
         <img alt="" src={withBasePath("/assets/icons/partner.svg")} className="size-[45px]" />
         <p className="text-[20px] font-bold tracking-[0.35px] text-[#444242]">頂級合作廠商</p>
       </div>
-      <div ref={scrollRef} className="scrollbar-hide h-[164px] w-full overflow-x-auto rounded-br-[50px] rounded-tl-[50px] border border-[#dadada]">
-        <img alt="頂級合作廠商" src={withBasePath("/assets/business/panel.png")} className="pointer-events-none block h-full w-auto max-w-none" />
+      <div className="relative h-[164px] w-full overflow-hidden rounded-br-[50px] rounded-tl-[50px] border border-[#dadada] bg-white">
+        <img alt="" src={withBasePath("/assets/business/ellipse8.svg")} className="pointer-events-none absolute right-[-171.55px] top-[-27.55px] size-[366px]" />
+        <div ref={scrollRef} className="scrollbar-hide absolute inset-0 flex items-center gap-[40px] overflow-x-auto py-[10px] pl-[40px]">
+          {PARTNERS.map((p) => (
+            <img key={p.alt} alt={p.alt} src={withBasePath(`/assets/business/${p.src}`)} className="size-[144px] shrink-0" />
+          ))}
+        </div>
       </div>
       <SlideArrows
         canScrollLeft={canScrollLeft}
