@@ -3,14 +3,9 @@ import { withBasePath } from "../lib/asset";
 
 function AvatarBadge() {
   return (
-    <div
-      className="relative size-[59px] shrink-0 rounded-full p-[2px]"
-      style={{
-        backgroundImage:
-          "linear-gradient(-48.0664842153752deg, rgb(72,186,206) 0%, rgb(72,186,206) 20%, rgb(154,113,241) 45%, rgb(182,90,253) 55%, rgb(141,84,216) 70%, rgb(111,79,189) 85%, rgb(100,78,179) 100%)",
-      }}
-    >
-      <img alt="" src={withBasePath("/assets/profile/avatar.png")} className="size-full rounded-full object-cover" />
+    <div className="relative size-[59px] shrink-0">
+      <img alt="" src={withBasePath("/assets/profile/avatar.png")} className="absolute inset-0 size-full rounded-full object-cover" />
+      <img alt="" src={withBasePath("/assets/profile/avatar-ring.svg")} className="pointer-events-none absolute inset-0 size-full" />
       <div
         className="absolute bottom-0 right-0 size-[21px] overflow-hidden rounded-full"
         style={{
@@ -74,9 +69,9 @@ export function ProfileCompact() {
 
 export default function Profile() {
   return (
-    <div className="flex items-center gap-[40px] rounded-full border border-[#dadada] bg-white/60 px-[40px] py-[23px] backdrop-blur-[20px]">
+    <div className="flex items-center gap-[40px] rounded-full border border-[#dadada] bg-white/60 px-[30px] py-[15px] backdrop-blur-[20px]">
       <div className="flex items-center gap-[20px]">
-        <div className="flex items-center gap-[20px]">
+        <div className="flex items-center gap-[10px]">
           <AvatarBadge />
           <NameAndBalance />
         </div>
