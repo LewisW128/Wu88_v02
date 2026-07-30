@@ -72,7 +72,7 @@ export default function Recommend() {
         <img alt="" src={withBasePath("/assets/shared/arrow-chevron-white.svg")} className="h-[13px] w-[8px]" />
       </div>
 
-      <div ref={scrollRef} className="scrollbar-hide mt-[24px] flex gap-[20px] overflow-x-auto pl-[60px] pb-[10px] drop-shadow-[0px_40px_20px_rgba(0,0,0,0.25)]">
+      <div ref={scrollRef} className="scrollbar-hide mt-[24px] flex gap-[20px] overflow-x-auto pl-[60px] pr-[40px] pb-[10px] drop-shadow-[0px_40px_20px_rgba(0,0,0,0.25)]">
         <Card main="鼠來寶" sub="SLOT" badge="HOT" specialShape>
           <img alt="" src={withBasePath("/assets/recommend/shulaibao.png")} className="absolute inset-0 size-full object-cover" />
         </Card>

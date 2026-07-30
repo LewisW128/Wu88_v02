@@ -19,7 +19,7 @@ export default function FormBar() {
 
   return (
     <div className="relative">
-      <div ref={scrollRef} className="scrollbar-hide -mt-[30px] flex items-end gap-[20px] overflow-x-auto pt-[30px]">
+      <div ref={scrollRef} className="scrollbar-hide -mt-[30px] flex items-end gap-[20px] overflow-x-auto pr-[40px] pt-[30px]">
         {FORMS.map((form) => (
           <div
             key={form.main}

@@ -79,7 +79,7 @@ export default function Hot() {
         </div>
       </div>
 
-      <div ref={scrollRef} className="scrollbar-hide flex gap-[20px] overflow-x-auto">
+      <div ref={scrollRef} className="scrollbar-hide flex gap-[20px] overflow-x-auto pr-[40px]">
         <div className="relative h-[292px] w-[297px] shrink-0">
           <NumeralFrame>
             <img alt="" src={withBasePath("/assets/hot/numeral01-outline.svg")} className="absolute left-0 top-0 h-[211.5px] w-[152px]" />
