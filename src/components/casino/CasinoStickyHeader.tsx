@@ -127,7 +127,7 @@ export default function CasinoStickyHeader({ active, onSelect }: { active: numbe
         </div>
       ) : (
         <>
-          <Filter />
+          {scrolled ? <img alt="" src={withBasePath("/assets/icons/search.svg")} className="size-[25px]" /> : <Filter />}
           {scrolled ? <ProfileCompact /> : <Profile />}
         </>
       )}
