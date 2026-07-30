@@ -77,7 +77,7 @@ function Business() {
         <p className="text-[20px] font-bold tracking-[0.35px] text-[#444242]">頂級合作廠商</p>
       </div>
       <div ref={scrollRef} className="scrollbar-hide h-[164px] w-full overflow-x-auto rounded-br-[50px] rounded-tl-[50px] border border-[#dadada]">
-        <img alt="頂級合作廠商" src={withBasePath("/assets/business/panel.png")} className="pointer-events-none block h-full min-w-full object-cover" />
+        <img alt="頂級合作廠商" src={withBasePath("/assets/business/panel.png")} className="pointer-events-none block h-full w-auto max-w-none" />
       </div>
       <SlideArrows
         canScrollLeft={canScrollLeft}
