@@ -29,7 +29,7 @@ export default function CasinoPage() {
             <CasinoHero />
 
             <div className="relative flex flex-col gap-[40px] pb-[40px] pl-[40px] pt-[20px]">
-              <div className="pl-[20px] pr-[40px]">
+              <div id="casino-filter-anchor" className="pl-[20px] pr-[40px]">
                 <CasinoFilterBar active={activeFilter} onSelect={setActiveFilter} />
               </div>
               <CasinoHotGames />
