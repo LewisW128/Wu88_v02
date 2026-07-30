@@ -22,7 +22,7 @@ export default function Sidebar() {
   const pathname = normalizePathname(usePathname());
 
   return (
-    <div className="h-full w-[291px] shrink-0 overflow-y-auto bg-white scrollbar-teal-thin">
+    <div className="h-full w-[291px] shrink-0 overflow-y-hidden bg-white">
       <div className="relative min-h-[1117px] w-[291px]">
         <img alt="" src={withBasePath("/assets/sidebar/sidebar-bg.svg")} className="pointer-events-none absolute left-0 top-0 h-[1117px] w-[291px]" />
 
