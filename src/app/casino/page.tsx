@@ -26,7 +26,9 @@ export default function CasinoPage() {
           <div className="min-w-0 flex-1">
             <CasinoStickyHeader active={activeFilter} onSelect={setActiveFilter} />
 
-            <CasinoHero />
+            <div className="relative -mt-[111px]">
+              <CasinoHero />
+            </div>
 
             <div className="relative z-10 -mt-[250px] flex flex-col gap-[40px] pb-[40px] pl-[40px] pt-[20px]">
               <div id="casino-filter-anchor" className="pl-[20px] pr-[40px]">
