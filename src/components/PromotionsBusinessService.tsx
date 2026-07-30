@@ -7,7 +7,9 @@ import SlideArrows from "./SlideArrows";
 function PromoButton({ text }: { text: string }) {
   return (
     <div className="absolute bottom-[20px] left-[20px] h-[53px] w-[128px] drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]">
-      <img alt="" src={withBasePath("/assets/reward-announcement/rectangle3.svg")} className="pointer-events-none absolute inset-0 block size-full max-w-none" />
+      <div className="pointer-events-none absolute inset-0 -scale-x-100">
+        <img alt="" src={withBasePath("/assets/reward-announcement/rectangle3.svg")} className="block size-full max-w-none" />
+      </div>
       <div className="absolute inset-[24.53%_11.72%_30.19%_11.72%] flex items-center justify-between">
         <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">{text}</p>
         <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[5.556px]">
