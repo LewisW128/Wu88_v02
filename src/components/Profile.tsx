@@ -15,7 +15,7 @@ function AvatarBadge() {
         className="absolute bottom-0 right-0 size-[21px] overflow-hidden rounded-full"
         style={{
           backgroundImage:
-            "linear-gradient(-48.0664842153752deg, rgb(1,250,176) 90.123%, rgb(20,232,184) 61.931%, rgb(72,186,206) 9.575%, rgb(154,113,241) 66.946%, rgb(182,90,253) 91.111%, rgb(141,84,216) 183.74%, rgb(111,79,189) 264.29%, rgb(100,78,179) 312.62%)",
+            "linear-gradient(-48.0664842153752deg, rgb(1,250,176) 0%, rgb(20,232,184) 10%, rgb(72,186,206) 20%, rgb(154,113,241) 45%, rgb(182,90,253) 55%, rgb(141,84,216) 70%, rgb(111,79,189) 85%, rgb(100,78,179) 100%)",
         }}
       >
         <img alt="" src={withBasePath("/assets/profile/icon-crown.svg")} className="absolute left-[3px] top-[3px] size-[15px]" />
