@@ -45,7 +45,7 @@ function Promotions() {
         </div>
       </div>
       <div ref={scrollRef} className="scrollbar-hide flex gap-[20px] overflow-x-auto">
-        <PromoCard image={withBasePath("/assets/promotions/card1.png")} alt="每日簽到禮 天天贈彩點" />
+        <PromoCard image={withBasePath("/assets/promotions/card1-signin.svg")} alt="每日簽到禮 天天贈彩點" />
         <PromoCard image={withBasePath("/assets/promotions/card2-wheel.svg")} alt="武財神風輪盤 天天轉 8,888">
           <PromoButton text="立即中獎" />
         </PromoCard>
