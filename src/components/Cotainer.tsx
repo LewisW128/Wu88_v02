@@ -7,13 +7,14 @@ const AUTOPLAY_MS = 6000;
 
 function Slide1() {
   return (
-    <>
-      <img alt="" src={withBasePath("/assets/cotainer/carousel/slide1-background.svg")} className="pointer-events-none absolute inset-0 size-full object-cover" />
-      <div className="absolute left-[80px] top-1/2 flex w-[382px] -translate-y-1/2 flex-col items-start gap-[20px]">
-        <img alt="精彩不設限 贏得更過癮！" src={withBasePath("/assets/cotainer/carousel/headline-slide1.svg")} className="w-[336px]" />
-        <p className="text-[36px] font-bold leading-none tracking-[0.36px] text-[#3e4140]">高額獎金 24h 精彩不斷</p>
-      </div>
-    </>
+    <video
+      src={withBasePath("/assets/cotainer/carousel/slide1-bg.mp4")}
+      autoPlay
+      loop
+      muted
+      playsInline
+      className="pointer-events-none absolute inset-0 size-full object-cover object-left"
+    />
   );
 }
 

@@ -25,7 +25,7 @@ function TitleIcon() {
 function RewardAnnouncement() {
   return (
     <div className="relative h-[438px] w-[519px] shrink-0 overflow-hidden rounded-tl-[50px] bg-white/50">
-      <img alt="" src={withBasePath("/assets/reward-announcement/bg.png")} className="pointer-events-none absolute inset-0 size-full object-cover" />
+      <img alt="" src={withBasePath("/assets/reward-announcement/bg.svg")} className="pointer-events-none absolute inset-0 size-full object-cover" />
 
       <div className="absolute left-[20px] top-[20px] flex items-center gap-[10px]">
         <TitleIcon />
