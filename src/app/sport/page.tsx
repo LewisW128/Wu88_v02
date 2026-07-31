@@ -24,9 +24,8 @@ export default function SportPage() {
               <SportHero />
             </div>
 
-            <SportComTags />
-
-            <div className="relative flex flex-col gap-[40px] pl-[40px] pt-[120px] pb-[40px]">
+            <div className="relative z-10 -mt-[333px] flex flex-col gap-[40px] pb-[40px] pl-[40px] pt-[20px]">
+              <SportComTags />
               <SportLiveGames />
               <SportNews />
               <SportAnalyze />

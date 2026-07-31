@@ -183,7 +183,7 @@ export default function LiveGamesCard({ data }: { data: Record<Category, Categor
         ))}
       </div>
 
-      <div className="flex items-center gap-[20px]">
+      <div className="flex items-center justify-center gap-[20px]">
         <button type="button" aria-label="上一頁" className="flex size-[45px] items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[10px]">
           <img alt="" src={withBasePath("/assets/shared/arrow-chevron-white.svg")} className="h-[13px] w-[8px] rotate-180" />
         </button>
