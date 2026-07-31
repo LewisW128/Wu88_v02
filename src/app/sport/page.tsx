@@ -3,6 +3,7 @@ import Sidebar from "../../components/Sidebar";
 import SportStickyHeader from "../../components/sport/SportStickyHeader";
 import SportHero from "../../components/sport/SportHero";
 import SportComTags from "../../components/sport/SportComTags";
+import SportLiveGames from "../../components/sport/SportLiveGames";
 import SportNews from "../../components/sport/SportNews";
 import SportAnalyze from "../../components/sport/SportAnalyze";
 import Footer from "../../components/Footer";
@@ -25,7 +26,8 @@ export default function SportPage() {
 
             <SportComTags />
 
-            <div className="relative flex flex-col gap-[40px] pl-[40px] pt-[573px] pb-[40px]">
+            <div className="relative flex flex-col gap-[40px] pl-[40px] pt-[120px] pb-[40px]">
+              <SportLiveGames />
               <SportNews />
               <SportAnalyze />
             </div>
