@@ -24,11 +24,17 @@ export default function SportPage() {
               <SportHero />
             </div>
 
-            <div className="relative z-10 -mt-[333px] flex flex-col gap-[40px] pb-[40px] pl-[40px] pt-[20px]">
+            <div className="relative z-10 -mt-[353px] flex flex-col pb-[40px] pl-[40px] pt-[20px]">
               <SportComTags />
-              <SportLiveGames />
-              <SportNews />
-              <SportAnalyze />
+              {/* Tags overlap the hero's fading tail like the casino filter
+                  row does, but everything after them should sit flush below
+                  the hero with no overlap -- 289px closes the gap between the
+                  tags' bottom (493+44) and the hero's bottom (826). */}
+              <div className="mt-[289px] flex flex-col gap-[40px]">
+                <SportLiveGames />
+                <SportNews />
+                <SportAnalyze />
+              </div>
             </div>
 
             <div className="-ml-[291px] w-[calc(100%+291px)]">
