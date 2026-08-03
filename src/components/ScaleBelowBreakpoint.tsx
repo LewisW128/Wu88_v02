@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useBreakpointZoom } from "../hooks/useBreakpointZoom";
 
 // The page is designed to look right at DESIGN_WIDTH. The instant the
 // viewport gets narrower than that, shrink the whole page down to fit as one
@@ -18,20 +18,8 @@ import { useEffect, useState } from "react";
 // it must never be. 1530 gives WinList's own min-width (600px) just enough
 // room at 1:1, and since everything below this threshold scales down together
 // via `zoom`, the ratio between the two cards stays constant at any size.
-const DESIGN_WIDTH = 1530;
-
 export default function ScaleBelowBreakpoint({ children }: { children: React.ReactNode }) {
-  const [zoom, setZoom] = useState(1);
-
-  useEffect(() => {
-    const updateZoom = () => {
-      const vw = window.innerWidth;
-      setZoom(Math.min(1, vw / DESIGN_WIDTH));
-    };
-    updateZoom();
-    window.addEventListener("resize", updateZoom);
-    return () => window.removeEventListener("resize", updateZoom);
-  }, []);
+  const zoom = useBreakpointZoom();
 
   // `vh` units don't scale with an ancestor's `zoom` the way px values do —
   // 100vh always resolves to the real viewport height, so anything sized with
