@@ -73,7 +73,7 @@ function RewardDay({ label, reward, state }: Day) {
 
 export default function ProfileEverydayRewards() {
   return (
-    <div className="relative flex w-full flex-col gap-[20px] overflow-hidden rounded-br-[50px] rounded-tl-[50px] border border-[#8d54d8] p-[19px]">
+    <div className="relative mr-[40px] flex flex-col gap-[20px] overflow-hidden rounded-br-[50px] rounded-tl-[50px] border border-[#8d54d8] p-[19px]">
       <img alt="" src={withBasePath("/assets/profile/rewards/model.png")} className="pointer-events-none absolute right-0 top-0 h-full w-[45%] object-cover object-top opacity-90" />
       <div className="pointer-events-none absolute inset-y-0 right-0 w-[55%] bg-gradient-to-r from-transparent via-transparent to-white/0" />
 

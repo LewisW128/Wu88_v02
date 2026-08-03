@@ -7,7 +7,7 @@ export default function ProfileMemberInfo() {
   const progress = Math.min(100, (VIP_EXPERIENCE / VIP_EXPERIENCE_MAX) * 100);
 
   return (
-    <div className="flex w-full items-center gap-[40px]">
+    <div className="flex w-full items-center gap-[40px] pr-[40px]">
       <div className="flex w-[327px] shrink-0 flex-col gap-[74px]">
         <div className="flex flex-col items-start gap-[10px]">
           <p className="whitespace-nowrap text-[20px] font-bold tracking-[0.35px] text-[#3e4140]">歡迎回來 !</p>
