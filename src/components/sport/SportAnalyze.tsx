@@ -90,10 +90,7 @@ export default function SportAnalyze() {
         </div>
       </div>
 
-      <div
-        className="flex w-full flex-col gap-[20px] pr-[40px]"
-        style={{ maskImage: "linear-gradient(to bottom, black 0%, black 80%, transparent 100%)" }}
-      >
+      <div className="scrollbar-teal-thin flex h-[768px] w-full flex-col gap-[20px] overflow-y-auto pr-[40px]">
         {ARTICLES.map((article) => (
           <ArticleRow key={article.title} {...article} />
         ))}

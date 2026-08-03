@@ -96,25 +96,35 @@ function Score({ score, activeHalf = "top" }: { score: [number, number]; activeH
 
 function MatchRow({ match }: { match: Match }) {
   return (
-    <div className="flex items-center gap-[40px] rounded-full border border-[#01fab0] bg-white/50 px-[40px] py-[10px] backdrop-blur-[10px]">
+    <div className="flex w-full items-center gap-[40px] rounded-full border border-[#01fab0] bg-white/50 px-[40px] py-[10px] backdrop-blur-[10px]">
       <div className="flex w-[98px] shrink-0 flex-col whitespace-nowrap">
         <p className="text-[36px] leading-[36px] tracking-[0.36px] text-[#b2b2b2]">{match.time}</p>
         <p className="text-[12px] tracking-[0.15px] text-[#8d54d8]">{match.offset}</p>
       </div>
       <div className="h-[93px] w-px shrink-0 bg-[#f4f4f4]" />
-      <div className="relative flex flex-1 items-center justify-between">
-        <TeamBadge team={match.team1} />
-        <div className="absolute left-1/2 -translate-x-1/2">
+      {/* Fixed 974px width, matching Figma's own SportInformations spec
+          exactly (not flex-1) -- team1/Score/team2 are positioned at the
+          exact same left offsets (0 / 50%+3px / 860px) Figma uses, so team2
+          lands at a fixed x near the row's right side instead of drifting
+          with its own text length (which is what flex justify-between did)
+          or sitting too close to center (a guessed fixed offset did). */}
+      <div className="relative h-[41px] w-[974px] shrink-0">
+        <div className="absolute left-0 top-1/2 -translate-y-1/2">
+          <TeamBadge team={match.team1} />
+        </div>
+        <div className="absolute left-[calc(50%+3px)] top-1/2 -translate-x-1/2 -translate-y-1/2">
           <Score score={match.score} activeHalf={match.activeHalf} />
         </div>
-        <TeamBadge team={match.team2} />
+        <div className="absolute left-[860px] top-1/2 -translate-y-1/2">
+          <TeamBadge team={match.team2} />
+        </div>
       </div>
       <button
         type="button"
         aria-label="賽事詳情"
-        className="flex size-[45px] shrink-0 items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[10px]"
+        className="ml-auto flex size-[45px] shrink-0 items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[10px]"
       >
-        <img alt="" src={withBasePath("/assets/shared/arrow-chevron-white.svg")} className="h-[13px] w-[8px]" />
+        <img alt="" src={withBasePath("/assets/shared/arrow-chevron-teal.svg")} className="h-[13px] w-[8px]" />
       </button>
     </div>
   );
@@ -142,7 +152,7 @@ export default function LiveGamesCard({ data }: { data: Record<Category, Categor
   const { dropdownLabel, matches } = data[active];
 
   return (
-    <div className="flex w-full flex-col gap-[20px]">
+    <div className="flex w-full flex-col gap-[20px] pr-[40px]">
       <div className="flex items-center justify-between pl-[20px]">
         <div className="flex items-center gap-[40px]">
           <SportSectionTitle>即時賽事</SportSectionTitle>
@@ -159,14 +169,14 @@ export default function LiveGamesCard({ data }: { data: Record<Category, Categor
 
       <div className="flex items-center justify-center gap-[20px]">
         <button type="button" aria-label="上一頁" className="flex size-[45px] items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[10px]">
-          <img alt="" src={withBasePath("/assets/shared/arrow-chevron-white.svg")} className="h-[13px] w-[8px] rotate-180" />
+          <img alt="" src={withBasePath("/assets/shared/arrow-chevron-teal.svg")} className="h-[13px] w-[8px] rotate-180" />
         </button>
         <PageNumber label="01" active />
         <PageNumber label="02" active={false} />
         <PageNumber label="03" active={false} />
         <PageNumber label="04" active={false} />
         <button type="button" aria-label="下一頁" className="flex size-[45px] items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[10px]">
-          <img alt="" src={withBasePath("/assets/shared/arrow-chevron-white.svg")} className="h-[13px] w-[8px]" />
+          <img alt="" src={withBasePath("/assets/shared/arrow-chevron-teal.svg")} className="h-[13px] w-[8px]" />
         </button>
       </div>
     </div>
