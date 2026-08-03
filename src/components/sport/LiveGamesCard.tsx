@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { withBasePath } from "../../lib/asset";
 import SportSectionTitle from "./SportSectionTitle";
@@ -65,9 +65,45 @@ function TeamBadge({ team }: { team: Team }) {
 }
 
 function ScoreDigit({ value, leading }: { value: number; leading: boolean }) {
+  // Switching category tabs swaps the whole match list, so scores jump
+  // straight to new values -- roll the old digit out and the new one in
+  // instead of just popping, so the change reads as an update, not a reload.
+  // mountedRef guards the very first render so the whole board doesn't play
+  // an unwanted intro animation on page load, only on later changes.
+  const prevValueRef = useRef(value);
+  const mountedRef = useRef(false);
+  const [outgoing, setOutgoing] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (!mountedRef.current) {
+      mountedRef.current = true;
+      return;
+    }
+    if (prevValueRef.current === value) return;
+    setOutgoing(prevValueRef.current);
+    prevValueRef.current = value;
+    const timeout = setTimeout(() => setOutgoing(null), 350);
+    return () => clearTimeout(timeout);
+  }, [value]);
+
   return (
     <div className="relative flex w-[23px] flex-col items-center">
-      <p className="text-[36px] font-bold leading-[36px] tracking-[0.36px] text-[#3e4140]">{value}</p>
+      <div className="relative h-[36px] w-full overflow-hidden">
+        {outgoing !== null && (
+          <p
+            key={`out-${outgoing}`}
+            className="animate-score-flip-out absolute inset-0 text-center text-[36px] font-bold leading-[36px] tracking-[0.36px] text-[#3e4140]"
+          >
+            {outgoing}
+          </p>
+        )}
+        <p
+          key={`in-${value}`}
+          className={`absolute inset-0 text-center text-[36px] font-bold leading-[36px] tracking-[0.36px] text-[#3e4140] ${outgoing !== null ? "animate-score-flip-in" : ""}`}
+        >
+          {value}
+        </p>
+      </div>
       {leading && <div className="mt-[4px] h-[3px] w-[23px] rounded-full bg-[#8d54d8]" />}
     </div>
   );

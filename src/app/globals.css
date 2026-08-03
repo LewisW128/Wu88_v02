@@ -77,3 +77,37 @@ html::-webkit-scrollbar-thumb:hover,
 .scrollbar-gray-thin::-webkit-scrollbar-thumb:hover {
   background-color: #a8a8a8;
 }
+
+/* Odometer-style digit flip for score changes (e.g. switching sport category
+   tabs swaps the whole match list, including scores) -- the outgoing digit
+   rolls up and out while the incoming one rolls up into place, run together
+   so it reads as one continuous tumble rather than two separate fades. */
+@keyframes score-flip-in {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes score-flip-out {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+.animate-score-flip-in {
+  animation: score-flip-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-score-flip-out {
+  animation: score-flip-out 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
