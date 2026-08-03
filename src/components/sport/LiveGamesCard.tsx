@@ -45,7 +45,7 @@ function LeagueDropdown({ label }: { label: string }) {
   return (
     <div className="flex shrink-0 items-center gap-[50px] rounded-full bg-[#3e4140] px-[20px] py-[10px]">
       <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-white">{label}</p>
-      <img alt="" src={withBasePath("/assets/shared/arrow-chevron-gray.svg")} className="h-[8px] w-[13px] rotate-90" />
+      <img alt="" src={withBasePath("/assets/shared/chevron-down.svg")} className="size-[14px]" />
     </div>
   );
 }
