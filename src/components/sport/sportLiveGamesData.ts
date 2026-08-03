@@ -3,7 +3,7 @@ import { withBasePath } from "../../lib/asset";
 export type Team = {
   name: string;
   sub: string;
-  flag: "england" | string;
+  flag: string;
 };
 
 export type Match = {
@@ -16,7 +16,7 @@ export type Match = {
 };
 
 const norway: Team = { name: "挪威", sub: "NORWAY", flag: withBasePath("/assets/sport/live/flags/norway.svg") };
-const england: Team = { name: "英國", sub: "ENGLAND", flag: "england" };
+const england: Team = { name: "英國", sub: "ENGLAND", flag: withBasePath("/assets/sport/live/flags/england.svg") };
 
 export const WORLD_CUP_MATCHES: Match[] = [
   { time: "32:14", offset: "+02:50", team1: england, team2: norway, score: [2, 1] },

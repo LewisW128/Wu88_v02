@@ -54,19 +54,10 @@ function LeagueDropdown({ label }: { label: string }) {
   );
 }
 
-function EnglandFlag() {
-  return (
-    <div className="relative size-full bg-white">
-      <div className="absolute inset-y-0 left-1/2 w-[9px] -translate-x-1/2 bg-[#b72336]" />
-      <div className="absolute inset-x-0 top-1/2 h-[9px] -translate-y-1/2 bg-[#b72336]" />
-    </div>
-  );
-}
-
 function TeamBadge({ team, align }: { team: Team; align: "left" | "right" }) {
   const flag = (
-    <div className="size-[40px] shrink-0 overflow-hidden rounded-full border border-[#f4f4f4] bg-white">
-      {team.flag === "england" ? <EnglandFlag /> : <img alt="" src={team.flag} className="size-full object-cover" />}
+    <div className="size-[40px] shrink-0 overflow-hidden rounded-full bg-white">
+      <img alt="" src={team.flag} className="size-full object-cover" />
     </div>
   );
   const label = (
