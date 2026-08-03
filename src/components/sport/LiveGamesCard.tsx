@@ -172,17 +172,22 @@ function MatchRow({ match }: { match: Match }) {
   );
 }
 
-function PageNumber({ label, active }: { label: string; active: boolean }) {
+function PageNumber({ label, active, onSelect }: { label: string; active: boolean; onSelect: () => void }) {
   return (
-    <div
-      className={`flex size-[46px] shrink-0 items-center justify-center rounded-full text-[20px] font-bold tracking-[0.35px] ${
+    <button
+      type="button"
+      onClick={onSelect}
+      aria-current={active}
+      className={`flex size-[46px] shrink-0 items-center justify-center rounded-full text-[20px] font-bold tracking-[0.35px] transition-colors ${
         active ? "bg-[#23f3d5] text-white" : "bg-[#f4f4f4] text-[#3e4140]"
       }`}
     >
       {label}
-    </div>
+    </button>
   );
 }
+
+const TOTAL_PAGES = 4;
 
 export type CategoryData = {
   dropdownLabel?: string;
@@ -191,14 +196,23 @@ export type CategoryData = {
 
 export default function LiveGamesCard({ data }: { data: Record<Category, CategoryData> }) {
   const [active, setActive] = useState<Category>("worldcup");
+  const [page, setPage] = useState(1);
   const { dropdownLabel, matches } = data[active];
+
+  const handleSelectCategory = (category: Category) => {
+    setActive(category);
+    setPage(1);
+  };
+
+  const isFirstPage = page === 1;
+  const isLastPage = page === TOTAL_PAGES;
 
   return (
     <div className="flex w-full flex-col gap-[20px] pr-[40px]">
       <div className="flex items-center justify-between pl-[20px]">
         <div className="flex items-center gap-[40px]">
           <SportSectionTitle>即時賽事</SportSectionTitle>
-          <CategoryToggle active={active} onSelect={setActive} />
+          <CategoryToggle active={active} onSelect={handleSelectCategory} />
         </div>
         {dropdownLabel && <LeagueDropdown label={dropdownLabel} />}
       </div>
@@ -210,15 +224,34 @@ export default function LiveGamesCard({ data }: { data: Record<Category, Categor
       </div>
 
       <div className="flex items-center justify-center gap-[20px]">
-        <button type="button" aria-label="上一頁" className="flex size-[45px] items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[10px]">
-          <img alt="" src={withBasePath("/assets/shared/arrow-chevron-teal.svg")} className="h-[13px] w-[8px] rotate-180" />
+        <button
+          type="button"
+          aria-label="上一頁"
+          disabled={isFirstPage}
+          onClick={() => setPage((p) => Math.max(1, p - 1))}
+          className="flex size-[45px] items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[10px] disabled:cursor-not-allowed"
+        >
+          <img
+            alt=""
+            src={withBasePath(isFirstPage ? "/assets/shared/arrow-chevron-gray.svg" : "/assets/shared/arrow-chevron-teal.svg")}
+            className="h-[13px] w-[8px] rotate-180"
+          />
         </button>
-        <PageNumber label="01" active />
-        <PageNumber label="02" active={false} />
-        <PageNumber label="03" active={false} />
-        <PageNumber label="04" active={false} />
-        <button type="button" aria-label="下一頁" className="flex size-[45px] items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[10px]">
-          <img alt="" src={withBasePath("/assets/shared/arrow-chevron-teal.svg")} className="h-[13px] w-[8px]" />
+        {Array.from({ length: TOTAL_PAGES }, (_, i) => i + 1).map((n) => (
+          <PageNumber key={n} label={String(n).padStart(2, "0")} active={page === n} onSelect={() => setPage(n)} />
+        ))}
+        <button
+          type="button"
+          aria-label="下一頁"
+          disabled={isLastPage}
+          onClick={() => setPage((p) => Math.min(TOTAL_PAGES, p + 1))}
+          className="flex size-[45px] items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[10px] disabled:cursor-not-allowed"
+        >
+          <img
+            alt=""
+            src={withBasePath(isLastPage ? "/assets/shared/arrow-chevron-gray.svg" : "/assets/shared/arrow-chevron-teal.svg")}
+            className="h-[13px] w-[8px]"
+          />
         </button>
       </div>
     </div>
