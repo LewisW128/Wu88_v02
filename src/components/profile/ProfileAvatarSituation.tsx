@@ -1,12 +1,8 @@
 import { withBasePath } from "../../lib/asset";
 
-// The "Level=Lv28-40" asset already bakes in the decorative purple ribbon
-// accents Figma shows around the photo -- no separate mask/gradient needed,
-// just pick the art matching the member's level bracket.
+// The "Level=Lv28-40" asset is exported at Figma's exact Avatar Situation
+// size (459x760, already baking in the decorative purple ribbon accents) --
+// render it at that native size directly rather than cropping/rescaling it.
 export default function ProfileAvatarSituation() {
-  return (
-    <div className="relative h-[420px] w-full overflow-hidden">
-      <img alt="" src={withBasePath("/assets/profile/avatar/level-lv28-40.png")} className="pointer-events-none absolute inset-0 size-full object-cover object-top" />
-    </div>
-  );
+  return <img alt="" src={withBasePath("/assets/profile/avatar/level-lv28-40.png")} className="pointer-events-none block h-[760px] w-[459px]" />;
 }

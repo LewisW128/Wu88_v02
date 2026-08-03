@@ -19,26 +19,31 @@ export default function ProfilePage() {
           </div>
 
           <div className="min-w-0 flex-1">
-            <ProfileHeader />
-
-            <div className="flex flex-col gap-[40px] pb-[40px] pl-[40px] pt-[20px]">
-              <div className="flex items-start gap-[40px]">
-                <div className="flex w-[420px] shrink-0 flex-col">
-                  <ProfileAvatarSituation />
-                  {/* Figma overlaps the wallet card up over the bottom of the
-                      avatar photo (avatar h760 vs wallet starting at y481 --
-                      a ~279px overlap) rather than stacking them cleanly. */}
-                  <div className="relative z-10 -mt-[150px]">
-                    <ProfileWallet />
-                  </div>
-                </div>
-                <div className="flex min-w-0 flex-1 flex-col gap-[40px]">
-                  <ProfileMemberInfo />
-                  <ProfileCollected />
-                  <ProfileEverydayRewards />
+            {/* Figma has no shared header row spanning both columns -- the
+                avatar column starts flush at the very top (y=0), while the
+                header only sits above the right column's own content
+                (member info etc), so it's nested there instead of full-width. */}
+            <div className="flex items-start gap-[40px] pb-[40px] pl-[40px]">
+              <div className="flex w-[459px] shrink-0 flex-col items-end">
+                <ProfileAvatarSituation />
+                {/* Wallet (420 wide) is narrower than the avatar photo
+                    (459 wide) and right-aligned to it, overlapping up
+                    over its bottom by the exact Figma amount (avatar h760,
+                    wallet starts at y481 -> 279px) -- covers the shoulders,
+                    not the face. */}
+                <div className="relative z-10 -mt-[279px] w-[420px]">
+                  <ProfileWallet />
                 </div>
               </div>
+              <div className="flex min-w-0 flex-1 flex-col gap-[40px]">
+                <ProfileHeader />
+                <ProfileMemberInfo />
+                <ProfileCollected />
+                <ProfileEverydayRewards />
+              </div>
+            </div>
 
+            <div className="flex flex-col gap-[40px] pb-[40px] pl-[40px]">
               <div className="flex w-full items-center gap-[40px] pr-[40px]">
                 <div className="min-w-0 flex-1">
                   <Promotions />
