@@ -1,8 +1,8 @@
 import ScaleBelowBreakpoint from "../../components/ScaleBelowBreakpoint";
-import Profile from "../../components/Profile";
 import Footer from "../../components/Footer";
 import { Promotions, Service } from "../../components/PromotionsBusinessService";
 import ProfileSidebar from "../../components/profile/ProfileSidebar";
+import ProfileHeader from "../../components/profile/ProfileHeader";
 import ProfileAvatarSituation from "../../components/profile/ProfileAvatarSituation";
 import ProfileWallet from "../../components/profile/ProfileWallet";
 import ProfileMemberInfo from "../../components/profile/ProfileMemberInfo";
@@ -19,9 +19,7 @@ export default function ProfilePage() {
           </div>
 
           <div className="min-w-0 flex-1">
-            <div className="sticky top-0 z-20 flex justify-end bg-white/80 px-[40px] pb-[15px] pt-[20px] backdrop-blur-[10px]">
-              <Profile />
-            </div>
+            <ProfileHeader />
 
             <div className="flex flex-col gap-[40px] pb-[40px] pl-[40px] pt-[20px]">
               <div className="flex items-start gap-[40px]">

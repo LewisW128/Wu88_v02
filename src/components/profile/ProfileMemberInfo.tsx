@@ -30,11 +30,7 @@ export default function ProfileMemberInfo() {
       </div>
 
       <div className="relative h-[282px] min-w-0 flex-1 overflow-hidden rounded-br-[50px] rounded-tl-[50px] border border-[#8d54d8] bg-white/50 backdrop-blur-[10px]">
-        <img
-          alt=""
-          src={withBasePath("/assets/profile/member/badge-lv28-40.png")}
-          className="pointer-events-none absolute -right-[20px] -top-[20px] size-[220px] opacity-90"
-        />
+        <img alt="" src={withBasePath("/assets/profile/member/vip-card-bg.png")} className="pointer-events-none absolute inset-0 size-full object-cover" />
         <div className="absolute left-[19px] top-[19px] flex items-center gap-[20px]">
           <img alt="" src={withBasePath("/assets/profile/icon-crown.svg")} className="size-[40px]" />
           <p className="whitespace-nowrap text-[36px] font-bold tracking-[0.36px] text-[#3e4140]">Lv. 35</p>
