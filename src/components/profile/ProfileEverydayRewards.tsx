@@ -18,29 +18,20 @@ const DAYS: Day[] = [
   { label: "DAY 7", reward: "+99 W", state: "locked" },
 ];
 
-function CheckIcon() {
-  return (
-    <svg viewBox="0 0 45 45" className="size-[45px]">
-      <circle cx="22.5" cy="22.5" r="20.5" fill="#23f3d5" />
-      <path d="M12 20.4 20.3 28.4 33 16" stroke="#3e4140" strokeWidth="3.8" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function WMark({ size, dim }: { size: number; dim?: boolean }) {
-  return (
-    <svg viewBox="0 0 45 45" style={{ width: size, height: size }}>
-      <circle cx="22.5" cy="22.5" r="20.3" fill="none" stroke="white" strokeWidth={dim ? 2 : 3} opacity={dim ? 0.6 : 1} />
-      <text x="22.5" y="29" textAnchor="middle" fontSize="18" fontWeight="700" fill="white" opacity={dim ? 0.6 : 1}>
-        W
-      </text>
-    </svg>
-  );
-}
-
+// Matches Figma's Reward_box component (COMPONENTS LIBRARY, node 279:3842)
+// exactly: a blurred coin-glow image sits behind the state icon (sharp only
+// for the claimed day, blurred for locked/current), with claimed/locked/
+// current each using their own real icon asset instead of a hand-drawn one.
 function RewardDay({ label, reward, state }: Day) {
   const isCurrent = state === "current";
-  const opacity = state === "locked" ? 0.5 : 0.9;
+  const opacity = state === "locked" ? 0.5 : 0.8;
+  const glowSharp = state === "claimed";
+  const actionIcon =
+    state === "claimed"
+      ? "/assets/profile/rewards/action-claimed.svg"
+      : isCurrent
+        ? "/assets/profile/rewards/action-current.svg"
+        : "/assets/profile/rewards/action-locked.svg";
 
   return (
     <div
@@ -50,16 +41,23 @@ function RewardDay({ label, reward, state }: Day) {
     >
       <div
         className="absolute inset-0"
-        style={{ backgroundImage: `linear-gradient(-41deg, rgba(1,250,176,${opacity}) 19%, rgba(20,232,184,${opacity}) 7%, rgba(72,186,206,${opacity}) 16%, rgba(154,113,241,${opacity}) 50%, rgba(182,90,253,${opacity}) 61%, rgba(141,84,216,${opacity}) 101%, rgba(111,79,189,${opacity}) 137%, rgba(100,78,179,${opacity}) 158%)` }}
+        style={{
+          backgroundImage: `linear-gradient(-41deg, rgba(1,250,176,${opacity}) 19%, rgba(20,232,184,${opacity}) 7%, rgba(72,186,206,${opacity}) 16%, rgba(154,113,241,${opacity}) 50%, rgba(182,90,253,${opacity}) 61%, rgba(141,84,216,${opacity}) 101%, rgba(111,79,189,${opacity}) 137%, rgba(100,78,179,${opacity}) 158%)`,
+        }}
+      />
+      <img
+        alt=""
+        src={withBasePath("/assets/profile/rewards/reward-glow.png")}
+        className={`pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${isCurrent ? "size-[148px] blur-[2.5px]" : glowSharp ? "size-[116px]" : "size-[116px] blur-[2.5px]"}`}
       />
       <div className={`absolute left-0 top-0 flex w-full items-center justify-center bg-[#8d54d8] ${isCurrent ? "h-[44px]" : "h-[35px]"}`}>
         <p className={`whitespace-nowrap font-bold tracking-[0.15px] text-[#67e4d2] ${isCurrent ? "text-[16px]" : "text-[14px]"}`}>{label}</p>
       </div>
-      <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center">
-        {state === "claimed" && <CheckIcon />}
-        {state === "current" && <WMark size={61} />}
-        {state === "locked" && <WMark size={45} dim />}
-      </div>
+      <img
+        alt=""
+        src={withBasePath(actionIcon)}
+        className={`pointer-events-none absolute ${isCurrent ? "left-1/2 top-[calc(50%+0.5px)] size-[61px] -translate-x-1/2 -translate-y-1/2" : "left-[41px] top-[64px] size-[45px]"}`}
+      />
       <p
         className={`absolute left-1/2 -translate-x-1/2 whitespace-nowrap text-center font-bold tracking-[0.15px] text-white ${
           isCurrent ? "bottom-[16px] text-[20px]" : "bottom-[19px] text-[16px]"
