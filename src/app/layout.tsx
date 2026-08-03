@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { withBasePath } from "../lib/asset";
+import SidebarAd from "../components/SidebarAd";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -21,7 +22,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <SidebarAd />
+      </body>
     </html>
   );
 }
