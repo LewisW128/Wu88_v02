@@ -23,9 +23,14 @@ export default function ProfilePage() {
 
             <div className="flex flex-col gap-[40px] pb-[40px] pl-[40px] pt-[20px]">
               <div className="flex items-start gap-[40px]">
-                <div className="flex w-[420px] shrink-0 flex-col gap-[20px]">
+                <div className="flex w-[420px] shrink-0 flex-col">
                   <ProfileAvatarSituation />
-                  <ProfileWallet />
+                  {/* Figma overlaps the wallet card up over the bottom of the
+                      avatar photo (avatar h760 vs wallet starting at y481 --
+                      a ~279px overlap) rather than stacking them cleanly. */}
+                  <div className="relative z-10 -mt-[150px]">
+                    <ProfileWallet />
+                  </div>
                 </div>
                 <div className="flex min-w-0 flex-1 flex-col gap-[40px]">
                   <ProfileMemberInfo />
