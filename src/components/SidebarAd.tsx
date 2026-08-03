@@ -1,16 +1,22 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 import { withBasePath } from "../lib/asset";
 import { useBreakpointZoom } from "../hooks/useBreakpointZoom";
 
 const REOPEN_DELAY_MS = 30000;
 
+// Pages where the floating ad shouldn't appear -- the profile page is the
+// member's own account view, already dense with its own promo/reward CTAs.
+const HIDDEN_ON = ["/profile"];
+
 // Figma's "AD" instance (e.g. node 647:20767) floats over every page at the
 // same spot rather than living inside the sidebar's own layout -- closing it
 // isn't permanent, it just comes back after a few seconds.
 export default function SidebarAd() {
+  const pathname = usePathname();
   const [visible, setVisible] = useState(true);
   // This is mounted once in the root layout, outside any single page's own
   // ScaleBelowBreakpoint wrapper, so it needs its own copy of that same zoom
@@ -25,6 +31,7 @@ export default function SidebarAd() {
   }, [visible]);
 
   if (!visible) return null;
+  if (HIDDEN_ON.some((path) => pathname === path || pathname === `${path}/`)) return null;
 
   return (
     <div className="fixed bottom-[24px] right-[24px] z-40 h-[462px] w-[291px]" style={{ zoom }}>

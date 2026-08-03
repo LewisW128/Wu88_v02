@@ -1,9 +1,11 @@
 
+import Link from "next/link";
+
 import { withBasePath } from "../lib/asset";
 
 function AvatarBadge() {
   return (
-    <div className="relative size-[59px] shrink-0">
+    <Link href="/profile" aria-label="會員中心" className="relative block size-[59px] shrink-0">
       <img alt="" src={withBasePath("/assets/profile/avatar.png")} className="absolute inset-0 size-full rounded-full object-cover" />
       <img alt="" src={withBasePath("/assets/profile/avatar-ring.svg")} className="pointer-events-none absolute inset-0 size-full" />
       <div
@@ -14,7 +16,7 @@ function AvatarBadge() {
       >
         <img alt="" src={withBasePath("/assets/profile/icon-crown.svg")} className="absolute left-[3px] top-[3px] size-[15px]" />
       </div>
-    </div>
+    </Link>
   );
 }
 

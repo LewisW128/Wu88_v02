@@ -29,7 +29,7 @@ function PromoCard({ image, alt, children }: { image: string; alt: string; child
   );
 }
 
-function Promotions() {
+export function Promotions() {
   const { scrollRef, canScrollLeft, canScrollRight, scrollByPage } = useHorizontalSlider();
 
   return (
@@ -109,7 +109,7 @@ function Business() {
   );
 }
 
-function Service() {
+export function Service() {
   return (
     <div className="relative h-[544px] w-[284px] shrink-0 overflow-hidden rounded-bl-[50px] rounded-tr-[50px]">
       <img alt="聯繫客服" src={withBasePath("/assets/service/service-card.png")} className="pointer-events-none block size-full object-cover" />
