@@ -4,27 +4,16 @@ import { useState } from "react";
 
 import { withBasePath } from "../../lib/asset";
 import SportSectionTitle from "./SportSectionTitle";
+import { BaseballIcon, BasketballIcon, FifaCupIcon, FootballIcon } from "./SportCategoryIcons";
 import type { Match, Team } from "./sportLiveGamesData";
 
 type Category = "worldcup" | "football" | "basketball" | "baseball";
 
-const CATEGORY_ICONS: Record<Category, { active: string; inactive: string }> = {
-  worldcup: {
-    active: withBasePath("/assets/sport/live/icons/worldcup-active.png"),
-    inactive: withBasePath("/assets/sport/live/icons/worldcup-inactive.png"),
-  },
-  football: {
-    active: withBasePath("/assets/sport/live/icons/football-active.png"),
-    inactive: withBasePath("/assets/sport/live/icons/football-inactive.png"),
-  },
-  basketball: {
-    active: withBasePath("/assets/sport/live/icons/basketball-active.png"),
-    inactive: withBasePath("/assets/sport/live/icons/basketball-inactive.png"),
-  },
-  baseball: {
-    active: withBasePath("/assets/sport/live/icons/baseball-active.png"),
-    inactive: withBasePath("/assets/sport/live/icons/baseball-inactive.png"),
-  },
+const CATEGORY_ICONS: Record<Category, (props: { className?: string }) => React.JSX.Element> = {
+  worldcup: FifaCupIcon,
+  football: FootballIcon,
+  basketball: BasketballIcon,
+  baseball: BaseballIcon,
 };
 
 const CATEGORY_ORDER: Category[] = ["worldcup", "football", "basketball", "baseball"];
@@ -32,15 +21,22 @@ const CATEGORY_ORDER: Category[] = ["worldcup", "football", "basketball", "baseb
 function CategoryToggle({ active, onSelect }: { active: Category; onSelect: (category: Category) => void }) {
   return (
     <div className="flex items-center gap-[20px]">
-      {CATEGORY_ORDER.map((category) => (
-        <button key={category} type="button" aria-label={category} onClick={() => onSelect(category)}>
-          <img
-            alt=""
-            src={category === active ? CATEGORY_ICONS[category].active : CATEGORY_ICONS[category].inactive}
-            className="h-[48px] w-[46px]"
-          />
-        </button>
-      ))}
+      {CATEGORY_ORDER.map((category) => {
+        const Icon = CATEGORY_ICONS[category];
+        const isActive = category === active;
+        return (
+          <button
+            key={category}
+            type="button"
+            aria-label={category}
+            onClick={() => onSelect(category)}
+            className={`relative flex h-[48px] w-[46px] items-center justify-center rounded-[10px] ${isActive ? "bg-[#3e4140] text-white" : "bg-[#f4f4f4] text-[#3e4140]"}`}
+          >
+            <Icon className="size-[25px]" />
+            {isActive && <div className="absolute bottom-[5px] h-[3px] w-[12px] rounded-full bg-[#23f3d5]" />}
+          </button>
+        );
+      })}
     </div>
   );
 }
