@@ -104,7 +104,7 @@ function ScoreDigit({ value, leading }: { value: number; leading: boolean }) {
           {value}
         </p>
       </div>
-      {leading && <div className="mt-[4px] h-[3px] w-[23px] rounded-full bg-[#8d54d8]" />}
+      {leading && <div className="mt-[4px] h-[3px] w-[23px] rounded-full bg-[#8d54d8] shadow-[0px_10px_10px_rgba(141,84,216,0.5)]" />}
     </div>
   );
 }
@@ -138,20 +138,26 @@ function MatchRow({ match }: { match: Match }) {
         <p className="text-[12px] tracking-[0.15px] text-[#8d54d8]">{match.offset}</p>
       </div>
       <div className="h-[93px] w-px shrink-0 bg-[#f4f4f4]" />
-      {/* Fixed 974px width, matching Figma's own SportInformations spec
-          exactly (not flex-1) -- team1/Score/team2 are positioned at the
-          exact same left offsets (0 / 50%+3px / 860px) Figma uses, so team2
-          lands at a fixed x near the row's right side instead of drifting
-          with its own text length (which is what flex justify-between did)
-          or sitting too close to center (a guessed fixed offset did). */}
-      <div className="relative h-[41px] w-[974px] shrink-0">
+      {/* Figma's SportInformations spec positions team2 at a literal
+          left:860px within a literal 974px-wide box (860/974 = 88.296%).
+          That box only fits because Figma's own canvas gives this row
+          ~1357px total. This project's actual content column (sidebar +
+          page padding subtracted from the page's design width) is
+          narrower than that, so a literal w-[974px] shrink-0 box can't
+          shrink to fit and overflows the row's rounded border. Using
+          flex-1 (fluid) + a PERCENTAGE offset for team2 keeps the exact
+          same proportional layout Figma intends -- team2's flag still
+          lands at an identical x across every row for a given render
+          (invariant to team-name length, same guarantee as before) --
+          while actually fitting whatever width this column has. */}
+      <div className="relative h-[41px] min-w-0 flex-1">
         <div className="absolute left-0 top-1/2 -translate-y-1/2">
           <TeamBadge team={match.team1} />
         </div>
         <div className="absolute left-[calc(50%+3px)] top-1/2 -translate-x-1/2 -translate-y-1/2">
           <Score score={match.score} activeHalf={match.activeHalf} />
         </div>
-        <div className="absolute left-[860px] top-1/2 -translate-y-1/2">
+        <div className="absolute left-[88.296%] top-1/2 -translate-y-1/2">
           <TeamBadge team={match.team2} />
         </div>
       </div>

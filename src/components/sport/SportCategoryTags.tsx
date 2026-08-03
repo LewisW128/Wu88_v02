@@ -4,8 +4,9 @@ import { useState } from "react";
 
 const CATEGORIES = ["全部", "足球", "籃球", "棒球", "賽車", "電競"];
 
-const ACTIVE_GRADIENT =
-  "linear-gradient(-49.83deg, rgb(1,250,176) 23.317%, rgb(20,232,184) 7.4137%, rgb(72,186,206) 22.121%, rgb(154,113,241) 65.287%, rgb(182,90,253) 78.918%, rgb(141,84,216) 131.17%, rgb(111,79,189) 176.61%, rgb(100,78,179) 203.87%)";
+// Same active-tag gradient as CasinoFilterChips -- one shared tag style
+// used across the site, so keep both literals in sync if it ever changes.
+const ACTIVE_GRADIENT = "linear-gradient(-56deg, rgb(72,186,206) 22%, rgb(154,113,241) 69%, rgb(141,84,216) 142%, rgb(100,78,179) 222%)";
 
 // Purely visual category filter -- News/Analyze each get their own local
 // active state. Neither section ships per-category content, so selecting a
