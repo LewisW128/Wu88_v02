@@ -8,7 +8,7 @@ const NAV_ITEMS = [
   { icon: withBasePath("/assets/icons/home.svg"), title: "首頁", sub: "CASINO", href: "/" },
   { icon: withBasePath("/assets/icons/casino.svg"), title: "賭場", sub: "LIVE", href: "/casino" },
   { icon: withBasePath("/assets/icons/sport.svg"), title: "體育", sub: "SPORT", href: "/sport" },
-  { icon: withBasePath("/assets/icons/gift.svg"), title: "優惠活動", sub: "PROMO", href: null },
+  { icon: withBasePath("/assets/icons/gift.svg"), title: "優惠活動", sub: "PROMO", href: "/promotions" },
 ];
 
 // Normalize away a trailing slash (except the root "/") since next.config's
