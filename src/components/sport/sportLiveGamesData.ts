@@ -12,6 +12,7 @@ export type Match = {
   team1: Team;
   team2: Team;
   score: [number, number];
+  activeHalf?: "top" | "bottom";
 };
 
 const norway: Team = { name: "挪威", sub: "NORWAY", flag: withBasePath("/assets/sport/live/flags/norway.svg") };
@@ -36,9 +37,30 @@ export const WORLD_CUP_MATCHES: Match[] = [
 ];
 
 export const BASKETBALL_MATCHES: Match[] = [
-  { time: "32:14", offset: "+02:50", team1: england, team2: norway, score: [2, 1] },
-  { time: "32:14", offset: "+02:50", team1: england, team2: norway, score: [2, 1] },
-  { time: "32:14", offset: "+02:50", team1: england, team2: norway, score: [2, 1] },
+  {
+    time: "32:14",
+    offset: "+02:50",
+    team1: { name: "金州勇士", sub: "GSW", flag: withBasePath("/assets/sport/live/basketball/gsw.png") },
+    team2: { name: "底特律活塞", sub: "DET", flag: withBasePath("/assets/sport/live/basketball/det.png") },
+    score: [2, 5],
+    activeHalf: "bottom",
+  },
+  {
+    time: "32:14",
+    offset: "+02:50",
+    team1: { name: "丹佛金塊", sub: "DEN", flag: withBasePath("/assets/sport/live/basketball/den.png") },
+    team2: { name: "達拉斯獨行俠", sub: "DAL", flag: withBasePath("/assets/sport/live/basketball/dal.png") },
+    score: [2, 1],
+    activeHalf: "bottom",
+  },
+  {
+    time: "32:14",
+    offset: "+02:50",
+    team1: { name: "布魯克林籃網", sub: "BKN", flag: withBasePath("/assets/sport/live/basketball/bkn.png") },
+    team2: { name: "亞特蘭大老鷹", sub: "ATL", flag: withBasePath("/assets/sport/live/basketball/atl.png") },
+    score: [8, 5],
+    activeHalf: "bottom",
+  },
 ];
 
 export const FOOTBALL_MATCHES: Match[] = [

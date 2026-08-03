@@ -101,7 +101,7 @@ function ScoreDigit({ value, leading }: { value: number; leading: boolean }) {
   );
 }
 
-function Score({ score }: { score: [number, number] }) {
+function Score({ score, activeHalf = "top" }: { score: [number, number]; activeHalf?: "top" | "bottom" }) {
   const [a, b] = score;
   return (
     <div className="flex items-center gap-[10px]">
@@ -111,10 +111,10 @@ function Score({ score }: { score: [number, number] }) {
         <ScoreDigit value={b} leading={b > a} />
       </div>
       <div className="flex w-[18px] flex-col gap-[3px]">
-        <div className="flex h-[18px] items-center justify-center rounded-[5px] bg-[#23f3d5] px-[3px]">
+        <div className={`flex h-[18px] items-center justify-center rounded-[5px] px-[3px] ${activeHalf === "top" ? "bg-[#23f3d5]" : "bg-[#dadada]"}`}>
           <p className="text-[12px] font-bold tracking-[0.15px] text-[#3e4140]">上</p>
         </div>
-        <div className="flex h-[18px] items-center justify-center rounded-[5px] bg-[#f4f4f4] px-[3px]">
+        <div className={`flex h-[18px] items-center justify-center rounded-[5px] px-[3px] ${activeHalf === "bottom" ? "bg-[#23f3d5]" : "bg-[#f4f4f4]"}`}>
           <p className="text-[12px] font-bold tracking-[0.15px] text-[#3e4140]">下</p>
         </div>
       </div>
@@ -132,7 +132,7 @@ function MatchRow({ match }: { match: Match }) {
       <div className="h-[93px] w-px shrink-0 bg-[#f4f4f4]" />
       <div className="flex flex-1 items-center justify-between">
         <TeamBadge team={match.team1} align="left" />
-        <Score score={match.score} />
+        <Score score={match.score} activeHalf={match.activeHalf} />
         <TeamBadge team={match.team2} align="right" />
       </div>
       <button
