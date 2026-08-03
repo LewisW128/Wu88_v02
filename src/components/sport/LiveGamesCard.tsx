@@ -50,31 +50,16 @@ function LeagueDropdown({ label }: { label: string }) {
   );
 }
 
-function TeamBadge({ team, align }: { team: Team; align: "left" | "right" }) {
-  const flag = (
-    <div className="size-[40px] shrink-0 overflow-hidden rounded-full bg-white">
-      <img alt="" src={team.flag} className="size-full object-cover" />
-    </div>
-  );
-  const label = (
-    <div className={`flex flex-col ${align === "right" ? "items-end" : "items-start"} whitespace-nowrap tracking-[0.15px]`}>
-      <p className="text-[14px] font-bold text-[#3e4140]">{team.name}</p>
-      <p className="text-[12px] font-medium text-[#23f3d5]">{team.sub}</p>
-    </div>
-  );
+function TeamBadge({ team }: { team: Team }) {
   return (
     <div className="flex items-center gap-[20px]">
-      {align === "left" ? (
-        <>
-          {flag}
-          {label}
-        </>
-      ) : (
-        <>
-          {label}
-          {flag}
-        </>
-      )}
+      <div className="size-[40px] shrink-0 overflow-hidden rounded-full bg-white">
+        <img alt="" src={team.flag} className="size-full object-cover" />
+      </div>
+      <div className="flex flex-col items-start whitespace-nowrap tracking-[0.15px]">
+        <p className="text-[14px] font-bold text-[#3e4140]">{team.name}</p>
+        <p className="text-[12px] font-medium text-[#23f3d5]">{team.sub}</p>
+      </div>
     </div>
   );
 }
@@ -117,10 +102,12 @@ function MatchRow({ match }: { match: Match }) {
         <p className="text-[12px] tracking-[0.15px] text-[#8d54d8]">{match.offset}</p>
       </div>
       <div className="h-[93px] w-px shrink-0 bg-[#f4f4f4]" />
-      <div className="flex flex-1 items-center justify-between">
-        <TeamBadge team={match.team1} align="left" />
-        <Score score={match.score} activeHalf={match.activeHalf} />
-        <TeamBadge team={match.team2} align="right" />
+      <div className="relative flex flex-1 items-center justify-between">
+        <TeamBadge team={match.team1} />
+        <div className="absolute left-1/2 -translate-x-1/2">
+          <Score score={match.score} activeHalf={match.activeHalf} />
+        </div>
+        <TeamBadge team={match.team2} />
       </div>
       <button
         type="button"
