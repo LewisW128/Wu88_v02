@@ -6,7 +6,7 @@ import ProfileTopBar from "./ProfileTopBar";
 // avatar/name/LV badge, unlike the standard site Profile bar.
 export default function ProfileHeader() {
   return (
-    <div className="sticky top-0 z-20 flex items-center justify-end bg-white pb-[15px] pr-[40px] pt-[20px]">
+    <div className="sticky top-0 z-20 flex items-center justify-end pb-[15px] pr-[40px] pt-[20px]">
       <ProfileTopBar />
     </div>
   );
