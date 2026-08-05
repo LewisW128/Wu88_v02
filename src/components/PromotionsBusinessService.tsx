@@ -39,6 +39,8 @@ const PROMO_CARDS = [
 ];
 
 export function Promotions() {
+  const { scrollRef, canScrollLeft, canScrollRight, scrollByPage } = useHorizontalSlider();
+
   return (
     <div className="relative flex w-full flex-col gap-[20px]">
       <div className="flex items-center justify-between pl-[20px]">
@@ -51,13 +53,20 @@ export function Promotions() {
           <img alt="" src={withBasePath("/assets/shared/arrow-chevron-gray.svg")} className="h-[11px] w-[6px]" />
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-[20px]">
+      <div ref={scrollRef} className="scrollbar-hide flex gap-[20px] overflow-x-auto">
         {PROMO_CARDS.map((card) => (
           <PromoCard key={card.alt} image={withBasePath(card.image)} alt={card.alt}>
             <PromoButton text={card.button} />
           </PromoCard>
         ))}
       </div>
+      <SlideArrows
+        canScrollLeft={canScrollLeft}
+        canScrollRight={canScrollRight}
+        onLeft={() => scrollByPage("left")}
+        onRight={() => scrollByPage("right")}
+        className="absolute bottom-[40px] right-[40px]"
+      />
     </div>
   );
 }
@@ -92,14 +101,14 @@ function Business() {
             <img key={p.alt} alt={p.alt} src={withBasePath(`/assets/business/${p.src}`)} className="size-[144px] shrink-0" />
           ))}
         </div>
+        <SlideArrows
+          canScrollLeft={canScrollLeft}
+          canScrollRight={canScrollRight}
+          onLeft={() => scrollByPage("left")}
+          onRight={() => scrollByPage("right")}
+          className="absolute right-[20px] top-1/2 -translate-y-1/2"
+        />
       </div>
-      <SlideArrows
-        canScrollLeft={canScrollLeft}
-        canScrollRight={canScrollRight}
-        onLeft={() => scrollByPage("left")}
-        onRight={() => scrollByPage("right")}
-        className="absolute bottom-[40px] right-[40px]"
-      />
     </div>
   );
 }
