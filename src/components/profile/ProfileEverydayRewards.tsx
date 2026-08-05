@@ -72,8 +72,12 @@ function RewardDay({ label, reward, state }: Day) {
 export default function ProfileEverydayRewards() {
   return (
     <div className="relative mr-[40px] flex flex-col gap-[20px] overflow-hidden rounded-br-[50px] rounded-tl-[50px] border border-[#8d54d8] p-[19px]">
-      <img alt="" src={withBasePath("/assets/profile/rewards/model.png")} className="pointer-events-none absolute right-0 top-0 h-full w-[45%] object-cover object-top opacity-90" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-[55%] bg-gradient-to-r from-transparent via-transparent to-white/0" />
+      <img alt="" src={withBasePath("/assets/profile/rewards/card-bg-stripe.svg")} className="pointer-events-none absolute inset-0 h-full w-full object-cover" />
+      <img
+        alt=""
+        src={withBasePath("/assets/profile/rewards/card-front-girl.svg")}
+        className="pointer-events-none absolute right-0 top-0 z-20 h-full w-[45%] object-cover object-top"
+      />
 
       <div className="relative z-10 flex items-center gap-[10px]">
         <svg viewBox="0 0 45 45" className="size-[45px]">
@@ -86,19 +90,19 @@ export default function ProfileEverydayRewards() {
         <p className="whitespace-nowrap text-[20px] font-bold tracking-[0.35px] text-[#3e4140]">每日簽到</p>
       </div>
 
-      <div className="relative z-10 flex items-center gap-[10px] overflow-x-auto">
+      <div className="scrollbar-hide relative z-10 flex items-center gap-[10px] overflow-x-auto">
         {DAYS.map((day) => (
           <RewardDay key={day.label} {...day} />
         ))}
       </div>
 
-      <button
-        type="button"
-        className="relative z-10 flex h-[53px] w-[300px] items-center justify-between rounded-full bg-[#e2ff25] px-[20px] drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]"
-      >
-        <p className="text-[16px] font-bold tracking-[0.15px] text-[#444242]">立即領取</p>
-        <div className="flex size-[25px] items-center justify-center rounded-full bg-[#3e4140]">
-          <img alt="" src={withBasePath("/assets/shared/arrow-chevron-teal.svg")} className="h-[8px] w-[5px]" />
+      <button type="button" className="relative z-10 h-[53px] w-[300px] drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]">
+        <img alt="" src={withBasePath("/assets/shared/pill-btn-yellow.svg")} className="pointer-events-none absolute inset-0 block size-full max-w-none" />
+        <div className="absolute inset-[24.53%_11.72%_30.19%_11.72%] flex items-center justify-between">
+          <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">立即領取</p>
+          <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140]">
+            <img alt="" src={withBasePath("/assets/shared/pill-btn-chevron.svg")} className="h-[7.222px] w-[4.711px]" />
+          </div>
         </div>
       </button>
     </div>

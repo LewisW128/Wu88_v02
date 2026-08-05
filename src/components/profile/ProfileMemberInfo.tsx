@@ -1,10 +1,20 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { withBasePath } from "../../lib/asset";
 
 const VIP_EXPERIENCE = 700;
 const VIP_EXPERIENCE_MAX = 1500;
 
 export default function ProfileMemberInfo() {
-  const progress = Math.min(100, (VIP_EXPERIENCE / VIP_EXPERIENCE_MAX) * 100);
+  const target = Math.min(100, (VIP_EXPERIENCE / VIP_EXPERIENCE_MAX) * 100);
+  // Grows from empty every time this page is entered, rather than the bar
+  // just appearing already full.
+  const [progress, setProgress] = useState(0);
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => setProgress(target));
+    return () => cancelAnimationFrame(frame);
+  }, [target]);
 
   return (
     <div className="flex w-full items-center gap-[40px] pr-[40px]">
@@ -47,7 +57,7 @@ export default function ProfileMemberInfo() {
             <img
               alt=""
               src={withBasePath("/assets/profile/member/exp-bar-fill.png")}
-              className="h-full rounded-full object-cover object-left"
+              className="h-full rounded-full object-cover object-left transition-[width] duration-1000 ease-out"
               style={{ width: `${progress}%` }}
             />
           </div>

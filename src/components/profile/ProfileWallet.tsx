@@ -1,4 +1,30 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import { withBasePath } from "../../lib/asset";
+
+// Meter-style count-up: runs once whenever the component mounts (i.e. every
+// time the profile page is entered), counting from 0 up to the balance.
+function useCountUp(target: number, durationMs = 1200) {
+  const [value, setValue] = useState(0);
+  const startRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    let frame: number;
+    const step = (timestamp: number) => {
+      if (startRef.current === null) startRef.current = timestamp;
+      const elapsed = timestamp - startRef.current;
+      const progress = Math.min(1, elapsed / durationMs);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setValue(Math.round(target * eased));
+      if (progress < 1) frame = requestAnimationFrame(step);
+    };
+    frame = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(frame);
+  }, [target, durationMs]);
+
+  return value;
+}
 
 type Transaction = {
   label: string;
@@ -36,21 +62,25 @@ function TransactionRow({ label, date, amount, negative }: Transaction) {
 
 function WalletActionButton({ label, primary }: { label: string; primary?: boolean }) {
   return (
-    <button
-      type="button"
-      className={`flex h-[53px] flex-1 items-center justify-between rounded-full px-[20px] ${
-        primary ? "bg-[#e2ff25] drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]" : "border border-[#dadada] bg-white"
-      }`}
-    >
-      <p className="text-[16px] font-bold tracking-[0.15px] text-[#444242]">{label}</p>
-      <div className="flex size-[25px] items-center justify-center rounded-full bg-[#3e4140]">
-        <img alt="" src={withBasePath("/assets/shared/arrow-chevron-teal.svg")} className="h-[8px] w-[5px]" />
+    <button type="button" className={`relative h-[53px] flex-1 ${primary ? "drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]" : ""}`}>
+      <img
+        alt=""
+        src={withBasePath(primary ? "/assets/shared/pill-btn-yellow.svg" : "/assets/shared/pill-btn-white.svg")}
+        className="pointer-events-none absolute inset-0 block size-full max-w-none"
+      />
+      <div className="absolute inset-[24.53%_11.72%_30.19%_11.72%] flex items-center justify-between">
+        <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">{label}</p>
+        <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140]">
+          <img alt="" src={withBasePath("/assets/shared/pill-btn-chevron.svg")} className="h-[7.222px] w-[4.711px]" />
+        </div>
       </div>
     </button>
   );
 }
 
 export default function ProfileWallet() {
+  const balance = useCountUp(10_000_000);
+
   return (
     <div className="flex h-[798px] w-full flex-col gap-[20px] rounded-bl-[50px] rounded-tr-[50px] border border-[#8d54d8] bg-white/80 p-[19px] backdrop-blur-[10px]">
       <div className="flex items-center justify-between">
@@ -66,7 +96,7 @@ export default function ProfileWallet() {
 
       <div className="flex flex-col items-start gap-[5px]">
         <p className="text-[14px] text-[#bfbfbf]">帳戶餘額</p>
-        <p className="text-[36px] font-bold text-[#3e4140]">10,000,000</p>
+        <p className="text-[36px] font-bold tabular-nums text-[#3e4140]">{balance.toLocaleString()}</p>
       </div>
 
       <div className="flex items-center gap-[20px]">
