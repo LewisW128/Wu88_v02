@@ -72,14 +72,16 @@ export default function ProfileAccountPage() {
           </div>
 
           <div className="relative min-w-0 flex-1 overflow-hidden">
-            {/* Real composited hero asset (girl + gradient blobs + dot grid) at
-                its native 3x resolution -- 4311x2478 matches this 1437x826 box
-                exactly (same 1.74 aspect ratio), so it's placed at 1:1 target
-                size with no cropping or stretching. */}
+            {/* Real composited hero asset (girl + gradient blobs + dot grid),
+                same 1.74 aspect ratio as the source 4311x2478 photo so it's
+                never cropped or stretched -- sized down from the Figma box
+                (1437x826) so the desk/calculator the girl is working at
+                clears the transaction card below instead of being hidden
+                behind it. */}
             <img
               alt=""
               src={withBasePath("/assets/profile/account/cover.png")}
-              className="pointer-events-none absolute right-0 top-0 z-0 h-[826px] w-[1437px] max-w-none"
+              className="pointer-events-none absolute right-0 top-0 z-0 h-[520px] w-[905px] max-w-none"
             />
 
             <div className="relative z-10 flex flex-col gap-[40px] pb-[40px] pl-[40px] pr-[40px] pt-[40px]">
