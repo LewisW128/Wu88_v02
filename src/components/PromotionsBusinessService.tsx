@@ -106,7 +106,7 @@ function Business() {
 
 export function Service() {
   return (
-    <div className="relative h-[505px] w-[284px] shrink-0 overflow-hidden rounded-[50px]">
+    <div className="relative h-[505px] w-[284px] shrink-0 overflow-hidden rounded-tl-[50px] rounded-br-[50px]">
       <img alt="聯繫客服" src={withBasePath("/assets/service/service-card.png")} className="pointer-events-none block size-full object-cover" />
     </div>
   );
