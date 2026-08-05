@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { withBasePath } from "../../lib/asset";
+import { taperedPillPath } from "../../lib/taperedPill";
 
 // Meter-style count-up: runs once whenever the component mounts (i.e. every
 // time the profile page is entered), counting from 0 up to the balance.
@@ -62,18 +63,20 @@ function TransactionRow({ label, date, amount, negative }: Transaction) {
 
 // Exact pixel widths from Figma's Wallet component (node 85:8280) -- 儲值
 // and 託售 are NOT an even flex split, they're fixed 247px / 113px inside a
-// 380px row. Plain CSS fill + fixed-px radius (not the stretched asset) --
-// stretching the real asset to 247px already visibly warped its corners, so
-// a fixed rounded-[15px] is used instead, which can never warp at any width.
+// 380px row.
 function WalletDepositButton() {
+  const w = 247;
+  const h = 53;
   return (
-    <button
-      type="button"
-      className="flex h-[53px] w-[247px] shrink-0 items-center justify-between rounded-[15px] bg-[#e2ff25] px-[15px] drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]"
-    >
-      <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">儲值</p>
-      <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[5.556px]">
-        <img alt="" src={withBasePath("/assets/shared/pill-btn-chevron.svg")} className="h-[6.111px] w-[3.333px]" />
+    <button type="button" className="relative h-[53px] w-[247px] shrink-0 drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]">
+      <svg viewBox={`0 0 ${w} ${h}`} width={w} height={h} className="pointer-events-none absolute inset-0 block">
+        <path d={taperedPillPath(w, h)} fill="#e2ff25" />
+      </svg>
+      <div className="absolute inset-0 flex items-center justify-between px-[15px]">
+        <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">儲值</p>
+        <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[5.556px]">
+          <img alt="" src={withBasePath("/assets/shared/pill-btn-chevron.svg")} className="h-[6.111px] w-[3.333px]" />
+        </div>
       </div>
     </button>
   );
