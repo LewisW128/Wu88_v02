@@ -13,6 +13,11 @@ export default function SlideArrows({
   onRight: () => void;
   className?: string;
 }) {
+  // Nothing to scroll to in either direction -- e.g. content that used to
+  // overflow now fits after the page's zoom-out, so there's no reason to
+  // show the control at all until an actual cut-off item reappears.
+  if (!canScrollLeft && !canScrollRight) return null;
+
   return (
     <div className={`flex items-center gap-[10px] ${className}`}>
       <button
