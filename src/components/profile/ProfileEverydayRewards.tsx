@@ -6,23 +6,25 @@ type Day = {
   label: string;
   reward: string;
   state: DayState;
+  glow: string;
+  glowFit?: "cover" | "contain";
 };
 
 const DAYS: Day[] = [
-  { label: "DAY 1", reward: "+99 W", state: "claimed" },
-  { label: "DAY 2", reward: "+99 W", state: "current" },
-  { label: "DAY 3", reward: "+999 W", state: "locked" },
-  { label: "DAY 4", reward: "+2,000 W", state: "locked" },
-  { label: "DAY 5", reward: "+5,000 W", state: "locked" },
-  { label: "DAY 6", reward: "+10,000 W", state: "locked" },
-  { label: "DAY 7", reward: "+99 W", state: "locked" },
+  { label: "DAY 1", reward: "+99 W", state: "claimed", glow: "/assets/profile/rewards/glow-day1.png" },
+  { label: "DAY 2", reward: "+99 W", state: "current", glow: "/assets/profile/rewards/glow-day2.png" },
+  { label: "DAY 3", reward: "+999 W", state: "locked", glow: "/assets/profile/rewards/glow-day3.png", glowFit: "contain" },
+  { label: "DAY 4", reward: "+2,000 W", state: "locked", glow: "/assets/profile/rewards/glow-day4.png" },
+  { label: "DAY 5", reward: "+5,000 W", state: "locked", glow: "/assets/profile/rewards/glow-day5.png" },
+  { label: "DAY 6", reward: "+10,000 W", state: "locked", glow: "/assets/profile/rewards/glow-day6.png" },
+  { label: "DAY 7", reward: "+99 W", state: "locked", glow: "/assets/profile/rewards/glow-day1.png" },
 ];
 
-// Matches Figma's Reward_box component (COMPONENTS LIBRARY, node 279:3842)
-// exactly: a blurred coin-glow image sits behind the state icon (sharp only
-// for the claimed day, blurred for locked/current), with claimed/locked/
-// current each using their own real icon asset instead of a hand-drawn one.
-function RewardDay({ label, reward, state }: Day) {
+// Matches Figma's Everyday Rewards instance (Profile Page, node 90:11373)
+// exactly: each day has its own reward artwork (money bag, treasure chest,
+// barrel, etc.) instead of one icon reused for every card, and only the
+// claimed day's glow renders sharp -- every other state is blurred.
+function RewardDay({ label, reward, state, glow, glowFit = "cover" }: Day) {
   const isCurrent = state === "current";
   const opacity = state === "locked" ? 0.5 : 0.8;
   const glowSharp = state === "claimed";
@@ -47,8 +49,10 @@ function RewardDay({ label, reward, state }: Day) {
       />
       <img
         alt=""
-        src={withBasePath("/assets/profile/rewards/reward-glow.png")}
-        className={`pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${isCurrent ? "size-[148px] blur-[2.5px]" : glowSharp ? "size-[116px]" : "size-[116px] blur-[2.5px]"}`}
+        src={withBasePath(glow)}
+        className={`pointer-events-none absolute left-1/2 -translate-x-1/2 ${glowFit === "contain" ? "object-contain" : "object-cover"} ${
+          isCurrent ? "top-[18px] size-[148px] blur-[2.5px]" : glowSharp ? "top-[29px] size-[116px]" : "top-[29px] size-[116px] blur-[2.5px]"
+        }`}
       />
       <div className={`absolute left-0 top-0 flex w-full items-center justify-center bg-[#8d54d8] ${isCurrent ? "h-[44px]" : "h-[35px]"}`}>
         <p className={`whitespace-nowrap font-bold tracking-[0.15px] text-[#67e4d2] ${isCurrent ? "text-[16px]" : "text-[14px]"}`}>{label}</p>
@@ -72,11 +76,19 @@ function RewardDay({ label, reward, state }: Day) {
 export default function ProfileEverydayRewards() {
   return (
     <div className="relative mr-[40px] flex flex-col gap-[20px] overflow-hidden rounded-br-[50px] rounded-tl-[50px] border border-[#8d54d8] p-[19px]">
-      <img alt="" src={withBasePath("/assets/profile/rewards/card-bg-stripe.svg")} className="pointer-events-none absolute inset-0 h-full w-full object-cover" />
+      {/* Figma sizes these decorative layers as fixed 588x388 / 524x388
+          boxes anchored to the right edge, not stretched to the card's
+          own (variable) height -- stretching them was what caused the
+          warped look. */}
+      <img
+        alt=""
+        src={withBasePath("/assets/profile/rewards/card-bg-stripe.svg")}
+        className="pointer-events-none absolute right-[-1px] top-1/2 h-[388px] w-[588px] -translate-y-1/2"
+      />
       <img
         alt=""
         src={withBasePath("/assets/profile/rewards/card-front-girl.png")}
-        className="pointer-events-none absolute right-0 top-0 z-20 h-full w-[45%] object-cover object-top"
+        className="pointer-events-none absolute right-[-1px] top-0 z-20 h-[388px] w-[524px] object-cover object-top"
       />
 
       <div className="relative z-10 flex items-center gap-[10px]">
@@ -90,7 +102,10 @@ export default function ProfileEverydayRewards() {
         <p className="whitespace-nowrap text-[20px] font-bold tracking-[0.35px] text-[#3e4140]">每日簽到</p>
       </div>
 
-      <div className="scrollbar-hide relative z-10 flex items-center gap-[10px] overflow-x-auto">
+      {/* Figma clips this row at a fixed width instead of scrolling --
+          the trailing days are meant to sit cropped behind the girl, not
+          be scrolled into view. */}
+      <div className="relative z-10 flex items-center gap-[10px] overflow-hidden">
         {DAYS.map((day) => (
           <RewardDay key={day.label} {...day} />
         ))}
