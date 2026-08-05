@@ -3,28 +3,6 @@ import { withBasePath } from "../../lib/asset";
 const VIP_EXPERIENCE = 700;
 const VIP_EXPERIENCE_MAX = 1500;
 
-// Figma's "Actions" icon (COMPONENTS LIBRARY, node 519:3184) built from its
-// real layered assets -- a dark crown (Subtract + Group1079 points + Line14
-// base) with a small teal badge dot (Ellipse27) at the bottom-right corner.
-function LvIcon() {
-  return (
-    <div className="relative size-[40px] shrink-0">
-      <div className="absolute bottom-[1.6px] right-[1.6px] size-[16px]">
-        <img alt="" className="block size-full" src={withBasePath("/assets/profile/member/lv-badge-dot.svg")} />
-      </div>
-      <div className="absolute left-[9.29px] top-[15.83px] h-[20.508px] w-[28.389px]">
-        <img alt="" className="block size-full" src={withBasePath("/assets/profile/member/lv-crown-subtract.svg")} />
-      </div>
-      <div className="absolute left-[4.8px] top-[3.64px] h-[9.289px] w-[30.4px]">
-        <img alt="" className="block size-full" src={withBasePath("/assets/profile/member/lv-crown-points.svg")} />
-      </div>
-      <div className="absolute left-[9.6px] top-[32.67px] h-[3.2px] w-[19.2px]">
-        <img alt="" className="block size-full" src={withBasePath("/assets/profile/member/lv-crown-line.svg")} />
-      </div>
-    </div>
-  );
-}
-
 export default function ProfileMemberInfo() {
   const progress = Math.min(100, (VIP_EXPERIENCE / VIP_EXPERIENCE_MAX) * 100);
 
@@ -41,10 +19,7 @@ export default function ProfileMemberInfo() {
           <div className="flex items-center gap-[10px]">
             <p className="whitespace-nowrap text-[16px] font-medium tracking-[0.15px] text-[#bfbfbf]">nickolas@gmail.com</p>
             <div className="flex items-center gap-[5px]">
-              <svg viewBox="0 0 18 18" className="size-[18px]">
-                <circle cx="9" cy="9" r="9" fill="#23f3d5" />
-                <path d="M5 9.3L7.6 12L13 6" stroke="#3e4140" strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+              <img alt="" src={withBasePath("/assets/profile/member/icon-verified.svg")} className="size-[18px]" />
               <p className="whitespace-nowrap text-[14px] font-bold tracking-[0.15px] text-[#23f3d5]">已驗證</p>
             </div>
           </div>
@@ -52,17 +27,17 @@ export default function ProfileMemberInfo() {
       </div>
 
       <div className="relative h-[282px] min-w-0 flex-1 overflow-hidden rounded-[50px] border border-[#dadada]">
-        <img alt="" src={withBasePath("/assets/profile/member/vip-card-bg.png")} className="pointer-events-none absolute inset-0 size-full object-cover" />
+        <img alt="" src={withBasePath("/assets/profile/member/vip-card-bg.png")} className="pointer-events-none absolute inset-0 size-full object-cover object-right" />
         <div className="absolute left-[19px] top-[19px] flex items-center gap-[20px]">
-          <LvIcon />
+          <img alt="" src={withBasePath("/assets/profile/member/icon-vip-lv.svg")} className="size-[40px]" />
           <p className="whitespace-nowrap text-[36px] font-bold tracking-[0.36px] text-[#3e4140]">Lv. 35</p>
         </div>
         <div className="absolute bottom-[18px] left-[19px] right-[19px] flex flex-col gap-[10px]">
           <div className="flex items-center justify-between">
             <p className="whitespace-nowrap text-[14px]">
-              <span className="text-[#3e4140]">VIP 經驗</span>{" "}
+              <span className="text-[#b2b2b2]">VIP 經驗</span>{" "}
               <span className="font-bold text-[#8d54d8]">{VIP_EXPERIENCE}</span>{" "}
-              <span className="text-[12px] text-[#fa812f]">/ {VIP_EXPERIENCE_MAX.toLocaleString()}</span>
+              <span className="text-[12px] text-[#b2b2b2]">/ {VIP_EXPERIENCE_MAX.toLocaleString()}</span>
             </p>
             <div className="flex h-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140] px-[6px] py-[5px] backdrop-blur-[6px]">
               <img alt="" src={withBasePath("/assets/profile/member/exp-plus.svg")} className="size-[14px]" />
