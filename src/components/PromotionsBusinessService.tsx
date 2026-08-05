@@ -29,9 +29,16 @@ function PromoCard({ image, alt, children }: { image: string; alt: string; child
   );
 }
 
-export function Promotions() {
-  const { scrollRef, canScrollLeft, canScrollRight, scrollByPage } = useHorizontalSlider();
+const PROMO_CARDS = [
+  { image: "/assets/promotions/card1-signin.svg", alt: "每日簽到禮 天天贈彩點", button: "立即領取" },
+  { image: "/assets/promotions/card2-wheel.svg", alt: "武財神風輪盤 天天轉 8,888", button: "立即下注" },
+  { image: "/assets/promotions/card4-gclass.svg", alt: "超商儲值禮 送 G-CLASS", button: "立即參加" },
+  { image: "/assets/promotions/card3-usdt-vault.svg", alt: "USDT返利 無上限，每筆USDT加碼贈2%", button: "立即下注" },
+  { image: "/assets/promotions/card5-vip.svg", alt: "VIP 尊享", button: "立即參加" },
+  { image: "/assets/promotions/card6-neobet.svg", alt: "來一次真人 NEOBET Fair Game", button: "立即遊玩" },
+];
 
+export function Promotions() {
   return (
     <div className="relative flex w-full flex-col gap-[20px]">
       <div className="flex items-center justify-between pl-[20px]">
@@ -44,25 +51,13 @@ export function Promotions() {
           <img alt="" src={withBasePath("/assets/shared/arrow-chevron-gray.svg")} className="h-[11px] w-[6px]" />
         </div>
       </div>
-      <div ref={scrollRef} className="scrollbar-hide flex gap-[20px] overflow-x-auto">
-        <PromoCard image={withBasePath("/assets/promotions/card1-signin.svg")} alt="每日簽到禮 天天贈彩點" />
-        <PromoCard image={withBasePath("/assets/promotions/card2-wheel.svg")} alt="武財神風輪盤 天天轉 8,888">
-          <PromoButton text="立即中獎" />
-        </PromoCard>
-        <PromoCard image={withBasePath("/assets/promotions/card3-usdt-vault.svg")} alt="USDT返利 無上限，每筆USDT加碼贈2%">
-          <PromoButton text="立即參加" />
-        </PromoCard>
-        <PromoCard image={withBasePath("/assets/promotions/card4-gclass.svg")} alt="超商儲值禮 送 G-CLASS">
-          <PromoButton text="立即參加" />
-        </PromoCard>
+      <div className="grid grid-cols-3 gap-[20px]">
+        {PROMO_CARDS.map((card) => (
+          <PromoCard key={card.alt} image={withBasePath(card.image)} alt={card.alt}>
+            <PromoButton text={card.button} />
+          </PromoCard>
+        ))}
       </div>
-      <SlideArrows
-        canScrollLeft={canScrollLeft}
-        canScrollRight={canScrollRight}
-        onLeft={() => scrollByPage("left")}
-        onRight={() => scrollByPage("right")}
-        className="absolute bottom-[40px] right-[40px]"
-      />
     </div>
   );
 }
@@ -111,7 +106,7 @@ function Business() {
 
 export function Service() {
   return (
-    <div className="relative h-[544px] w-[284px] shrink-0 overflow-hidden rounded-bl-[50px] rounded-tr-[50px]">
+    <div className="relative h-[505px] w-[284px] shrink-0 overflow-hidden rounded-[50px]">
       <img alt="聯繫客服" src={withBasePath("/assets/service/service-card.png")} className="pointer-events-none block size-full object-cover" />
     </div>
   );

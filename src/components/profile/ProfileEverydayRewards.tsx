@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { withBasePath } from "../../lib/asset";
 
 type DayState = "claimed" | "current" | "locked";
@@ -20,14 +23,37 @@ const DAYS: Day[] = [
   { label: "DAY 7", reward: "+99 W", state: "locked", glow: "/assets/profile/rewards/glow-day1.png" },
 ];
 
+// Diagonal purple -> teal brand gradient used across the reward boxes
+// (card fill tint, Day 2's ring border). Figma's exported stop order was
+// out of sequence (values like 19%, 7%, 16%, ...), which CSS silently
+// clamps into a broken/collapsed gradient -- reconstructed here as a
+// clean, monotonically increasing stop list in the same purple->teal
+// direction actually seen on canvas.
+const GRADIENT_STOPS: [number, number, number][] = [
+  [100, 78, 179],
+  [111, 79, 189],
+  [141, 84, 216],
+  [182, 90, 253],
+  [154, 113, 241],
+  [72, 186, 206],
+  [20, 232, 184],
+  [1, 250, 176],
+];
+function rewardGradient(opacity: number, angle = "135deg") {
+  const stops = GRADIENT_STOPS.map(([r, g, b], i) => `rgba(${r},${g},${b},${opacity}) ${((i / (GRADIENT_STOPS.length - 1)) * 100).toFixed(1)}%`);
+  return `linear-gradient(${angle}, ${stops.join(", ")})`;
+}
+
 // Matches Figma's Everyday Rewards instance (Profile Page, node 90:11373)
 // exactly: each day has its own reward artwork (money bag, treasure chest,
 // barrel, etc.) instead of one icon reused for every card, and only the
-// claimed day's glow renders sharp -- every other state is blurred.
+// claimed day's glow renders sharp -- every other state is blurred. The
+// gradient tint sits ON TOP of the reward artwork (not hidden behind it):
+// 50% for the claimed day, 80% for current/locked.
 function RewardDay({ label, reward, state, glow, glowFit = "cover" }: Day) {
   const isCurrent = state === "current";
-  const opacity = state === "locked" ? 0.5 : 0.8;
   const glowSharp = state === "claimed";
+  const tintOpacity = state === "claimed" ? 0.5 : 0.8;
   const actionIcon =
     state === "claimed"
       ? "/assets/profile/rewards/action-claimed.svg"
@@ -35,18 +61,12 @@ function RewardDay({ label, reward, state, glow, glowFit = "cover" }: Day) {
         ? "/assets/profile/rewards/action-current.svg"
         : "/assets/profile/rewards/action-locked.svg";
 
-  return (
+  const content = (
     <div
-      className={`relative shrink-0 overflow-hidden border-[#8d54d8] bg-white ${
-        isCurrent ? "h-[192px] w-[149px] rounded-bl-[35px] rounded-br-[35px] rounded-tr-[35px] border-4 border-[#01fab0]" : "h-[167px] w-[129px] rounded-[30px] border"
+      className={`relative size-full overflow-hidden bg-white ${
+        isCurrent ? "rounded-bl-[31px] rounded-br-[31px] rounded-tr-[31px]" : "rounded-[30px] border border-[#8d54d8]"
       }`}
     >
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `linear-gradient(-41deg, rgba(1,250,176,${opacity}) 19%, rgba(20,232,184,${opacity}) 7%, rgba(72,186,206,${opacity}) 16%, rgba(154,113,241,${opacity}) 50%, rgba(182,90,253,${opacity}) 61%, rgba(141,84,216,${opacity}) 101%, rgba(111,79,189,${opacity}) 137%, rgba(100,78,179,${opacity}) 158%)`,
-        }}
-      />
       <img
         alt=""
         src={withBasePath(glow)}
@@ -54,6 +74,7 @@ function RewardDay({ label, reward, state, glow, glowFit = "cover" }: Day) {
           isCurrent ? "top-[18px] size-[148px] blur-[2.5px]" : glowSharp ? "top-[29px] size-[116px]" : "top-[29px] size-[116px] blur-[2.5px]"
         }`}
       />
+      <div className="pointer-events-none absolute inset-0" style={{ backgroundImage: rewardGradient(tintOpacity) }} />
       <div className={`absolute left-0 top-0 flex w-full items-center justify-center bg-[#8d54d8] ${isCurrent ? "h-[44px]" : "h-[35px]"}`}>
         <p className={`whitespace-nowrap font-bold tracking-[0.15px] text-[#67e4d2] ${isCurrent ? "text-[16px]" : "text-[14px]"}`}>{label}</p>
       </div>
@@ -71,9 +92,36 @@ function RewardDay({ label, reward, state, glow, glowFit = "cover" }: Day) {
       </p>
     </div>
   );
+
+  // Day 2's ring is a gradient, which CSS border-image can't blend with
+  // rounded corners -- a padded outer box (gradient fill) wrapping a
+  // slightly-smaller-radius inner box keeps the ring following the card's
+  // actual rounded shape instead of being clipped to sharp corners.
+  if (isCurrent) {
+    return (
+      <div className="h-[192px] w-[149px] shrink-0 rounded-bl-[35px] rounded-br-[35px] rounded-tr-[35px] p-[4px]" style={{ backgroundImage: rewardGradient(1) }}>
+        {content}
+      </div>
+    );
+  }
+
+  return (
+    <div className="h-[167px] w-[129px] shrink-0">
+      {content}
+    </div>
+  );
 }
 
 export default function ProfileEverydayRewards() {
+  const [days, setDays] = useState(DAYS);
+
+  // Clicking claims the current day -- it collapses into Day 1's claimed
+  // style (small box, checkmark icon, sharp glow) instead of staying the
+  // large highlighted "current" card.
+  function handleClaim() {
+    setDays((prev) => prev.map((day) => (day.state === "current" ? { ...day, state: "claimed" } : day)));
+  }
+
   return (
     <div className="relative mr-[40px] flex flex-col gap-[20px] overflow-hidden rounded-br-[50px] rounded-tl-[50px] border border-[#8d54d8] p-[19px]">
       {/* Figma sizes these decorative layers as fixed 588x388 / 524x388
@@ -106,18 +154,19 @@ export default function ProfileEverydayRewards() {
           the trailing days are meant to sit cropped behind the girl, not
           be scrolled into view. */}
       <div className="relative z-10 flex items-center gap-[10px] overflow-hidden">
-        {DAYS.map((day) => (
+        {days.map((day) => (
           <RewardDay key={day.label} {...day} />
         ))}
       </div>
 
-      <button type="button" className="relative z-10 h-[53px] w-[300px] drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]">
-        <img alt="" src={withBasePath("/assets/shared/pill-btn-yellow.svg")} className="pointer-events-none absolute inset-0 block size-full max-w-none" />
-        <div className="absolute inset-[24.53%_11.72%_30.19%_11.72%] flex items-center justify-between">
-          <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">立即領取</p>
-          <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140]">
-            <img alt="" src={withBasePath("/assets/shared/pill-btn-chevron.svg")} className="h-[7.222px] w-[4.711px]" />
-          </div>
+      <button
+        type="button"
+        onClick={handleClaim}
+        className="relative z-30 flex h-[53px] w-[300px] items-center justify-between rounded-full bg-[#e2ff25] px-[20px] drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]"
+      >
+        <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">立即領取</p>
+        <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140]">
+          <img alt="" src={withBasePath("/assets/shared/pill-btn-chevron.svg")} className="h-[7.222px] w-[4.711px]" />
         </div>
       </button>
     </div>

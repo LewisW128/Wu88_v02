@@ -9,18 +9,18 @@ import { useEffect, useState } from "react";
 // of staying full-size while everything around it scales down.
 export const DESIGN_WIDTH = 1530;
 
-export function useBreakpointZoom() {
+export function useBreakpointZoom(designWidth: number = DESIGN_WIDTH) {
   const [zoom, setZoom] = useState(1);
 
   useEffect(() => {
     const updateZoom = () => {
       const vw = window.innerWidth;
-      setZoom(Math.min(1, vw / DESIGN_WIDTH));
+      setZoom(Math.min(1, vw / designWidth));
     };
     updateZoom();
     window.addEventListener("resize", updateZoom);
     return () => window.removeEventListener("resize", updateZoom);
-  }, []);
+  }, [designWidth]);
 
   return zoom;
 }

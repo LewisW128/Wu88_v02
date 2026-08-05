@@ -62,17 +62,15 @@ function TransactionRow({ label, date, amount, negative }: Transaction) {
 
 function WalletActionButton({ label, primary }: { label: string; primary?: boolean }) {
   return (
-    <button type="button" className={`relative h-[53px] flex-1 ${primary ? "drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]" : ""}`}>
-      <img
-        alt=""
-        src={withBasePath(primary ? "/assets/shared/pill-btn-yellow.svg" : "/assets/shared/pill-btn-white.svg")}
-        className="pointer-events-none absolute inset-0 block size-full max-w-none"
-      />
-      <div className="absolute inset-[24.53%_11.72%_30.19%_11.72%] flex items-center justify-between">
-        <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">{label}</p>
-        <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140]">
-          <img alt="" src={withBasePath("/assets/shared/pill-btn-chevron.svg")} className="h-[7.222px] w-[4.711px]" />
-        </div>
+    <button
+      type="button"
+      className={`flex h-[53px] flex-1 items-center justify-between rounded-full px-[20px] ${
+        primary ? "bg-[#e2ff25] drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]" : "border border-[#dadada] bg-white"
+      }`}
+    >
+      <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">{label}</p>
+      <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140]">
+        <img alt="" src={withBasePath("/assets/shared/pill-btn-chevron.svg")} className="h-[7.222px] w-[4.711px]" />
       </div>
     </button>
   );
