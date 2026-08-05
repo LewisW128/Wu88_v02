@@ -31,7 +31,7 @@ export default function SidebarAd() {
   }, [visible]);
 
   if (!visible) return null;
-  if (HIDDEN_ON.some((path) => pathname === path || pathname === `${path}/`)) return null;
+  if (HIDDEN_ON.some((path) => pathname === path || pathname === `${path}/` || pathname?.startsWith(`${path}/`))) return null;
 
   return (
     <div className="fixed bottom-[24px] right-[24px] z-40 h-[462px] w-[291px]" style={{ zoom }}>

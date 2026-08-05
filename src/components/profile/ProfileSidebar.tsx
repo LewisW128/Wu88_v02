@@ -1,19 +1,20 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { withBasePath } from "../../lib/asset";
 
 const NAV_ITEMS = [
-  { icon: withBasePath("/assets/profile/icons/overview.svg"), title: "總覽", sub: "OVERVIEW", active: true },
-  { icon: withBasePath("/assets/profile/icons/account.svg"), title: "賬戶明細", sub: "A/C" },
+  { icon: withBasePath("/assets/profile/icons/overview.svg"), title: "總覽", sub: "OVERVIEW", href: "/profile" },
+  { icon: withBasePath("/assets/profile/icons/account.svg"), title: "賬戶明細", sub: "A/C", href: "/profile/account" },
   { icon: withBasePath("/assets/profile/icons/member-info.svg"), title: "會員資料", sub: "PROFILE" },
   { icon: withBasePath("/assets/profile/icons/rewards.svg"), title: "領獎中心", sub: "SOC" },
   { icon: withBasePath("/assets/profile/icons/help.svg"), title: "協助中心", sub: "HELP" },
 ];
 
-function NavRow({ icon, title, sub, active }: { icon: string; title: string; sub: string; active?: boolean }) {
-  return (
+function NavRow({ icon, title, sub, href, active }: { icon: string; title: string; sub: string; href?: string; active?: boolean }) {
+  const content = (
     <div className="relative flex h-[122px] w-full shrink-0 items-center">
       {active && (
         <>
@@ -29,6 +30,14 @@ function NavRow({ icon, title, sub, active }: { icon: string; title: string; sub
         <p className="text-[14px] tracking-[0.15px] text-[#23f3d5]">{sub}</p>
       </div>
     </div>
+  );
+
+  return href ? (
+    <Link href={href} className="block w-full shrink-0">
+      {content}
+    </Link>
+  ) : (
+    content
   );
 }
 
@@ -53,6 +62,9 @@ function BackButton() {
 // and row layout, just with a back button instead of the logo and a
 // different nav list.
 export default function ProfileSidebar() {
+  const pathname = usePathname();
+  const normalized = (pathname ?? "").replace(/\/+$/, "") || "/";
+
   return (
     <div className="h-full w-[291px] shrink-0 overflow-y-hidden bg-white">
       <div className="relative min-h-[1117px] w-[291px]">
@@ -62,7 +74,7 @@ export default function ProfileSidebar() {
 
         <nav className="absolute inset-x-0 top-[130px] z-10 flex flex-col items-end pl-[20px]">
           {NAV_ITEMS.map((item) => (
-            <NavRow key={item.title} {...item} />
+            <NavRow key={item.title} {...item} active={!!item.href && normalized === item.href} />
           ))}
           <div className="h-px w-[271px] shrink-0 bg-[#dadada]" />
           <NavRow icon={withBasePath("/assets/profile/icons/logout.svg")} title="登出" sub="LOGOUT" />

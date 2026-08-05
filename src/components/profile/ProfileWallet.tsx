@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { withBasePath } from "../../lib/asset";
 
 // Meter-style count-up: runs once whenever the component mounts (i.e. every
 // time the profile page is entered), counting from 0 up to the balance.
-function useCountUp(target: number, durationMs = 1200) {
+export function useCountUp(target: number, durationMs = 1200) {
   const [value, setValue] = useState(0);
   const startRef = useRef<number | null>(null);
 
@@ -26,7 +27,7 @@ function useCountUp(target: number, durationMs = 1200) {
   return value;
 }
 
-type Transaction = {
+export type Transaction = {
   label: string;
   date: string;
   amount: string;
@@ -45,7 +46,7 @@ const TRANSACTIONS: Transaction[] = [
   { label: "返水", date: "06/12 13:30", amount: "$10,000" },
 ];
 
-function TransactionRow({ label, date, amount, negative }: Transaction) {
+export function TransactionRow({ label, date, amount, negative }: Transaction) {
   return (
     <div className="flex h-[67px] w-full shrink-0 items-center justify-between rounded-[25px] bg-[#fafafa] px-[20px]">
       <div className="flex flex-col items-start gap-[5px]">
@@ -64,7 +65,7 @@ function TransactionRow({ label, date, amount, negative }: Transaction) {
 // and 託售 are NOT an even flex split, they're fixed 247px / 113px inside a
 // 380px row. wallet-btn-bg.svg is the real asset at its native 247x53 size
 // (from /public/item/Wallet_btn.svg) -- rendered 1:1, never stretched.
-function WalletDepositButton() {
+export function WalletDepositButton() {
   return (
     <button type="button" className="relative h-[53px] w-[247px] shrink-0 drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]">
       <img alt="" src={withBasePath("/assets/shared/wallet-btn-bg.svg")} className="pointer-events-none absolute inset-0 block size-full" />
@@ -78,7 +79,7 @@ function WalletDepositButton() {
   );
 }
 
-function WalletSellButton() {
+export function WalletSellButton() {
   return (
     <button type="button" className="relative h-[50px] w-[113px] shrink-0">
       <img alt="" src={withBasePath("/assets/shared/pill-btn-outline.svg")} className="pointer-events-none absolute inset-0 block size-full" />
@@ -102,10 +103,10 @@ export default function ProfileWallet() {
           <img alt="" src={withBasePath("/assets/icons/wallet.svg")} className="size-[45px]" />
           <p className="whitespace-nowrap text-[20px] font-bold tracking-[0.35px] text-[#444242]">錢包總覽</p>
         </div>
-        <div className="flex items-center gap-[10px]">
+        <Link href="/profile/account" className="flex items-center gap-[10px]">
           <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#3e4140]">帳戶明細</p>
           <img alt="" src={withBasePath("/assets/shared/arrow-chevron-teal.svg")} className="h-[11px] w-[6px]" />
-        </div>
+        </Link>
       </div>
 
       <div className="flex flex-col items-start gap-[5px]">
