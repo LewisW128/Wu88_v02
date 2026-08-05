@@ -75,7 +75,7 @@ export default function ProfileEverydayRewards() {
       <img alt="" src={withBasePath("/assets/profile/rewards/card-bg-stripe.svg")} className="pointer-events-none absolute inset-0 h-full w-full object-cover" />
       <img
         alt=""
-        src={withBasePath("/assets/profile/rewards/card-front-girl.svg")}
+        src={withBasePath("/assets/profile/rewards/card-front-girl.png")}
         className="pointer-events-none absolute right-0 top-0 z-20 h-full w-[45%] object-cover object-top"
       />
 
