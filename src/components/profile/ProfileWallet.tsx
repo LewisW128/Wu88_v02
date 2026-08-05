@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { withBasePath } from "../../lib/asset";
-import { taperedPillPath } from "../../lib/taperedPill";
 
 // Meter-style count-up: runs once whenever the component mounts (i.e. every
 // time the profile page is entered), counting from 0 up to the balance.
@@ -63,15 +62,12 @@ function TransactionRow({ label, date, amount, negative }: Transaction) {
 
 // Exact pixel widths from Figma's Wallet component (node 85:8280) -- 儲值
 // and 託售 are NOT an even flex split, they're fixed 247px / 113px inside a
-// 380px row.
+// 380px row. wallet-btn-bg.svg is the real asset at its native 247x53 size
+// (from /public/item/Wallet_btn.svg) -- rendered 1:1, never stretched.
 function WalletDepositButton() {
-  const w = 247;
-  const h = 53;
   return (
     <button type="button" className="relative h-[53px] w-[247px] shrink-0 drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]">
-      <svg viewBox={`0 0 ${w} ${h}`} width={w} height={h} className="pointer-events-none absolute inset-0 block">
-        <path d={taperedPillPath(w, h)} fill="#e2ff25" />
-      </svg>
+      <img alt="" src={withBasePath("/assets/shared/wallet-btn-bg.svg")} className="pointer-events-none absolute inset-0 block size-full" />
       <div className="absolute inset-0 flex items-center justify-between px-[15px]">
         <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">儲值</p>
         <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[5.556px]">
@@ -84,10 +80,13 @@ function WalletDepositButton() {
 
 function WalletSellButton() {
   return (
-    <button type="button" className="flex h-[50px] w-[113px] shrink-0 items-center justify-between rounded-[15px] border border-[#dadada] bg-white px-[15px]">
-      <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">託售</p>
-      <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[5.556px]">
-        <img alt="" src={withBasePath("/assets/shared/pill-btn-chevron.svg")} className="h-[6.111px] w-[3.333px]" />
+    <button type="button" className="relative h-[50px] w-[113px] shrink-0">
+      <img alt="" src={withBasePath("/assets/shared/pill-btn-outline.svg")} className="pointer-events-none absolute inset-0 block size-full" />
+      <div className="absolute inset-0 flex items-center justify-between px-[15px]">
+        <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">託售</p>
+        <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[5.556px]">
+          <img alt="" src={withBasePath("/assets/shared/pill-btn-chevron.svg")} className="h-[6.111px] w-[3.333px]" />
+        </div>
       </div>
     </button>
   );
