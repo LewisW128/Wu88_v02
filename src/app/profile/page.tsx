@@ -44,9 +44,9 @@ export default function ProfilePage() {
             </div>
 
             <div className="flex flex-col gap-[40px] pb-[40px] pl-[40px]">
-              <div className="flex w-full items-center gap-[40px] pr-[40px]">
+              <div className="flex w-full items-start gap-[40px] pr-[40px]">
                 <div className="min-w-0 flex-1">
-                  <Promotions layout="grid" />
+                  <Promotions />
                 </div>
                 <Service />
               </div>

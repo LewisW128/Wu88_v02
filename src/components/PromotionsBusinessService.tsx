@@ -38,9 +38,7 @@ const PROMO_CARDS = [
   { image: "/assets/promotions/card6-neobet.svg", alt: "來一次真人 NEOBET Fair Game", button: "立即遊玩" },
 ];
 
-// Home page scrolls one row with arrows; the profile page has room to wrap
-// into a 2-row grid instead, which needs no arrows since nothing overflows.
-export function Promotions({ layout = "scroll" }: { layout?: "scroll" | "grid" }) {
+export function Promotions() {
   const { scrollRef, canScrollLeft, canScrollRight, scrollByPage } = useHorizontalSlider();
 
   return (
@@ -55,32 +53,20 @@ export function Promotions({ layout = "scroll" }: { layout?: "scroll" | "grid" }
           <img alt="" src={withBasePath("/assets/shared/arrow-chevron-gray.svg")} className="h-[11px] w-[6px]" />
         </div>
       </div>
-      {layout === "grid" ? (
-        <div className="grid grid-cols-3 gap-[20px]">
-          {PROMO_CARDS.map((card) => (
-            <PromoCard key={card.alt} image={withBasePath(card.image)} alt={card.alt}>
-              <PromoButton text={card.button} />
-            </PromoCard>
-          ))}
-        </div>
-      ) : (
-        <>
-          <div ref={scrollRef} className="scrollbar-hide flex gap-[20px] overflow-x-auto">
-            {PROMO_CARDS.map((card) => (
-              <PromoCard key={card.alt} image={withBasePath(card.image)} alt={card.alt}>
-                <PromoButton text={card.button} />
-              </PromoCard>
-            ))}
-          </div>
-          <SlideArrows
-            canScrollLeft={canScrollLeft}
-            canScrollRight={canScrollRight}
-            onLeft={() => scrollByPage("left")}
-            onRight={() => scrollByPage("right")}
-            className="absolute bottom-[40px] right-[40px]"
-          />
-        </>
-      )}
+      <div ref={scrollRef} className="scrollbar-hide flex gap-[20px] overflow-x-auto">
+        {PROMO_CARDS.map((card) => (
+          <PromoCard key={card.alt} image={withBasePath(card.image)} alt={card.alt}>
+            <PromoButton text={card.button} />
+          </PromoCard>
+        ))}
+      </div>
+      <SlideArrows
+        canScrollLeft={canScrollLeft}
+        canScrollRight={canScrollRight}
+        onLeft={() => scrollByPage("left")}
+        onRight={() => scrollByPage("right")}
+        className="absolute bottom-[40px] right-[40px]"
+      />
     </div>
   );
 }
