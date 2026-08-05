@@ -18,8 +18,8 @@ import { useBreakpointZoom } from "../hooks/useBreakpointZoom";
 // it must never be. 1530 gives WinList's own min-width (600px) just enough
 // room at 1:1, and since everything below this threshold scales down together
 // via `zoom`, the ratio between the two cards stays constant at any size.
-export default function ScaleBelowBreakpoint({ children, designWidth }: { children: React.ReactNode; designWidth?: number }) {
-  const zoom = useBreakpointZoom(designWidth);
+export default function ScaleBelowBreakpoint({ children, designWidth, maxZoom }: { children: React.ReactNode; designWidth?: number; maxZoom?: number }) {
+  const zoom = useBreakpointZoom(designWidth, maxZoom);
 
   // `vh` units don't scale with an ancestor's `zoom` the way px values do —
   // 100vh always resolves to the real viewport height, so anything sized with

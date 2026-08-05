@@ -9,18 +9,22 @@ import { useEffect, useState } from "react";
 // of staying full-size while everything around it scales down.
 export const DESIGN_WIDTH = 1530;
 
-export function useBreakpointZoom(designWidth: number = DESIGN_WIDTH) {
-  const [zoom, setZoom] = useState(1);
+// maxZoom caps how large the page ever renders, even on wide viewports --
+// e.g. 0.85 makes every page render at 85% scale at most, so the whole site
+// feels less oversized without touching any individual element's sizing
+// (zoom is uniform, so all proportions/spacing stay exactly as designed).
+export function useBreakpointZoom(designWidth: number = DESIGN_WIDTH, maxZoom = 1) {
+  const [zoom, setZoom] = useState(maxZoom);
 
   useEffect(() => {
     const updateZoom = () => {
       const vw = window.innerWidth;
-      setZoom(Math.min(1, vw / designWidth));
+      setZoom(Math.min(maxZoom, vw / designWidth));
     };
     updateZoom();
     window.addEventListener("resize", updateZoom);
     return () => window.removeEventListener("resize", updateZoom);
-  }, [designWidth]);
+  }, [designWidth, maxZoom]);
 
   return zoom;
 }
