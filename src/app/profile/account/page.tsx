@@ -83,7 +83,7 @@ export default function ProfileAccountPage() {
             <img
               alt=""
               src={withBasePath("/assets/profile/account/cover.png")}
-              className="pointer-events-none absolute right-0 top-0 z-0 h-[520px] w-[905px] max-w-none"
+              className="pointer-events-none absolute right-0 top-0 z-0 h-[605px] w-[1053px] max-w-none"
               style={{ maskImage: "linear-gradient(to bottom, black 0%, black 85%, transparent 100%)" }}
             />
 
