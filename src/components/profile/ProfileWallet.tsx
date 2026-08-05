@@ -64,7 +64,7 @@ function WalletActionButton({ label, primary }: { label: string; primary?: boole
   return (
     <button
       type="button"
-      className={`flex h-[53px] flex-1 items-center justify-between rounded-[16px] px-[20px] ${
+      className={`flex h-[53px] flex-1 items-center justify-between rounded-[15px] px-[20px] ${
         primary ? "bg-[#e2ff25] drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]" : "border border-[#dadada] bg-white"
       }`}
     >

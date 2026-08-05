@@ -162,7 +162,7 @@ export default function ProfileEverydayRewards() {
       <button
         type="button"
         onClick={handleClaim}
-        className="relative z-30 flex h-[53px] w-[300px] items-center justify-between rounded-[16px] bg-[#e2ff25] px-[20px] drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]"
+        className="relative z-30 flex h-[53px] w-[300px] items-center justify-between rounded-[15px] bg-[#e2ff25] px-[20px] drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]"
       >
         <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">立即領取</p>
         <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140]">
