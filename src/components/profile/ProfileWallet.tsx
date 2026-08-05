@@ -61,13 +61,32 @@ function TransactionRow({ label, date, amount, negative }: Transaction) {
 }
 
 function WalletActionButton({ label, primary }: { label: string; primary?: boolean }) {
+  // The real yellow CTA asset only looks right at its native ~128px width --
+  // stretched to fill a wider button it goes flat and loses its rounded
+  // ends. 9-slicing it via border-image keeps the rounded end-caps at their
+  // real size and only stretches the flat middle, so the same asset looks
+  // identical (just longer) at any button width.
+  if (primary) {
+    return (
+      <button
+        type="button"
+        className="flex h-[53px] flex-1 items-center justify-between border-y-0 border-x-[24px] border-solid px-[15px] drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]"
+        style={{
+          borderImageSource: `url(${withBasePath("/assets/shared/pill-btn-yellow.svg")})`,
+          borderImageSlice: "0 24 fill",
+          borderImageWidth: "0 24px",
+        }}
+      >
+        <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">{label}</p>
+        <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140]">
+          <img alt="" src={withBasePath("/assets/shared/pill-btn-chevron.svg")} className="h-[7.222px] w-[4.711px]" />
+        </div>
+      </button>
+    );
+  }
+
   return (
-    <button
-      type="button"
-      className={`flex h-[53px] flex-1 items-center justify-between rounded-[15px] px-[20px] ${
-        primary ? "bg-[#e2ff25] drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]" : "border border-[#dadada] bg-white"
-      }`}
-    >
+    <button type="button" className="flex h-[53px] flex-1 items-center justify-between rounded-[15px] border border-[#dadada] bg-white px-[15px]">
       <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">{label}</p>
       <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140]">
         <img alt="" src={withBasePath("/assets/shared/pill-btn-chevron.svg")} className="h-[7.222px] w-[4.711px]" />
