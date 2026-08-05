@@ -77,11 +77,14 @@ export default function ProfileAccountPage() {
                 never cropped or stretched -- sized down from the Figma box
                 (1437x826) so the desk/calculator the girl is working at
                 clears the transaction card below instead of being hidden
-                behind it. */}
+                behind it. Shrinking it exposed the photo's own hard bottom
+                edge (previously hidden behind the card) -- a fade mask
+                dissolves that cutoff into the white page background. */}
             <img
               alt=""
               src={withBasePath("/assets/profile/account/cover.png")}
               className="pointer-events-none absolute right-0 top-0 z-0 h-[520px] w-[905px] max-w-none"
+              style={{ maskImage: "linear-gradient(to bottom, black 0%, black 85%, transparent 100%)" }}
             />
 
             <div className="relative z-10 flex flex-col gap-[40px] pb-[40px] pl-[40px] pr-[40px] pt-[40px]">
