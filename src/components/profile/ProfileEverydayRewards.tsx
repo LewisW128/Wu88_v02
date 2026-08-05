@@ -159,19 +159,20 @@ export default function ProfileEverydayRewards() {
         ))}
       </div>
 
-      <button
-        type="button"
-        onClick={handleClaim}
-        className="relative z-30 flex h-[53px] w-[300px] items-center justify-between border-y-0 border-x-[24px] border-solid px-[15px] drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]"
-        style={{
-          borderImageSource: `url(${withBasePath("/assets/shared/pill-btn-yellow.svg")})`,
-          borderImageSlice: "0 24 fill",
-          borderImageWidth: "0 24px",
-        }}
-      >
-        <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">立即領取</p>
-        <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140]">
-          <img alt="" src={withBasePath("/assets/shared/pill-btn-chevron.svg")} className="h-[7.222px] w-[4.711px]" />
+      <button type="button" onClick={handleClaim} className="relative z-30 h-[53px] w-[300px] drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]">
+        <div
+          className="pointer-events-none absolute inset-0 border-y-0 border-x-[24px] border-solid"
+          style={{
+            borderImageSource: `url(${withBasePath("/assets/shared/pill-btn-yellow.svg")})`,
+            borderImageSlice: "0 24 fill",
+            borderImageWidth: "0 24px",
+          }}
+        />
+        <div className="absolute inset-0 flex items-center justify-between px-[15px]">
+          <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">立即領取</p>
+          <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140]">
+            <img alt="" src={withBasePath("/assets/shared/pill-btn-chevron.svg")} className="h-[7.222px] w-[4.711px]" />
+          </div>
         </div>
       </button>
     </div>

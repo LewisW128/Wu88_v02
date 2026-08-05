@@ -60,36 +60,35 @@ function TransactionRow({ label, date, amount, negative }: Transaction) {
   );
 }
 
-function WalletActionButton({ label, primary }: { label: string; primary?: boolean }) {
-  // The real yellow CTA asset only looks right at its native ~128px width --
-  // stretched to fill a wider button it goes flat and loses its rounded
-  // ends. 9-slicing it via border-image keeps the rounded end-caps at their
-  // real size and only stretches the flat middle, so the same asset looks
-  // identical (just longer) at any button width.
-  if (primary) {
-    return (
-      <button
-        type="button"
-        className="flex h-[53px] flex-1 items-center justify-between border-y-0 border-x-[24px] border-solid px-[15px] drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]"
-        style={{
-          borderImageSource: `url(${withBasePath("/assets/shared/pill-btn-yellow.svg")})`,
-          borderImageSlice: "0 24 fill",
-          borderImageWidth: "0 24px",
-        }}
-      >
-        <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">{label}</p>
-        <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140]">
-          <img alt="" src={withBasePath("/assets/shared/pill-btn-chevron.svg")} className="h-[7.222px] w-[4.711px]" />
-        </div>
-      </button>
-    );
-  }
-
+// Exact pixel widths from Figma's Wallet component (node 85:8280) -- 儲值
+// and 託售 are NOT an even flex split, they're fixed 247px / 113px inside a
+// 380px row. Each uses its own real asset (rectangle3.svg / rectangle4.svg)
+// at its native size, so neither ever stretches or warps.
+function WalletDepositButton() {
   return (
-    <button type="button" className="flex h-[53px] flex-1 items-center justify-between rounded-[15px] border border-[#dadada] bg-white px-[15px]">
-      <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">{label}</p>
-      <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140]">
-        <img alt="" src={withBasePath("/assets/shared/pill-btn-chevron.svg")} className="h-[7.222px] w-[4.711px]" />
+    <button type="button" className="relative h-[53px] w-[247px] shrink-0 drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]">
+      <div className="pointer-events-none absolute inset-0 -scale-x-100">
+        <img alt="" src={withBasePath("/assets/shared/pill-btn-yellow.svg")} className="block size-full max-w-none" />
+      </div>
+      <div className="absolute inset-y-[24.53%] left-[15px] right-[15px] flex items-center justify-between">
+        <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">儲值</p>
+        <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[5.556px]">
+          <img alt="" src={withBasePath("/assets/shared/pill-btn-chevron.svg")} className="h-[6.111px] w-[3.333px]" />
+        </div>
+      </div>
+    </button>
+  );
+}
+
+function WalletSellButton() {
+  return (
+    <button type="button" className="relative h-[50px] w-[113px] shrink-0">
+      <img alt="" src={withBasePath("/assets/shared/pill-btn-outline.svg")} className="pointer-events-none absolute inset-0 block size-full max-w-none" />
+      <div className="absolute inset-0 flex items-center justify-between px-[15px]">
+        <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#444242]">託售</p>
+        <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[5.556px]">
+          <img alt="" src={withBasePath("/assets/shared/pill-btn-chevron.svg")} className="h-[6.111px] w-[3.333px]" />
+        </div>
       </div>
     </button>
   );
@@ -106,7 +105,7 @@ export default function ProfileWallet() {
           <p className="whitespace-nowrap text-[20px] font-bold tracking-[0.35px] text-[#444242]">錢包總覽</p>
         </div>
         <div className="flex items-center gap-[10px]">
-          <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#3e4140]">所有遊戲</p>
+          <p className="whitespace-nowrap text-[16px] font-bold tracking-[0.15px] text-[#3e4140]">帳戶明細</p>
           <img alt="" src={withBasePath("/assets/shared/arrow-chevron-teal.svg")} className="h-[11px] w-[6px]" />
         </div>
       </div>
@@ -116,9 +115,9 @@ export default function ProfileWallet() {
         <p className="text-[36px] font-bold tabular-nums text-[#3e4140]">{balance.toLocaleString()}</p>
       </div>
 
-      <div className="flex items-center gap-[20px]">
-        <WalletActionButton label="儲值" primary />
-        <WalletActionButton label="託售" />
+      <div className="flex items-center justify-between">
+        <WalletDepositButton />
+        <WalletSellButton />
       </div>
 
       <div
