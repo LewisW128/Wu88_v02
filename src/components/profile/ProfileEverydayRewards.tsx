@@ -71,7 +71,7 @@ function RewardDay({ label, reward, state, glow, glowFit = "cover" }: Day) {
         alt=""
         src={withBasePath(glow)}
         className={`pointer-events-none absolute left-1/2 -translate-x-1/2 ${glowFit === "contain" ? "object-contain" : "object-cover"} ${
-          isCurrent ? "top-[18px] size-[148px] blur-[2.5px]" : glowSharp ? "top-[29px] size-[116px]" : "top-[29px] size-[116px] blur-[2.5px]"
+          isCurrent ? "top-[32px] size-[120px] blur-[2.5px]" : glowSharp ? "top-[42px] size-[90px]" : "top-[42px] size-[90px] blur-[2.5px]"
         }`}
       />
       <div className="pointer-events-none absolute inset-0" style={{ backgroundImage: rewardGradient(tintOpacity) }} />
