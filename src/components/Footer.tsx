@@ -72,10 +72,14 @@ function AppDownload({
   );
 }
 
-export default function Footer() {
+// notchClassName lets a page match this decorative "poke-up" shape to its
+// own background -- most pages sit on white, but e.g. the member profile
+// page's body is #f5f5f5, and a hardcoded bg-white here would show as a
+// visible seam right where the page meets the footer.
+export default function Footer({ notchClassName = "bg-white" }: { notchClassName?: string }) {
   return (
     <footer className="relative w-full overflow-hidden bg-[#021128] pb-[60px] pt-[60px]">
-      <div className="absolute -top-[108px] left-[291px] h-[227px] w-[calc(100%-291px)] rounded-bl-[50px] bg-white" />
+      <div className={`absolute -top-[108px] left-[291px] h-[227px] w-[calc(100%-291px)] rounded-bl-[50px] ${notchClassName}`} />
 
       <div className="relative flex flex-wrap justify-between gap-[24px] py-[10px] pl-[331px] pr-[40px] pt-[100px]">
         <div className="flex flex-col gap-[20px] sm:flex-row sm:items-center sm:gap-[24px]">

@@ -92,7 +92,7 @@ export default function ProfileMemberPage() {
             </div>
 
             <div className="-ml-[291px] w-[calc(100%+291px)]">
-              <Footer />
+              <Footer notchClassName="bg-[#f5f5f5]" />
             </div>
           </div>
         </div>
