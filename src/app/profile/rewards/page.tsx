@@ -5,6 +5,7 @@ import Footer from "../../../components/Footer";
 import ProfileSidebar from "../../../components/profile/ProfileSidebar";
 import ProfileEverydayRewards from "../../../components/profile/ProfileEverydayRewards";
 import { Promotions } from "../../../components/PromotionsBusinessService";
+import { useCountUp } from "../../../components/profile/ProfileWallet";
 import { withBasePath } from "../../../lib/asset";
 
 const COUNTDOWN = [
@@ -15,9 +16,9 @@ const COUNTDOWN = [
 ];
 
 const STATS = [
-  { label: "目前 Ｗ 幣", value: "25,230", icon: "/assets/icons/money.svg" },
-  { label: "排名", value: "235", icon: "/assets/icons/fraction.svg" },
-  { label: "分數", value: "150", icon: "/assets/icons/diamond.svg" },
+  { label: "目前 Ｗ 幣", value: 25230, icon: "/assets/icons/money.svg" },
+  { label: "排名", value: 235, icon: "/assets/icons/fraction.svg" },
+  { label: "分數", value: 150, icon: "/assets/icons/diamond.svg" },
 ];
 
 const LEVEL_POINTS = [1, 14, 28, 41, 54, 67, 82];
@@ -41,8 +42,15 @@ const REWARD_KITS: RewardKitData[] = [
 const ACTIVE_GRADIENT = "linear-gradient(-56deg, rgb(72,186,206) 22%, rgb(154,113,241) 69%, rgb(141,84,216) 142%, rgb(100,78,179) 222%)";
 
 function RewardKit({ name, count, image, current }: RewardKitData) {
+  // bg-white/20 + backdrop-blur is meant to frost the page behind the card
+  // -- on the current card that "page behind" is the gradient wrapper
+  // itself, so the low opacity let the gradient bleed through the whole
+  // interior instead of staying confined to the thin ring. A near-opaque
+  // fill keeps the gradient visible only at the padded edge.
   const content = (
-    <div className={`relative size-full overflow-hidden bg-white/20 backdrop-blur-[10px] ${current ? "rounded-bl-[31px] rounded-tr-[31px]" : "rounded-bl-[35px] rounded-tr-[35px]"}`}>
+    <div
+      className={`relative size-full overflow-hidden backdrop-blur-[10px] ${current ? "rounded-bl-[31px] rounded-tr-[31px] bg-white/95" : "rounded-bl-[35px] rounded-tr-[35px] bg-white/20"}`}
+    >
       <img alt="" src={withBasePath(image)} className="pointer-events-none absolute left-1/2 top-[9px] size-[178px] -translate-x-1/2 object-contain" />
       <div className="absolute left-1/2 top-[159px] flex -translate-x-1/2 flex-col items-center gap-[5px]">
         <div className="flex items-center gap-[5px]">
@@ -127,6 +135,13 @@ function LevelTrack() {
   );
 }
 
+// useCountUp is a hook, so each stat needs its own component instance
+// rather than being called inline inside the .map() below.
+function StatValue({ value }: { value: number }) {
+  const counted = useCountUp(value);
+  return <p className="whitespace-nowrap text-[36px] font-bold tabular-nums tracking-[0.36px] text-[#23f3d5]">{counted.toLocaleString()}</p>;
+}
+
 function VipEventStats() {
   return (
     <div className="flex w-full items-center overflow-hidden rounded-[35px] border border-[#dadada] bg-white/50 py-[20px] backdrop-blur-[10px]">
@@ -135,7 +150,7 @@ function VipEventStats() {
           <p className="whitespace-nowrap text-[16px] font-medium tracking-[0.15px] text-[#b2b2b2]">{stat.label}</p>
           <div className="flex items-center gap-[10px]">
             <img alt="" src={withBasePath(stat.icon)} className="size-[25px]" />
-            <p className="whitespace-nowrap text-[36px] font-bold tracking-[0.36px] text-[#23f3d5]">{stat.value}</p>
+            <StatValue value={stat.value} />
           </div>
         </div>
       ))}
@@ -219,15 +234,16 @@ function VipCard() {
 
 // Figma's own layout (node 209:11543/209:11545): the level track + 7
 // chests form one fixed 1110px block with a tight 10px gap between cards,
-// and the trophy is a separate fixed 237px block beside it with its own
-// 10px gap -- 1110 + 10 + 237 = 1357, which already matches the section's
-// full width exactly, so nothing here needs to stretch. mx-auto only
-// centers the pair as a fallback if a wider viewport ever leaves it
-// narrower than its container -- it does not change the tight card
-// spacing itself.
+// and the trophy is a separate fixed 237px block beside it -- at the design
+// width the gap between them is exactly 10px (1110 + 10 + 237 = 1357), but
+// unlike the chest-to-chest gaps (always fixed, so the level track above
+// stays pixel-aligned to its chests) that one gap is a flexible
+// justify-between space: on a wider viewport it grows so the trophy (and
+// its background streak) stays flush against the section's own 40px right
+// edge instead of leaving dead space.
 function LevelAndRewards() {
   return (
-    <div className="mx-auto flex w-[1357px] max-w-full items-end gap-[10px]">
+    <div className="flex w-full items-end justify-between">
       <div className="flex w-[1110px] shrink-0 flex-col items-end gap-[40px]">
         <LevelTrack />
         <div className="flex w-full items-center gap-[10px]">
