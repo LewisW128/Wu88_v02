@@ -35,27 +35,18 @@ const REWARD_KITS: RewardKitData[] = [
   { name: "頂級藍寶石寶箱", count: "5,000", image: "/assets/profile/rewards-center/gem-top-sapphire.png" },
 ];
 
-function ChestIcon({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 17 17" className={className} fill="none">
-      <circle cx="14.5" cy="14.5" r="2.5" fill="#23F3D5" />
-      <rect x="1" y="1" width="10" height="7" rx="1.3" stroke="#3E4140" strokeWidth="1.36" />
-      <rect x="1" y="8.5" width="10" height="6.5" rx="1.3" stroke="#3E4140" strokeWidth="1.36" />
-    </svg>
-  );
-}
+// Same active-tag gradient as the account page's tab pills / SportCategoryTags
+// / CasinoFilterChips -- one shared brand gradient, reused here for the
+// current reward tier's border.
+const ACTIVE_GRADIENT = "linear-gradient(-56deg, rgb(72,186,206) 22%, rgb(154,113,241) 69%, rgb(141,84,216) 142%, rgb(100,78,179) 222%)";
 
 function RewardKit({ name, count, image, current }: RewardKitData) {
-  return (
-    <div
-      className={`relative h-[212px] w-[150px] shrink-0 overflow-hidden rounded-bl-[35px] rounded-tr-[35px] bg-white/20 backdrop-blur-[10px] ${
-        current ? "border-4 border-[#01fab0]" : "border border-[#8d54d8]"
-      }`}
-    >
+  const content = (
+    <div className={`relative size-full overflow-hidden bg-white/20 backdrop-blur-[10px] ${current ? "rounded-bl-[31px] rounded-tr-[31px]" : "rounded-bl-[35px] rounded-tr-[35px]"}`}>
       <img alt="" src={withBasePath(image)} className="pointer-events-none absolute left-1/2 top-[9px] size-[178px] -translate-x-1/2 object-contain" />
       <div className="absolute left-1/2 top-[159px] flex -translate-x-1/2 flex-col items-center gap-[5px]">
         <div className="flex items-center gap-[5px]">
-          <ChestIcon className="size-[17px] shrink-0" />
+          <img alt="" src={withBasePath("/assets/icons/treasure.svg")} className="size-[17px] shrink-0" />
           <p className="whitespace-nowrap text-[12px] text-black">{name}</p>
         </div>
         <div className="flex items-center gap-[5px] whitespace-nowrap">
@@ -66,6 +57,20 @@ function RewardKit({ name, count, image, current }: RewardKitData) {
       </div>
     </div>
   );
+
+  // The current tier's ring is a gradient, which plain CSS border can't do --
+  // a padded outer box (gradient fill) wrapping a slightly-smaller-radius
+  // inner box keeps the ring following the card's rounded shape (same
+  // technique as the Everyday Rewards Day 2 card).
+  if (current) {
+    return (
+      <div className="h-[212px] w-[150px] shrink-0 rounded-bl-[35px] rounded-tr-[35px] p-[4px]" style={{ backgroundImage: ACTIVE_GRADIENT }}>
+        {content}
+      </div>
+    );
+  }
+
+  return <div className="h-[212px] w-[150px] shrink-0 rounded-bl-[35px] rounded-tr-[35px] border border-[#8d54d8]">{content}</div>;
 }
 
 // Figma's Level_Point is a vertical hexagon (flat sides, pointed top/bottom),
@@ -243,7 +248,7 @@ function LevelAndRewards() {
         <img alt="" src={withBasePath("/assets/profile/rewards-center/gem-trophy-top.png")} className="relative z-10 w-full object-contain" />
         <div className="relative z-10 flex flex-col items-center gap-[5px]">
           <div className="flex items-center gap-[5px]">
-            <ChestIcon className="size-[17px] shrink-0" />
+            <img alt="" src={withBasePath("/assets/icons/treasure.svg")} className="size-[17px] shrink-0" />
             <p className="whitespace-nowrap text-[12px] text-black">頂級星鑽寶箱</p>
           </div>
           <div className="flex items-center gap-[5px] whitespace-nowrap">
@@ -295,17 +300,17 @@ export default function ProfileRewardsPage() {
           </div>
 
           <div className="relative min-w-0 flex-1 overflow-hidden">
-            {/* The champion banner's own "BONUS HUB" wordmark runs the full
-                image width and collided with the page's own 領獎中心/VIP盛典
-                headings when shown at full size -- object-cover with a
-                narrower box (object-position keeps it right/top-anchored)
-                crops down to just the trophy on the right, without touching
-                the source file itself. */}
+            {/* Per the reference mockup, this banner spans the full header
+                width as a background layer -- the "BONUS HUB" wordmark and
+                trophy sit behind the real headings/VIP card on purpose
+                (the wordmark is hollow/outlined so the solid foreground
+                text stays legible over it), matching Figma's "Cover images"
+                instance size exactly (1437x826, same aspect as the source
+                so nothing is cropped or stretched). */}
             <img
               alt=""
               src={withBasePath("/assets/profile/rewards-center/cover-champion.png")}
-              className="pointer-events-none absolute right-0 top-0 z-0 h-[605px] w-[380px] max-w-none object-cover object-right-top"
-              style={{ maskImage: "linear-gradient(to bottom, black 0%, black 85%, transparent 100%)" }}
+              className="pointer-events-none absolute right-0 top-0 z-0 h-[826px] w-[1437px] max-w-none"
             />
 
             <div className="relative z-10 flex flex-col gap-[40px] pb-[40px] pl-[40px] pr-[40px] pt-[40px]">
@@ -314,21 +319,25 @@ export default function ProfileRewardsPage() {
                 <p className="whitespace-nowrap text-[36px] font-bold tracking-[0.36px] text-[#3e4140]">領獎中心</p>
               </div>
 
-              <div className="flex items-end justify-between gap-[20px]">
+              {/* Figma places this row ~452px below the header (492 - 40),
+                  not a plain 40px gap -- the VIP盛典 heading sits lower,
+                  overlapping the middle of the trophy banner rather than
+                  crowding right up against the page title. */}
+              <div className="mt-[352px] flex items-end justify-between gap-[20px]">
                 <VipEventSection />
                 <VipCard />
               </div>
 
               <LevelAndRewards />
 
-              <div className="flex w-full justify-center">
-                <button
-                  type="button"
-                  className="h-[60px] rounded-bl-[25px] rounded-tr-[25px] bg-[#e2ff25] px-[60px] text-[20px] font-bold tracking-[0.35px] text-[#3e4140] shadow-[0px_10px_20px_0px_rgba(226,255,37,0.25)]"
-                >
-                  一鍵領取
-                </button>
-              </div>
+              {/* Figma's button fill is size-full of a 1357px-wide container
+                  -- a full-width bar, not a small centered pill. */}
+              <button
+                type="button"
+                className="h-[60px] w-full rounded-bl-[25px] rounded-tr-[25px] bg-[#e2ff25] text-[20px] font-bold tracking-[0.35px] text-[#3e4140] shadow-[0px_10px_20px_0px_rgba(226,255,37,0.25)]"
+              >
+                一鍵領取
+              </button>
 
               <div className="flex items-start gap-[40px]">
                 <ProfileEverydayRewards />
