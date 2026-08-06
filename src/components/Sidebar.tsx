@@ -62,6 +62,25 @@ export default function Sidebar() {
             );
           })}
         </nav>
+
+        {/* Figma's "AD" instance (Components Library node 1:1654 -> 561:3366)
+            lives inside the sidebar's own layout, anchored to its bottom --
+            not a separately floating/dismissible overlay. */}
+        <div className="absolute bottom-0 left-0 h-[462px] w-[291px]">
+          <img alt="" src={withBasePath("/assets/shared/sidebar-ad.svg")} className="pointer-events-none absolute inset-0 size-full" />
+          <Link
+            href="/promotions"
+            className="absolute bottom-[20px] left-1/2 h-[60px] w-[227px] -translate-x-1/2 drop-shadow-[0px_10px_10px_rgba(226,255,37,0.25)]"
+          >
+            <img alt="" src={withBasePath("/assets/sidebar/promotions-button.svg")} className="pointer-events-none absolute inset-0 size-full" />
+            <div className="absolute inset-[23.81%_11.62%_25.4%_11.62%] flex items-center justify-between">
+              <p className="text-[20px] font-bold tracking-[0.35px] text-[#444242]">領取獎勵</p>
+              <div className="flex size-[25px] shrink-0 items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[5.556px]">
+                <img alt="" src={withBasePath("/assets/sidebar/arrow-chevron.svg")} className="h-[7.222px] w-[4.711px]" />
+              </div>
+            </div>
+          </Link>
+        </div>
       </div>
     </div>
   );
