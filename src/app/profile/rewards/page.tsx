@@ -68,25 +68,54 @@ function RewardKit({ name, count, image, current }: RewardKitData) {
   );
 }
 
+// Figma's Level_Point is a vertical hexagon (flat sides, pointed top/bottom),
+// not a circle -- reached points use a dark #3e4140 outline, unreached ones
+// are drawn in a near-invisible #f4f4f4 outline.
 function LevelPoint({ label, reached }: { label: string; reached: boolean }) {
+  const color = reached ? "#3e4140" : "#f4f4f4";
   return (
-    <div
-      className={`flex size-[24px] shrink-0 items-center justify-center rounded-full border text-[12px] font-medium tracking-[0.15px] ${
-        reached ? "border-[#8d54d8] bg-white text-[#3e4140]" : "border-[#dadada] bg-[#f4f4f4] text-white"
-      }`}
-    >
-      {label}
+    <div className="relative z-10 flex size-[24px] shrink-0 items-center justify-center bg-white">
+      <svg viewBox="0 0 21 24" className="absolute inset-0 size-full">
+        <path
+          d="M19.7849 6.57715V17.4219L10.3923 22.8447L0.999726 17.4219V6.57715L10.3923 1.1543L19.7849 6.57715Z"
+          fill="white"
+          stroke={color}
+          strokeWidth="2"
+        />
+      </svg>
+      <p className="relative text-[12px] font-medium tracking-[0.15px]" style={{ color }}>
+        {label}
+      </p>
     </div>
   );
 }
 
+// Matches the 150px-wide / 10px-gap chest grid below it exactly -- each
+// point sits centered above its own chest (column width 160px), instead of
+// an even flex-1 spread that drifts out of alignment with fixed-width cards.
+const CHEST_COLUMN = 150;
+const CHEST_GAP = 10;
+const LEVEL_COLUMN = CHEST_COLUMN + CHEST_GAP;
+
 function LevelTrack() {
   return (
-    <div className="flex w-full items-center">
+    <div className="relative h-[24px] w-[1110px]">
+      {LEVEL_POINTS.slice(0, -1).map((_, i) => {
+        const left = i * LEVEL_COLUMN + CHEST_COLUMN / 2;
+        // The segment leading into the current level is half progressed --
+        // dark up to the midpoint, then fades to the unreached color --
+        // matching Figma's split Line7/Line8 overlay on that one segment.
+        const background =
+          i < CURRENT_LEVEL_INDEX
+            ? "#3e4140"
+            : i === CURRENT_LEVEL_INDEX
+              ? "linear-gradient(to right, #3e4140 50%, #f4f4f4 50%)"
+              : "#f4f4f4";
+        return <div key={i} className="absolute top-1/2 h-[3px] -translate-y-1/2" style={{ left, width: LEVEL_COLUMN, background }} />;
+      })}
       {LEVEL_POINTS.map((lv, i) => (
-        <div key={lv} className="flex flex-1 items-center last:flex-none">
+        <div key={lv} className="absolute top-0" style={{ left: i * LEVEL_COLUMN + CHEST_COLUMN / 2 - 12 }}>
           <LevelPoint label={String(lv)} reached={i <= CURRENT_LEVEL_INDEX} />
-          {i < LEVEL_POINTS.length - 1 && <div className="h-0 flex-1 border-t border-[#dadada]" />}
         </div>
       ))}
     </div>
@@ -183,39 +212,44 @@ function VipCard() {
   );
 }
 
+// Figma's own layout (node 209:11543/209:11545): the level track + 7
+// chests form one fixed 1110px block with a tight 10px gap between cards,
+// and the trophy is a separate fixed 237px block beside it with its own
+// 10px gap -- 1110 + 10 + 237 = 1357, which already matches the section's
+// full width exactly, so nothing here needs to stretch. mx-auto only
+// centers the pair as a fallback if a wider viewport ever leaves it
+// narrower than its container -- it does not change the tight card
+// spacing itself.
 function LevelAndRewards() {
   return (
-    <div className="flex w-full flex-col items-center gap-[40px]">
-      <LevelTrack />
-      {/* justify-between spreads the 7 chests + trophy across the full row
-          width -- with only 8 fixed-size items and no fixed gap, this fills
-          the row edge-to-edge (flush with the section's own 40px right
-          padding) instead of leaving dead space when the row is narrower
-          than its container, and stays centered as a group either way. */}
-      <div className="flex w-full items-end justify-between">
-        {REWARD_KITS.map((kit) => (
-          <RewardKit key={kit.name} {...kit} />
-        ))}
+    <div className="mx-auto flex w-[1357px] max-w-full items-end gap-[10px]">
+      <div className="flex w-[1110px] shrink-0 flex-col items-end gap-[40px]">
+        <LevelTrack />
+        <div className="flex w-full items-center gap-[10px]">
+          {REWARD_KITS.map((kit) => (
+            <RewardKit key={kit.name} {...kit} />
+          ))}
+        </div>
+      </div>
 
-        <div className="relative flex h-[299px] w-[237px] shrink-0 flex-col items-center gap-[12px]">
-          {/* Figma's "Background_kit" glow streak behind the top-tier trophy --
-              bleeds up/left past the trophy box and out to the page edge. */}
-          <img
-            alt=""
-            src={withBasePath("/assets/profile/rewards-center/trophy-bg-streak.svg")}
-            className="pointer-events-none absolute -right-[40px] -top-[46px] z-0 h-[365px] w-[442px]"
-          />
-          <img alt="" src={withBasePath("/assets/profile/rewards-center/gem-trophy-top.png")} className="relative z-10 w-full object-contain" />
-          <div className="relative z-10 flex flex-col items-center gap-[5px]">
-            <div className="flex items-center gap-[5px]">
-              <ChestIcon className="size-[17px] shrink-0" />
-              <p className="whitespace-nowrap text-[12px] text-black">頂級星鑽寶箱</p>
-            </div>
-            <div className="flex items-center gap-[5px] whitespace-nowrap">
-              <p className="text-[12px] text-[#a2a2a2]">前</p>
-              <p className="text-[14px] font-bold tracking-[0.15px] text-[#23f3d5]">2,000</p>
-              <p className="text-[12px] text-[#a2a2a2]">名</p>
-            </div>
+      <div className="relative flex h-[299px] w-[237px] shrink-0 flex-col items-center gap-[12px]">
+        {/* Figma's "Background_kit" glow streak behind the top-tier trophy --
+            bleeds up/left past the trophy box and out to the page edge. */}
+        <img
+          alt=""
+          src={withBasePath("/assets/profile/rewards-center/trophy-bg-streak.svg")}
+          className="pointer-events-none absolute -right-[40px] -top-[46px] z-0 h-[365px] w-[442px]"
+        />
+        <img alt="" src={withBasePath("/assets/profile/rewards-center/gem-trophy-top.png")} className="relative z-10 w-full object-contain" />
+        <div className="relative z-10 flex flex-col items-center gap-[5px]">
+          <div className="flex items-center gap-[5px]">
+            <ChestIcon className="size-[17px] shrink-0" />
+            <p className="whitespace-nowrap text-[12px] text-black">頂級星鑽寶箱</p>
+          </div>
+          <div className="flex items-center gap-[5px] whitespace-nowrap">
+            <p className="text-[12px] text-[#a2a2a2]">前</p>
+            <p className="text-[14px] font-bold tracking-[0.15px] text-[#23f3d5]">2,000</p>
+            <p className="text-[12px] text-[#a2a2a2]">名</p>
           </div>
         </div>
       </div>
@@ -261,10 +295,16 @@ export default function ProfileRewardsPage() {
           </div>
 
           <div className="relative min-w-0 flex-1 overflow-hidden">
+            {/* The champion banner's own "BONUS HUB" wordmark runs the full
+                image width and collided with the page's own 領獎中心/VIP盛典
+                headings when shown at full size -- object-cover with a
+                narrower box (object-position keeps it right/top-anchored)
+                crops down to just the trophy on the right, without touching
+                the source file itself. */}
             <img
               alt=""
-              src={withBasePath("/assets/profile/account/cover.png")}
-              className="pointer-events-none absolute right-0 top-0 z-0 h-[605px] w-[1053px] max-w-none"
+              src={withBasePath("/assets/profile/rewards-center/cover-champion.png")}
+              className="pointer-events-none absolute right-0 top-0 z-0 h-[605px] w-[380px] max-w-none object-cover object-right-top"
               style={{ maskImage: "linear-gradient(to bottom, black 0%, black 85%, transparent 100%)" }}
             />
 
