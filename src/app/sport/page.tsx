@@ -10,7 +10,7 @@ import Footer from "../../components/Footer";
 
 export default function SportPage() {
   return (
-    <ScaleBelowBreakpoint maxZoom={0.8}>
+    <ScaleBelowBreakpoint maxZoom={0.9}>
       <div className="min-h-screen bg-white">
         <div className="flex w-full">
           <div className="sticky top-0 z-10" style={{ height: "min(calc(100vh / var(--page-zoom, 1)), 1117px)" }}>
