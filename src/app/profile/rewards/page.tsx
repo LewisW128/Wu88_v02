@@ -334,7 +334,7 @@ function ReferralCard() {
 
 export default function ProfileRewardsPage() {
   return (
-    <ScaleBelowBreakpoint designWidth={1728} maxZoom={0.9}>
+    <ScaleBelowBreakpoint designWidth={1728} maxZoom={0.8}>
       <div className="min-h-screen bg-white">
         <div className="flex w-full">
           <div className="sticky top-0 z-10" style={{ height: "min(calc(100vh / var(--page-zoom, 1)), 1117px)" }}>

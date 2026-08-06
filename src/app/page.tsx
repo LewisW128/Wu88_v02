@@ -11,7 +11,7 @@ import Footer from "../components/Footer";
 
 export default function Home() {
   return (
-    <ScaleBelowBreakpoint maxZoom={0.9}>
+    <ScaleBelowBreakpoint maxZoom={0.8}>
       <div className="min-h-screen bg-white">
         <div className="flex w-full">
           {/* Capped at the sidebar's own content height (1117px, the ad banner's
