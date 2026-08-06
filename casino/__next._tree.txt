@@ -1,0 +1,3 @@
+:HL["/Wu88_v02/_next/static/chunks/1goa8q5z5s8mw.css","style"]
+:HL["https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Advent+Pro:wght@700&display=swap","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":16,"slots":{"children":{"name":"casino","param":null,"prefetchHints":0,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":0,"slots":null}}}}},"staleTime":300,"buildId":"nZ2vddneccTkGGUoZUgZ1"}
