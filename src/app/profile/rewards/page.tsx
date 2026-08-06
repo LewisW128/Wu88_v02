@@ -51,7 +51,11 @@ function RewardKit({ name, count, image, current }: RewardKitData) {
     <div
       className={`relative size-full overflow-hidden backdrop-blur-[10px] ${current ? "rounded-bl-[31px] rounded-tr-[31px] bg-white/95" : "rounded-bl-[35px] rounded-tr-[35px] bg-white/20"}`}
     >
-      <img alt="" src={withBasePath(image)} className="pointer-events-none absolute left-1/2 top-[9px] size-[178px] -translate-x-1/2 object-contain" />
+      {/* 178px reached down into the label text below (trophy-shaped
+          variants especially, whose base isn't cropped as tight as the
+          hexagon badges) -- shrunk so every variant's bottom edge clears
+          the text zone starting at top-159. */}
+      <img alt="" src={withBasePath(image)} className="pointer-events-none absolute left-1/2 top-[9px] size-[140px] -translate-x-1/2 object-contain" />
       <div className="absolute left-1/2 top-[159px] flex -translate-x-1/2 flex-col items-center gap-[5px]">
         <div className="flex items-center gap-[5px]">
           <img alt="" src={withBasePath("/assets/icons/treasure.svg")} className="size-[17px] shrink-0" />
@@ -103,32 +107,55 @@ function LevelPoint({ label, reached }: { label: string; reached: boolean }) {
   );
 }
 
-// Matches the 150px-wide / 10px-gap chest grid below it exactly -- each
-// point sits centered above its own chest (column width 160px), instead of
-// an even flex-1 spread that drifts out of alignment with fixed-width cards.
-const CHEST_COLUMN = 150;
-const CHEST_GAP = 10;
-const LEVEL_COLUMN = CHEST_COLUMN + CHEST_GAP;
+// Shared grid definition for both the level track and the chest row below
+// it: 7 fixed 150px chest columns + 6 flexible 1fr gap columns between them.
+// Using the SAME grid-template-columns on both rows is what keeps every
+// number centered exactly above its chest even as the 1fr gaps grow on a
+// wider viewport -- independent flex distributions (justify-between on one
+// row, flex-1 on the other) don't stay in sync since the two rows' items
+// are different widths (24px hexagons vs 150px cards).
+const CHEST_GRID_COLUMNS = "150px repeat(6, 1fr 150px)";
 
 function LevelTrack() {
   return (
-    <div className="relative h-[24px] w-[1110px]">
-      {LEVEL_POINTS.slice(0, -1).map((_, i) => {
-        const left = i * LEVEL_COLUMN + CHEST_COLUMN / 2;
-        // The segment leading into the current level is half progressed --
-        // dark up to the midpoint, then fades to the unreached color --
-        // matching Figma's split Line7/Line8 overlay on that one segment.
-        const background =
-          i < CURRENT_LEVEL_INDEX
-            ? "#3e4140"
-            : i === CURRENT_LEVEL_INDEX
-              ? "linear-gradient(to right, #3e4140 50%, #f4f4f4 50%)"
-              : "#f4f4f4";
-        return <div key={i} className="absolute top-1/2 h-[3px] -translate-y-1/2" style={{ left, width: LEVEL_COLUMN, background }} />;
-      })}
+    <div className="grid h-[24px] w-full items-center" style={{ gridTemplateColumns: CHEST_GRID_COLUMNS }}>
       {LEVEL_POINTS.map((lv, i) => (
-        <div key={lv} className="absolute top-0" style={{ left: i * LEVEL_COLUMN + CHEST_COLUMN / 2 - 12 }}>
-          <LevelPoint label={String(lv)} reached={i <= CURRENT_LEVEL_INDEX} />
+        <div key={`line-${lv}`} className="contents">
+          {i > 0 &&
+            (() => {
+              const segment = i - 1;
+              // The segment leading into the current level is half progressed
+              // -- dark up to the midpoint, then fades to the unreached color
+              // -- matching Figma's split Line7/Line8 overlay on that segment.
+              const background =
+                segment < CURRENT_LEVEL_INDEX
+                  ? "#3e4140"
+                  : segment === CURRENT_LEVEL_INDEX
+                    ? "linear-gradient(to right, #3e4140 50%, #f4f4f4 50%)"
+                    : "#f4f4f4";
+              // The grid area spans the full point-columns on each side (not
+              // just the 1fr gap column between them), then 75px margins --
+              // half of the fixed 150px point column -- pull each end in to
+              // land exactly on the hexagon's own center, so it disappears
+              // under the icon (z-10, white fill) instead of stopping short
+              // with a visible gap. Margins, not a full-column span, matter
+              // for the very first/last segment: spanning the full column
+              // would run the line past the first hexagon's center with
+              // nothing on the other end to connect to.
+              // gridRow: 1 is required here -- once the line spans back over
+              // a point's own column, grid auto-placement sees that column
+              // as "already occupied" in row 1 and silently bumps the next
+              // item down to row 2, which is what broke the whole track
+              // into a staircase.
+              return (
+                <div
+                  style={{ gridColumn: `${segment * 2 + 1} / ${segment * 2 + 4}`, gridRow: 1, marginLeft: 75, marginRight: 75, height: 3, background }}
+                />
+              );
+            })()}
+          <div className="flex justify-center" style={{ gridColumn: i * 2 + 1, gridRow: 1 }}>
+            <LevelPoint label={String(lv)} reached={i <= CURRENT_LEVEL_INDEX} />
+          </div>
         </div>
       ))}
     </div>
@@ -232,23 +259,22 @@ function VipCard() {
   );
 }
 
-// Figma's own layout (node 209:11543/209:11545): the level track + 7
-// chests form one fixed 1110px block with a tight 10px gap between cards,
-// and the trophy is a separate fixed 237px block beside it -- at the design
-// width the gap between them is exactly 10px (1110 + 10 + 237 = 1357), but
-// unlike the chest-to-chest gaps (always fixed, so the level track above
-// stays pixel-aligned to its chests) that one gap is a flexible
-// justify-between space: on a wider viewport it grows so the trophy (and
-// its background streak) stays flush against the section's own 40px right
-// edge instead of leaving dead space.
+// The chest column (level track + 7 chests) is flex-1, growing to fill
+// whatever width is left after the trophy's fixed 237px -- its own grid
+// (CHEST_GRID_COLUMNS) then spreads the 6 gaps between chests evenly across
+// that width, and the level track above uses the exact same grid so its
+// numbers stay centered on their chests at any viewport width, not just
+// the design width.
 function LevelAndRewards() {
   return (
-    <div className="flex w-full items-end justify-between">
-      <div className="flex w-[1110px] shrink-0 flex-col items-end gap-[40px]">
+    <div className="flex w-full items-end gap-[10px]">
+      <div className="flex min-w-0 flex-1 flex-col items-end gap-[40px]">
         <LevelTrack />
-        <div className="flex w-full items-center gap-[10px]">
-          {REWARD_KITS.map((kit) => (
-            <RewardKit key={kit.name} {...kit} />
+        <div className="grid w-full" style={{ gridTemplateColumns: CHEST_GRID_COLUMNS }}>
+          {REWARD_KITS.map((kit, i) => (
+            <div key={kit.name} style={{ gridColumn: i * 2 + 1 }}>
+              <RewardKit {...kit} />
+            </div>
           ))}
         </div>
       </div>
@@ -360,10 +386,7 @@ export default function ProfileRewardsPage() {
                 <ReferralCard />
               </div>
 
-              <div className="flex flex-col gap-[20px]">
-                <p className="text-[20px] font-bold tracking-[0.35px] text-[#3e4140]">熱門優惠</p>
-                <Promotions />
-              </div>
+              <Promotions />
             </div>
 
             <div className="-ml-[291px] w-[calc(100%+291px)]">
