@@ -185,27 +185,37 @@ function VipCard() {
 
 function LevelAndRewards() {
   return (
-    <div className="flex w-full items-end gap-[10px]">
-      <div className="flex w-[1110px] shrink-0 flex-col items-end gap-[40px]">
-        <LevelTrack />
-        <div className="flex w-full items-center gap-[10px]">
-          {REWARD_KITS.map((kit) => (
-            <RewardKit key={kit.name} {...kit} />
-          ))}
-        </div>
-      </div>
+    <div className="flex w-full flex-col items-center gap-[40px]">
+      <LevelTrack />
+      {/* justify-between spreads the 7 chests + trophy across the full row
+          width -- with only 8 fixed-size items and no fixed gap, this fills
+          the row edge-to-edge (flush with the section's own 40px right
+          padding) instead of leaving dead space when the row is narrower
+          than its container, and stays centered as a group either way. */}
+      <div className="flex w-full items-end justify-between">
+        {REWARD_KITS.map((kit) => (
+          <RewardKit key={kit.name} {...kit} />
+        ))}
 
-      <div className="flex h-[299px] w-[237px] shrink-0 flex-col items-center gap-[12px]">
-        <img alt="" src={withBasePath("/assets/profile/rewards-center/gem-trophy-top.png")} className="w-full object-contain" />
-        <div className="flex flex-col items-center gap-[5px]">
-          <div className="flex items-center gap-[5px]">
-            <ChestIcon className="size-[17px] shrink-0" />
-            <p className="whitespace-nowrap text-[12px] text-black">頂級星鑽寶箱</p>
-          </div>
-          <div className="flex items-center gap-[5px] whitespace-nowrap">
-            <p className="text-[12px] text-[#a2a2a2]">前</p>
-            <p className="text-[14px] font-bold tracking-[0.15px] text-[#23f3d5]">2,000</p>
-            <p className="text-[12px] text-[#a2a2a2]">名</p>
+        <div className="relative flex h-[299px] w-[237px] shrink-0 flex-col items-center gap-[12px]">
+          {/* Figma's "Background_kit" glow streak behind the top-tier trophy --
+              bleeds up/left past the trophy box and out to the page edge. */}
+          <img
+            alt=""
+            src={withBasePath("/assets/profile/rewards-center/trophy-bg-streak.svg")}
+            className="pointer-events-none absolute -right-[40px] -top-[46px] z-0 h-[365px] w-[442px]"
+          />
+          <img alt="" src={withBasePath("/assets/profile/rewards-center/gem-trophy-top.png")} className="relative z-10 w-full object-contain" />
+          <div className="relative z-10 flex flex-col items-center gap-[5px]">
+            <div className="flex items-center gap-[5px]">
+              <ChestIcon className="size-[17px] shrink-0" />
+              <p className="whitespace-nowrap text-[12px] text-black">頂級星鑽寶箱</p>
+            </div>
+            <div className="flex items-center gap-[5px] whitespace-nowrap">
+              <p className="text-[12px] text-[#a2a2a2]">前</p>
+              <p className="text-[14px] font-bold tracking-[0.15px] text-[#23f3d5]">2,000</p>
+              <p className="text-[12px] text-[#a2a2a2]">名</p>
+            </div>
           </div>
         </div>
       </div>
