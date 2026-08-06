@@ -235,7 +235,7 @@ function VipCard() {
 
       <div className="absolute left-[19px] top-[18px] flex items-center gap-[20px]">
         <img alt="" src={withBasePath("/assets/profile/member/icon-vip-lv.svg")} className="size-[40px]" />
-        <p className="whitespace-nowrap text-[36px] font-bold tracking-[0.36px] text-[#3e4140]">Lv. 8</p>
+        <p className="whitespace-nowrap text-[36px] font-bold tracking-[0.36px] text-[#3e4140]">Lv. {LEVEL_POINTS[CURRENT_LEVEL_INDEX]}</p>
       </div>
 
       <div className="absolute inset-x-[19px] bottom-[19px] flex flex-col gap-[10px]">

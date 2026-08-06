@@ -12,9 +12,10 @@ const REOPEN_DELAY_MS = 30000;
 // member's own account view, already dense with its own promo/reward CTAs.
 const HIDDEN_ON = ["/profile"];
 
-// Figma's "AD" instance (e.g. node 647:20767) floats over every page at the
-// same spot rather than living inside the sidebar's own layout -- closing it
-// isn't permanent, it just comes back after a few seconds.
+// Floats over the sidebar's own column (same 291px width) at the bottom
+// left, rather than being appended into the sidebar's own scrollable
+// content -- closing it isn't permanent, it just comes back after a few
+// seconds.
 export default function SidebarAd() {
   const pathname = usePathname();
   const [visible, setVisible] = useState(true);
@@ -34,7 +35,7 @@ export default function SidebarAd() {
   if (HIDDEN_ON.some((path) => pathname === path || pathname === `${path}/` || pathname?.startsWith(`${path}/`))) return null;
 
   return (
-    <div className="fixed bottom-[24px] right-[24px] z-40 h-[462px] w-[291px]" style={{ zoom }}>
+    <div className="fixed bottom-[24px] left-[24px] z-40 h-[462px] w-[291px]" style={{ zoom }}>
       <img alt="" src={withBasePath("/assets/shared/sidebar-ad.svg")} className="pointer-events-none absolute inset-0 size-full" />
 
       <button

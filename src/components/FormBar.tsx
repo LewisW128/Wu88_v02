@@ -14,17 +14,28 @@ const FORMS = [
   { img: withBasePath("/assets/formbar/board-card.png"), video: withBasePath("/assets/formbar/board-card.mp4"), main: "棋牌", sub: "BOARD & CARD" },
 ];
 
+// 200px per card, minimum 20px gap between them (per-card math: 7*200 +
+// 6*20 = 1520) -- below that the row can no longer fit and the scroll
+// container (with SlideArrows) takes over instead of squeezing gaps
+// further. Above it, the 1fr tracks grow evenly so the row centers itself
+// between the section's own 40px left/right padding instead of sitting
+// flush-left with dead space on the right.
+const FORM_GRID_MIN_WIDTH = FORMS.length * 200 + (FORMS.length - 1) * 20;
+const FORM_GRID_COLUMNS = `200px repeat(${FORMS.length - 1}, minmax(20px, 1fr) 200px)`;
+
 export default function FormBar() {
   const { scrollRef, canScrollLeft, canScrollRight, scrollByPage } = useHorizontalSlider();
 
   return (
     <div className="relative">
-      <div ref={scrollRef} className="scrollbar-hide -mt-[30px] flex items-end gap-[20px] overflow-x-auto pr-[40px] pt-[30px]">
-        {FORMS.map((form) => (
-          <div
-            key={form.main}
-            className="group relative h-[224px] w-[200px] shrink-0 transition-[width] duration-300 ease-out hover:z-10 hover:w-[227px]"
-          >
+      <div ref={scrollRef} className="scrollbar-hide -mt-[30px] overflow-x-auto pr-[40px] pt-[30px]">
+        <div className="grid items-end" style={{ gridTemplateColumns: FORM_GRID_COLUMNS, minWidth: FORM_GRID_MIN_WIDTH }}>
+          {FORMS.map((form, i) => (
+            <div
+              key={form.main}
+              style={{ gridColumn: i * 2 + 1 }}
+              className="group relative h-[224px] w-[200px] transition-[width] duration-300 ease-out hover:z-10 hover:w-[227px]"
+            >
             <div className="absolute bottom-0 left-0 h-[224px] w-[200px] overflow-hidden rounded-[50px] bg-white transition-[width,height] duration-300 ease-out group-hover:h-[254px] group-hover:w-[227px]">
               <img
                 alt=""
@@ -46,8 +57,9 @@ export default function FormBar() {
                 </div>
               </div>
             </div>
-          </div>
-        ))}
+            </div>
+          ))}
+        </div>
       </div>
       <SlideArrows
         canScrollLeft={canScrollLeft}
