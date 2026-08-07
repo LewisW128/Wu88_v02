@@ -346,13 +346,14 @@ export default function ProfileRewardsPage() {
                 width as a background layer -- the "BONUS HUB" wordmark and
                 trophy sit behind the real headings/VIP card on purpose
                 (the wordmark is hollow/outlined so the solid foreground
-                text stays legible over it), matching Figma's "Cover images"
-                instance size exactly (1437x826, same aspect as the source
-                so nothing is cropped or stretched). */}
+                text stays legible over it). Stretched to fill the content
+                column's full width (object-cover, no fixed width) so there's
+                no blank strip on wide viewports where the column renders
+                wider than the source photo's 1437px. */}
             <img
               alt=""
               src={withBasePath("/assets/profile/rewards-center/cover-champion.png")}
-              className="pointer-events-none absolute right-0 top-0 z-0 h-[826px] w-[1437px] max-w-none"
+              className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[826px] w-full object-cover object-right"
             />
 
             <div className="relative z-10 flex flex-col gap-[40px] pb-[40px] pl-[40px] pr-[40px] pt-[40px]">

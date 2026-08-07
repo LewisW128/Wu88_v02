@@ -64,10 +64,14 @@ export default function ProfileHelpPage() {
           </div>
 
           <div className="relative min-w-0 flex-1 overflow-hidden">
+            {/* Stretched to fill the content column's full width
+                (object-cover, no fixed width) so there's no blank strip on
+                wide viewports where the column renders wider than the
+                source image's 1437px. */}
             <img
               alt=""
               src={withBasePath("/assets/profile/help/hero.svg")}
-              className="pointer-events-none absolute right-0 top-0 z-0 h-[826px] w-[1437px] max-w-none"
+              className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[826px] w-full object-cover object-right"
             />
 
             <div className="relative z-10 flex flex-col gap-[40px] pb-[40px] pl-[40px] pr-[40px] pt-[40px]">
