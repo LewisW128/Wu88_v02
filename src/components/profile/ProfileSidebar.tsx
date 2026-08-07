@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { withBasePath } from "../../lib/asset";
+import LoginPopup from "../LoginPopup";
 
 const NAV_ITEMS = [
   { icon: withBasePath("/assets/profile/icons/overview.svg"), title: "總覽", sub: "OVERVIEW", href: "/profile" },
@@ -13,7 +15,21 @@ const NAV_ITEMS = [
   { icon: withBasePath("/assets/profile/icons/help.svg"), title: "協助中心", sub: "HELP", href: "/profile/help" },
 ];
 
-function NavRow({ icon, title, sub, href, active }: { icon: string; title: string; sub: string; href?: string; active?: boolean }) {
+function NavRow({
+  icon,
+  title,
+  sub,
+  href,
+  active,
+  onClick,
+}: {
+  icon: string;
+  title: string;
+  sub: string;
+  href?: string;
+  active?: boolean;
+  onClick?: () => void;
+}) {
   const content = (
     <div className="relative flex h-[122px] w-full shrink-0 items-center">
       {active && (
@@ -32,13 +48,21 @@ function NavRow({ icon, title, sub, href, active }: { icon: string; title: strin
     </div>
   );
 
-  return href ? (
-    <Link href={href} className="block w-full shrink-0">
-      {content}
-    </Link>
-  ) : (
-    content
-  );
+  if (href) {
+    return (
+      <Link href={href} className="block w-full shrink-0">
+        {content}
+      </Link>
+    );
+  }
+  if (onClick) {
+    return (
+      <button type="button" onClick={onClick} className="block w-full shrink-0 text-left">
+        {content}
+      </button>
+    );
+  }
+  return content;
 }
 
 function BackButton() {
@@ -64,6 +88,7 @@ function BackButton() {
 export default function ProfileSidebar() {
   const pathname = usePathname();
   const normalized = (pathname ?? "").replace(/\/+$/, "") || "/";
+  const [loginOpen, setLoginOpen] = useState(false);
 
   return (
     <div className="h-full w-[291px] shrink-0 overflow-y-hidden bg-white">
@@ -77,9 +102,25 @@ export default function ProfileSidebar() {
             <NavRow key={item.title} {...item} active={!!item.href && normalized === item.href} />
           ))}
           <div className="h-px w-[271px] shrink-0 bg-[#dadada]" />
-          <NavRow icon={withBasePath("/assets/profile/icons/logout.svg")} title="登出" sub="LOGOUT" />
+          <NavRow
+            icon={withBasePath("/assets/profile/icons/logout.svg")}
+            title="登出"
+            sub="LOGOUT"
+            onClick={() => setLoginOpen(true)}
+          />
         </nav>
       </div>
+
+      {loginOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+          onClick={() => setLoginOpen(false)}
+        >
+          <div onClick={(e) => e.stopPropagation()}>
+            <LoginPopup onClose={() => setLoginOpen(false)} />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
