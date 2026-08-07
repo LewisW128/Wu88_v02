@@ -42,22 +42,13 @@ function FilterTag({ label, active, onClick }: { label: string; active: boolean;
 }
 
 function QaRow({ question }: { question: string }) {
-  const [open, setOpen] = useState(false);
   return (
-    <button
-      type="button"
-      onClick={() => setOpen((v) => !v)}
-      className="flex h-[113px] w-full items-center justify-between rounded-[50px] border border-[#8d54d8] bg-white/80 px-[40px] py-[33px] text-left backdrop-blur-[10px]"
-    >
+    <div className="flex h-[113px] w-full items-center justify-between rounded-[50px] border border-[#8d54d8] bg-white/80 px-[40px] py-[33px] backdrop-blur-[10px]">
       <p className="text-[20px] font-bold tracking-[0.35px] text-[#3e4140]">{question}</p>
       <div className="flex size-[45px] shrink-0 items-center justify-center rounded-full bg-[#3e4140] backdrop-blur-[10px]">
-        <img
-          alt=""
-          src={withBasePath("/assets/shared/arrow-chevron-white.svg")}
-          className={`h-[11px] w-[6px] transition-transform ${open ? "rotate-90" : "-rotate-90"}`}
-        />
+        <img alt="" src={withBasePath("/assets/shared/arrow-chevron-white.svg")} className="h-[11px] w-[6px]" />
       </div>
-    </button>
+    </div>
   );
 }
 
