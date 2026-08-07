@@ -5,22 +5,23 @@ import Link from "next/link";
 
 import { withBasePath } from "../lib/asset";
 
-// Resting state (scrolling down, or idle) collapses to just avatar+bell;
-// scrolling back up reveals the full info. Direction-based, not a fixed
-// scroll-position threshold.
-function useScrollingUp() {
-  const [scrollingUp, setScrollingUp] = useState(false);
+// Resting state (scrolling up, or idle) collapses to just avatar+bell;
+// scrolling down reveals the full info. Direction-based, not a fixed
+// scroll-position threshold. Defaults to expanded since entering the
+// scrolled/compact header at all only happens by scrolling down past it.
+function useScrollingDown() {
+  const [scrollingDown, setScrollingDown] = useState(true);
   useEffect(() => {
     let lastY = window.scrollY;
     const onScroll = () => {
       const y = window.scrollY;
-      setScrollingUp(y < lastY);
+      setScrollingDown(y > lastY);
       lastY = y;
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-  return scrollingUp;
+  return scrollingDown;
 }
 
 function AvatarBadge() {
@@ -77,17 +78,17 @@ const NotifyIcon = () => <img alt="" src={withBasePath("/assets/icons/notify.svg
 // own, just the bare elements spaced with gap-20/40, unlike the top-bar
 // version which wraps everything in its own bordered pill. Figma's own
 // "unhover" situation for this state (node 573:3452) rests at just the
-// avatar and bell; name/balance/top-up reveal when scrolling back up (or on
-// hover), and re-collapse once you scroll down or the mouse leaves.
+// avatar and bell; name/balance/top-up reveal while scrolling down (or on
+// hover), and re-collapse once you scroll up or the mouse leaves.
 export function ProfileCompact() {
-  const scrollingUp = useScrollingUp();
+  const scrollingDown = useScrollingDown();
   return (
     <div className="group flex items-center gap-[40px]">
       <div className="flex h-[59px] items-center gap-[20px]">
         <AvatarBadge />
         <div
           className={`grid transition-[grid-template-columns] duration-300 ease-out group-hover:grid-cols-[1fr] ${
-            scrollingUp ? "grid-cols-[1fr]" : "grid-cols-[0fr]"
+            scrollingDown ? "grid-cols-[1fr]" : "grid-cols-[0fr]"
           }`}
         >
           <div className="flex min-w-0 items-center gap-[20px] overflow-hidden">
@@ -101,15 +102,25 @@ export function ProfileCompact() {
   );
 }
 
+// The top-of-page pill also rests collapsed by default (same Figma unhover
+// situation) and reveals name/balance/top-up on hover.
 export default function Profile() {
   return (
-    <div className="flex items-center gap-[40px] rounded-full border border-[#dadada] bg-white/60 px-[30px] py-[15px] backdrop-blur-[20px]">
+    <div className="group flex items-center gap-[40px] rounded-full border border-[#dadada] bg-white/60 px-[30px] py-[15px] backdrop-blur-[20px]">
       <div className="flex items-center gap-[20px]">
         <div className="flex items-center gap-[10px]">
           <AvatarBadge />
-          <NameAndBalance />
+          <div className="grid grid-cols-[0fr] transition-[grid-template-columns] duration-300 ease-out group-hover:grid-cols-[1fr]">
+            <div className="flex min-w-0 items-center gap-[10px] overflow-hidden">
+              <NameAndBalance />
+            </div>
+          </div>
         </div>
-        <TopUpButton />
+        <div className="grid grid-cols-[0fr] transition-[grid-template-columns] duration-300 ease-out group-hover:grid-cols-[1fr]">
+          <div className="flex min-w-0 items-center overflow-hidden">
+            <TopUpButton />
+          </div>
+        </div>
       </div>
       <NotifyIcon />
     </div>
