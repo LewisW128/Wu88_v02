@@ -2,12 +2,20 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { withBasePath } from "../lib/asset";
+import { useBreakpointZoom } from "../hooks/useBreakpointZoom";
 
 const REOPEN_DELAY_MS = 30_000;
 
 export default function SidebarAd() {
+  // This overlay is mounted outside any page's own ScaleBelowBreakpoint
+  // wrapper (see that hook's comment), so it needs the same zoom factor
+  // applied directly or it renders full-size and overruns the sidebar's
+  // (shrunk-down) width instead of matching it.
+  const zoom = useBreakpointZoom(undefined, 0.9);
+  const pathname = usePathname();
   const [closed, setClosed] = useState(false);
   const [entered, setEntered] = useState(false);
 
@@ -24,10 +32,11 @@ export default function SidebarAd() {
     return () => clearTimeout(timer);
   }, [closed]);
 
-  if (closed) return null;
+  if (closed || pathname?.startsWith("/profile")) return null;
 
   return (
     <div
+      style={{ zoom }}
       className={`fixed bottom-0 left-[34px] z-40 h-[408px] w-[257px] transition-transform duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
         entered ? "translate-y-0" : "translate-y-full"
       }`}
