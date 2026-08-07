@@ -22,7 +22,7 @@ export default function Sidebar() {
   const pathname = normalizePathname(usePathname());
 
   return (
-    <div className="scrollbar-hide h-full w-[291px] shrink-0 overflow-y-auto bg-white">
+    <div className="h-full w-[291px] shrink-0 overflow-y-hidden bg-white">
       <div className="relative min-h-[1117px] w-[291px]">
         <img alt="" src={withBasePath("/assets/sidebar/sidebar-bg.svg")} className="pointer-events-none absolute left-0 top-0 h-[1117px] w-[291px]" />
 
@@ -62,18 +62,6 @@ export default function Sidebar() {
             );
           })}
         </nav>
-
-        {/* Figma's "AD" instance (Components Library node 1:1654 -> 561:3777)
-            lives inside the sidebar's own layout, anchored to its bottom-right --
-            not a separately floating/dismissible overlay. */}
-        <div className="absolute bottom-0 right-0 h-[408px] w-[257px]">
-          <img alt="" src={withBasePath("/assets/shared/sidebar-ad.svg")} className="pointer-events-none absolute inset-0 size-full" />
-          <Link
-            href="/promotions"
-            aria-label="領取獎勵"
-            className="absolute bottom-[17.66px] left-1/2 h-[52.99px] w-[200.47px] -translate-x-1/2"
-          />
-        </div>
       </div>
     </div>
   );
