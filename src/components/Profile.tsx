@@ -55,14 +55,20 @@ const NotifyIcon = () => <img alt="" src={withBasePath("/assets/icons/notify.svg
 // The scrolled/compact nav bar (Figma 439:3383) sits directly on the sticky
 // header's own translucent background -- no separate pill/border/fill of its
 // own, just the bare elements spaced with gap-20/40, unlike the top-bar
-// version which wraps everything in its own bordered pill.
+// version which wraps everything in its own bordered pill. Figma's own
+// "unhover" situation for this state (node 573:3452) rests at just the
+// avatar and bell -- name/balance/top-up only reveal on hover.
 export function ProfileCompact() {
   return (
-    <div className="flex items-center gap-[40px]">
+    <div className="group flex items-center gap-[40px]">
       <div className="flex h-[59px] items-center gap-[20px]">
         <AvatarBadge />
-        <NameAndBalance />
-        <TopUpButton />
+        <div className="grid grid-cols-[0fr] transition-[grid-template-columns] duration-300 ease-out group-hover:grid-cols-[1fr]">
+          <div className="flex min-w-0 items-center gap-[20px] overflow-hidden">
+            <NameAndBalance />
+            <TopUpButton />
+          </div>
+        </div>
       </div>
       <NotifyIcon />
     </div>
