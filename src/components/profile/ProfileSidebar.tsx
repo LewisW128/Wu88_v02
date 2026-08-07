@@ -10,7 +10,7 @@ const NAV_ITEMS = [
   { icon: withBasePath("/assets/profile/icons/account.svg"), title: "賬戶明細", sub: "A/C", href: "/profile/account" },
   { icon: withBasePath("/assets/profile/icons/member-info.svg"), title: "會員資料", sub: "PROFILE", href: "/profile/member" },
   { icon: withBasePath("/assets/profile/icons/rewards.svg"), title: "領獎中心", sub: "SOC", href: "/profile/rewards" },
-  { icon: withBasePath("/assets/profile/icons/help.svg"), title: "協助中心", sub: "HELP" },
+  { icon: withBasePath("/assets/profile/icons/help.svg"), title: "協助中心", sub: "HELP", href: "/profile/help" },
 ];
 
 function NavRow({ icon, title, sub, href, active }: { icon: string; title: string; sub: string; href?: string; active?: boolean }) {
