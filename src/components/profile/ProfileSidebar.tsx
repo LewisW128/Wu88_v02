@@ -1,13 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { withBasePath } from "../../lib/asset";
-import LoginPopup from "../LoginPopup";
-import { useBreakpointZoom } from "../../hooks/useBreakpointZoom";
 
 const NAV_ITEMS = [
   { icon: withBasePath("/assets/profile/icons/overview.svg"), title: "總覽", sub: "OVERVIEW", href: "/profile" },
@@ -17,21 +13,7 @@ const NAV_ITEMS = [
   { icon: withBasePath("/assets/profile/icons/help.svg"), title: "協助中心", sub: "HELP", href: "/profile/help" },
 ];
 
-function NavRow({
-  icon,
-  title,
-  sub,
-  href,
-  active,
-  onClick,
-}: {
-  icon: string;
-  title: string;
-  sub: string;
-  href?: string;
-  active?: boolean;
-  onClick?: () => void;
-}) {
+function NavRow({ icon, title, sub, href, active }: { icon: string; title: string; sub: string; href?: string; active?: boolean }) {
   const content = (
     <div className="relative flex h-[122px] w-full shrink-0 items-center">
       {active && (
@@ -50,45 +32,12 @@ function NavRow({
     </div>
   );
 
-  if (href) {
-    return (
-      <Link href={href} className="block w-full shrink-0">
-        {content}
-      </Link>
-    );
-  }
-  if (onClick) {
-    return (
-      <button type="button" onClick={onClick} className="block w-full shrink-0 text-left">
-        {content}
-      </button>
-    );
-  }
-  return content;
-}
-
-// Rendered via a portal straight to document.body so it escapes the
-// sidebar's own stacking context (and every ancestor's backdrop-blur /
-// z-index) instead of getting trapped behind later page content. Needs its
-// own zoom factor for the same reason SidebarAd does -- it lives outside
-// any page's ScaleBelowBreakpoint wrapper.
-function LoginModal({ onClose }: { onClose: () => void }) {
-  const zoom = useBreakpointZoom(undefined, 0.9);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
-
-  return createPortal(
-    <div style={{ zoom }} className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={onClose}>
-      <div onClick={(e) => e.stopPropagation()}>
-        <LoginPopup onClose={onClose} />
-      </div>
-    </div>,
-    document.body,
+  return href ? (
+    <Link href={href} className="block w-full shrink-0">
+      {content}
+    </Link>
+  ) : (
+    content
   );
 }
 
@@ -115,7 +64,6 @@ function BackButton() {
 export default function ProfileSidebar() {
   const pathname = usePathname();
   const normalized = (pathname ?? "").replace(/\/+$/, "") || "/";
-  const [loginOpen, setLoginOpen] = useState(false);
 
   return (
     <div className="h-full w-[291px] shrink-0 overflow-y-hidden bg-white">
@@ -129,16 +77,9 @@ export default function ProfileSidebar() {
             <NavRow key={item.title} {...item} active={!!item.href && normalized === item.href} />
           ))}
           <div className="h-px w-[271px] shrink-0 bg-[#dadada]" />
-          <NavRow
-            icon={withBasePath("/assets/profile/icons/logout.svg")}
-            title="登出"
-            sub="LOGOUT"
-            onClick={() => setLoginOpen(true)}
-          />
+          <NavRow icon={withBasePath("/assets/profile/icons/logout.svg")} title="登出" sub="LOGOUT" />
         </nav>
       </div>
-
-      {loginOpen && <LoginModal onClose={() => setLoginOpen(false)} />}
     </div>
   );
 }
