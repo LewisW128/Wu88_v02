@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { withBasePath } from "../../lib/asset";
 import LoginPopup from "../LoginPopup";
+import { useBreakpointZoom } from "../../hooks/useBreakpointZoom";
 
 const NAV_ITEMS = [
   { icon: withBasePath("/assets/profile/icons/overview.svg"), title: "總覽", sub: "OVERVIEW", href: "/profile" },
@@ -65,6 +67,31 @@ function NavRow({
   return content;
 }
 
+// Rendered via a portal straight to document.body so it escapes the
+// sidebar's own stacking context (and every ancestor's backdrop-blur /
+// z-index) instead of getting trapped behind later page content. Needs its
+// own zoom factor for the same reason SidebarAd does -- it lives outside
+// any page's ScaleBelowBreakpoint wrapper.
+function LoginModal({ onClose }: { onClose: () => void }) {
+  const zoom = useBreakpointZoom(undefined, 0.9);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
+  return createPortal(
+    <div style={{ zoom }} className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={onClose}>
+      <div onClick={(e) => e.stopPropagation()}>
+        <LoginPopup onClose={onClose} />
+      </div>
+    </div>,
+    document.body,
+  );
+}
+
 function BackButton() {
   return (
     <Link
@@ -111,16 +138,7 @@ export default function ProfileSidebar() {
         </nav>
       </div>
 
-      {loginOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
-          onClick={() => setLoginOpen(false)}
-        >
-          <div onClick={(e) => e.stopPropagation()}>
-            <LoginPopup onClose={() => setLoginOpen(false)} />
-          </div>
-        </div>
-      )}
+      {loginOpen && <LoginModal onClose={() => setLoginOpen(false)} />}
     </div>
   );
 }
