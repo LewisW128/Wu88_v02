@@ -1,7 +1,27 @@
+"use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
 import { withBasePath } from "../lib/asset";
+
+// Resting state (scrolling down, or idle) collapses to just avatar+bell;
+// scrolling back up reveals the full info. Direction-based, not a fixed
+// scroll-position threshold.
+function useScrollingUp() {
+  const [scrollingUp, setScrollingUp] = useState(false);
+  useEffect(() => {
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrollingUp(y < lastY);
+      lastY = y;
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return scrollingUp;
+}
 
 function AvatarBadge() {
   return (
@@ -57,13 +77,19 @@ const NotifyIcon = () => <img alt="" src={withBasePath("/assets/icons/notify.svg
 // own, just the bare elements spaced with gap-20/40, unlike the top-bar
 // version which wraps everything in its own bordered pill. Figma's own
 // "unhover" situation for this state (node 573:3452) rests at just the
-// avatar and bell -- name/balance/top-up only reveal on hover.
+// avatar and bell; name/balance/top-up reveal when scrolling back up (or on
+// hover), and re-collapse once you scroll down or the mouse leaves.
 export function ProfileCompact() {
+  const scrollingUp = useScrollingUp();
   return (
     <div className="group flex items-center gap-[40px]">
       <div className="flex h-[59px] items-center gap-[20px]">
         <AvatarBadge />
-        <div className="grid grid-cols-[0fr] transition-[grid-template-columns] duration-300 ease-out group-hover:grid-cols-[1fr]">
+        <div
+          className={`grid transition-[grid-template-columns] duration-300 ease-out group-hover:grid-cols-[1fr] ${
+            scrollingUp ? "grid-cols-[1fr]" : "grid-cols-[0fr]"
+          }`}
+        >
           <div className="flex min-w-0 items-center gap-[20px] overflow-hidden">
             <NameAndBalance />
             <TopUpButton />
